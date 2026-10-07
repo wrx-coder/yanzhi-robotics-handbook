@@ -2,6 +2,17 @@
 
 中文、本地、无需登录的静态知识库，包含 Linux、MuJoCo、Gazebo、ROS 1/2、Isaac Lab、GitHub 和 Embodied · 具身智能科研技能七个模块。
 
+[![在线访问](https://img.shields.io/badge/在线访问-wrx--coder.github.io-2ea44f)](https://wrx-coder.github.io/yanzhi-robotics-handbook/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+## 在线访问
+
+不想下载时直接打开：**https://wrx-coder.github.io/yanzhi-robotics-handbook/**
+
+站点由 GitHub Pages 从 `main` 分支根目录发布，仓库根 `index.html` 会跳转到 `dist/index.html`，所以在线子路径与本地 `file://` 两种打开方式都能工作。在线站点同样不请求外部接口，只是首次打开需要联网下载约 1.1 MB 的 `dist/knowledge.js`，之后由浏览器缓存。
+
+重新部署无需任何配置：向 `main` 推送后 Pages 会自动重建，约 1–2 分钟生效。
+
 ## 打开网站
 
 直接用浏览器打开本目录的 **index.html**，无需安装任何依赖、构建工具或联网。
@@ -120,4 +131,32 @@ python3 scripts/build.py
 
 `dist/knowledge.json` 是便于扩展与检索的完整结构化内容；页面加载 `knowledge.js` 以兼容浏览器 file:// 访问，无需 fetch、服务端或数据库。
 
-本项目按用户要求仅交付本地网站，未发布到远程托管服务，也未创建或修改 GitHub 仓库。
+## 技术栈
+
+没有框架、没有包管理器、没有构建服务，只依赖 Python 标准库（构建/校验）与系统自带的浏览器：
+
+| 层 | 实现 |
+|---|---|
+| 页面 | 手写 HTML + CSS + 原生 JavaScript（`dist/app.js`），无 React/Vue、无 CDN、无在线字体 |
+| 数据 | `data/` 下 `¦` 分隔的纯文本源稿 → 编译为 `dist/knowledge.json` 与 `knowledge.js` |
+| 构建 | `scripts/*.py`，全部为标准库（顺带校验数量、必填字段、引用完整性） |
+| 测试 | `scripts/verify*.py` / `verify*.cjs`，含无头 Chrome 的离线与响应式回归 |
+| 部署 | GitHub Pages 静态托管，直接发布 `dist/` 所在目录 |
+
+首次克隆后不需要 `pip install`、`npm install` 或联网即可阅读与搜索；只有跑测试才需要额外准备 `linkedom`、`PyYAML`、`playwright`、MuJoCo。
+
+## 参与与反馈
+
+欢迎提 Issue 报告错误命令、失效的官方链接或事实性错误。请尽量附上：
+
+1. 你使用的环境（发行版、工具版本，例如 Ubuntu 22.04 + ROS 2 Jazzy）；
+2. 完整报错或截图；
+3. 正确的复现步骤与期望结果。
+
+内容以准确为先：**改事实、补来源、修版本号**的 PR 比新增篇数更受欢迎。提交前请运行 `python3 scripts/verify_content.py`，并确认 `data/` 源稿与 `dist/` 产物是同一次构建的结果（不要把手工改动直接写进 `dist/`）。
+
+## 许可
+
+[MIT](LICENSE) © 2026 wrx-coder。你可以自由使用、修改、分发本项目，包括商业用途，只需保留版权与许可声明。
+
+正文中的命令、代码与配置示例按 MIT 授权供学习参考；文内引用的官方文档、论文、软件与商标版权归各自所有者，本项目只做中文讲解与索引，不复制其原文全文。
