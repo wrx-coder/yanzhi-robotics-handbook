@@ -1,0 +1,23 @@
+{
+  "url": "https://docs.github.com/en/pages",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Quickstart",
+      "url": "https://docs.github.com/en/pages/quickstart"
+    },
+    {
+      "title": "Get started",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages"
+    },
+    {
+      "title": "Set up site with Jekyll",
+      "url": "https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll"
+    },
+    {
+      "title": "Configure a custom domain",
+      "url": "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages"
+    }
+  ]
+}

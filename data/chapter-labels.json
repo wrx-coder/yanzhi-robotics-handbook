@@ -1,0 +1,4037 @@
+{
+  "mujoco-nav|Overview": {
+    "title": "引擎概览",
+    "entries": [
+      "mujoco-install",
+      "mujoco-quickstart"
+    ]
+  },
+  "mujoco-nav|Computation": {
+    "title": "计算原理",
+    "entries": [
+      "mujoco-step",
+      "mujoco-contact",
+      "mujoco-integrator"
+    ]
+  },
+  "mujoco-nav|Fluid forces": {
+    "title": "流体力",
+    "entries": []
+  },
+  "mujoco-nav|Modeling": {
+    "title": "模型构建",
+    "entries": [
+      "mujoco-body",
+      "mujoco-freejoint",
+      "mujoco-inertia"
+    ]
+  },
+  "mujoco-nav|XML Reference": {
+    "title": "XML 元素参考",
+    "entries": [
+      "mujoco-defaults",
+      "mujoco-assets",
+      "mujoco-actuator"
+    ]
+  },
+  "mujoco-nav|Programming": {
+    "title": "编程指南",
+    "entries": [
+      "mujoco-step",
+      "mujoco-quickstart"
+    ]
+  },
+  "mujoco-nav|Simulation": {
+    "title": "物理仿真",
+    "entries": [
+      "mujoco-quickstart",
+      "mujoco-step",
+      "mujoco-state-copy"
+    ]
+  },
+  "mujoco-nav|Visualization": {
+    "title": "可视化",
+    "entries": [
+      "mujoco-render",
+      "mujoco-viewer"
+    ]
+  },
+  "mujoco-nav|User Interface": {
+    "title": "用户界面",
+    "entries": [
+      "mujoco-viewer"
+    ]
+  },
+  "mujoco-nav|Model Editing": {
+    "title": "程序化模型编辑",
+    "entries": [
+      "mujoco-spec"
+    ]
+  },
+  "mujoco-nav|Code samples": {
+    "title": "代码示例",
+    "entries": [
+      "mujoco-quickstart",
+      "mujoco-arm-project"
+    ]
+  },
+  "mujoco-nav|Extensions": {
+    "title": "扩展机制",
+    "entries": [
+      "mujoco-spec"
+    ]
+  },
+  "mujoco-nav|API Reference": {
+    "title": "API 参考",
+    "entries": [
+      "mujoco-jacobian",
+      "mujoco-contact-force"
+    ]
+  },
+  "mujoco-nav|Types": {
+    "title": "数据类型",
+    "entries": [
+      "mujoco-model-data"
+    ]
+  },
+  "mujoco-nav|Functions": {
+    "title": "函数接口",
+    "entries": [
+      "mujoco-step",
+      "mujoco-jacobian"
+    ]
+  },
+  "mujoco-nav|Globals": {
+    "title": "全局变量",
+    "entries": []
+  },
+  "mujoco-nav|Python": {
+    "title": "Python 接口",
+    "entries": [
+      "mujoco-install",
+      "mujoco-quickstart"
+    ]
+  },
+  "mujoco-nav|MuJoCo XLA": {
+    "title": "MuJoCo XLA 加速",
+    "entries": [
+      "mujoco-mjx"
+    ]
+  },
+  "mujoco-nav|MuJoCo Warp": {
+    "title": "MuJoCo Warp 加速",
+    "entries": []
+  },
+  "mujoco-nav|API": {
+    "title": "Warp API 参考",
+    "entries": []
+  },
+  "mujoco-nav|Unity Plug-in": {
+    "title": "Unity 插件",
+    "entries": []
+  },
+  "mujoco-nav|OpenUSD": {
+    "title": "OpenUSD 集成",
+    "entries": []
+  },
+  "mujoco-nav|Building": {
+    "title": "构建 OpenUSD 插件",
+    "entries": []
+  },
+  "mujoco-nav|mjcPhysics": {
+    "title": "mjcPhysics 物理模式",
+    "entries": []
+  },
+  "mujoco-nav|File Format Plugin": {
+    "title": "文件格式插件",
+    "entries": []
+  },
+  "mujoco-nav|Importing": {
+    "title": "导入模型",
+    "entries": []
+  },
+  "mujoco-nav|Exporting": {
+    "title": "导出模型",
+    "entries": []
+  },
+  "mujoco-nav|Model Gallery": {
+    "title": "模型示例库",
+    "entries": []
+  },
+  "mujoco-nav|Changelog": {
+    "title": "版本变更",
+    "entries": []
+  },
+  "gazebo-nav|Get Started": {
+    "title": "开始使用",
+    "entries": [
+      "gazebo-install",
+      "gazebo-run"
+    ]
+  },
+  "gazebo-nav|Install": {
+    "title": "安装指南",
+    "entries": [
+      "gazebo-install"
+    ]
+  },
+  "gazebo-nav|Binary Ubuntu Install": {
+    "title": "Ubuntu 二进制安装",
+    "entries": [
+      "gazebo-install"
+    ]
+  },
+  "gazebo-nav|Binary macOS Install": {
+    "title": "macOS 二进制安装",
+    "entries": []
+  },
+  "gazebo-nav|Binary Windows Install": {
+    "title": "Windows 二进制安装",
+    "entries": []
+  },
+  "gazebo-nav|Ubuntu Source Install": {
+    "title": "Ubuntu 源码安装",
+    "entries": []
+  },
+  "gazebo-nav|macOS Source Install": {
+    "title": "macOS 源码安装",
+    "entries": []
+  },
+  "gazebo-nav|Windows Source Install": {
+    "title": "Windows 源码安装",
+    "entries": []
+  },
+  "gazebo-nav|Troubleshooting": {
+    "title": "安装排障",
+    "entries": [
+      "gazebo-error-gz-command",
+      "gazebo-error-render"
+    ]
+  },
+  "gazebo-nav|ROS/Gazebo Installation": {
+    "title": "ROS 与 Gazebo 配套安装",
+    "entries": [
+      "gazebo-install",
+      "gazebo-classic"
+    ]
+  },
+  "gazebo-nav|ROS 2 Gazebo Vendor Packages": {
+    "title": "ROS 2 的 Gazebo 供应包",
+    "entries": []
+  },
+  "gazebo-nav|Simulation Tutorials": {
+    "title": "仿真教程",
+    "entries": [
+      "gazebo-quickstart",
+      "gazebo-diffdrive-project"
+    ]
+  },
+  "gazebo-nav|Building your own robot": {
+    "title": "构建自己的机器人",
+    "entries": [
+      "gazebo-model",
+      "gazebo-inertia"
+    ]
+  },
+  "gazebo-nav|Moving the robot": {
+    "title": "驱动机器人",
+    "entries": [
+      "gazebo-diff-drive",
+      "gazebo-cmd-vel",
+      "gazebo-diffdrive-project"
+    ]
+  },
+  "gazebo-nav|SDF worlds": {
+    "title": "SDF 世界",
+    "entries": [
+      "gazebo-world",
+      "gazebo-quickstart"
+    ]
+  },
+  "gazebo-nav|Sensors": {
+    "title": "传感器",
+    "entries": [
+      "gazebo-camera",
+      "gazebo-lidar",
+      "gazebo-imu"
+    ]
+  },
+  "gazebo-nav|Actors": {
+    "title": "动画角色",
+    "entries": []
+  },
+  "gazebo-nav|Understanding the GUI": {
+    "title": "理解图形界面",
+    "entries": [
+      "gazebo-run"
+    ]
+  },
+  "gazebo-nav|Manipulating Models": {
+    "title": "操作模型",
+    "entries": [
+      "gazebo-spawn"
+    ]
+  },
+  "gazebo-nav|Model Insertion from Fuel": {
+    "title": "从 Fuel 插入模型",
+    "entries": [
+      "gazebo-fuel"
+    ]
+  },
+  "gazebo-nav|Keyboard Shortcuts": {
+    "title": "键盘快捷键",
+    "entries": []
+  },
+  "gazebo-nav|Spawn URDF": {
+    "title": "生成 URDF 模型",
+    "entries": [
+      "gazebo-urdf"
+    ]
+  },
+  "gazebo-nav|How-to Guides": {
+    "title": "实践指南",
+    "entries": [
+      "gazebo-bridge",
+      "gazebo-diffdrive-project"
+    ]
+  },
+  "gazebo-nav|ROS 2 integration overview": {
+    "title": "ROS 2 集成概览",
+    "entries": [
+      "gazebo-bridge",
+      "gazebo-clock"
+    ]
+  },
+  "gazebo-nav|Launch Gazebo from ROS 2": {
+    "title": "从 ROS 2 启动 Gazebo",
+    "entries": [
+      "gazebo-diffdrive-project"
+    ]
+  },
+  "gazebo-nav|Use ROS 2 to interact with Gazebo": {
+    "title": "使用 ROS 2 与 Gazebo 交互",
+    "entries": [
+      "gazebo-bridge",
+      "gazebo-diffdrive-project"
+    ]
+  },
+  "gazebo-nav|Use ROS 2 Simulation Interfaces to Interact with Gazebo": {
+    "title": "ROS 2 仿真接口交互",
+    "entries": []
+  },
+  "gazebo-nav|Use ROS 2 to spawn a Gazebo model": {
+    "title": "使用 ROS 2 生成模型",
+    "entries": [
+      "gazebo-spawn"
+    ]
+  },
+  "gazebo-nav|ROS 2 interoperability": {
+    "title": "ROS 2 互操作性",
+    "entries": [
+      "gazebo-bridge-yaml"
+    ]
+  },
+  "gazebo-nav|ROS 2 integration template": {
+    "title": "ROS 2 集成项目模板",
+    "entries": [
+      "gazebo-diffdrive-project"
+    ]
+  },
+  "gazebo-nav|Web Visualization": {
+    "title": "网页可视化",
+    "entries": []
+  },
+  "gazebo-nav|Sim Architecture": {
+    "title": "仿真架构",
+    "entries": [
+      "gazebo-plugin",
+      "gazebo-physics"
+    ]
+  },
+  "gazebo-nav|Library How-to Guides": {
+    "title": "各组件库实践指南",
+    "entries": [
+      "gazebo-plugin"
+    ]
+  },
+  "gazebo-nav|Continuous Integration For Gazebo Packages": {
+    "title": "Gazebo 包持续集成",
+    "entries": []
+  },
+  "gazebo-nav|Roadmap": {
+    "title": "发展路线",
+    "entries": []
+  },
+  "gazebo-nav|Development": {
+    "title": "开发指南",
+    "entries": []
+  },
+  "gazebo-nav|Contributing": {
+    "title": "参与贡献",
+    "entries": []
+  },
+  "gazebo-nav|Maintainer Guidelines": {
+    "title": "维护者指南",
+    "entries": []
+  },
+  "gazebo-nav|Continuous Integration": {
+    "title": "持续集成",
+    "entries": []
+  },
+  "gazebo-nav|Release process": {
+    "title": "发布流程",
+    "entries": []
+  },
+  "gazebo-nav|Release Instructions": {
+    "title": "发布操作说明",
+    "entries": []
+  },
+  "gazebo-nav|Release Features": {
+    "title": "版本功能",
+    "entries": []
+  },
+  "gazebo-nav|Releases": {
+    "title": "发行版本",
+    "entries": []
+  },
+  "gazebo-nav|Governance": {
+    "title": "项目治理",
+    "entries": []
+  },
+  "gazebo-nav|Fuel": {
+    "title": "Fuel 资源平台",
+    "entries": [
+      "gazebo-fuel",
+      "gazebo-mesh"
+    ]
+  },
+  "gazebo-nav|Content Deletion Policy": {
+    "title": "内容删除政策",
+    "entries": []
+  },
+  "gazebo-nav|Contributing New Model": {
+    "title": "贡献新模型",
+    "entries": []
+  },
+  "gazebo-nav|Contributing New World": {
+    "title": "贡献新世界",
+    "entries": []
+  },
+  "gazebo-nav|Copyright": {
+    "title": "版权说明",
+    "entries": []
+  },
+  "gazebo-nav|Data and Privacy Policy": {
+    "title": "数据与隐私政策",
+    "entries": []
+  },
+  "gazebo-nav|What is Fair Use": {
+    "title": "合理使用说明",
+    "entries": []
+  },
+  "gazebo-nav|Projects using Gazebo": {
+    "title": "使用 Gazebo 的项目",
+    "entries": []
+  },
+  "gazebo-nav|Support": {
+    "title": "支持渠道",
+    "entries": []
+  },
+  "gazebo-nav|Migration from Ignition": {
+    "title": "从 Ignition 迁移",
+    "entries": [
+      "gazebo-classic"
+    ]
+  },
+  "gazebo-nav|Feature Comparison": {
+    "title": "功能对比",
+    "entries": [
+      "gazebo-classic"
+    ]
+  },
+  "gazebo-nav|Gazebo Classic Migration": {
+    "title": "Gazebo Classic 迁移",
+    "entries": [
+      "gazebo-classic"
+    ]
+  },
+  "gazebo-nav|Installing Gazebo11 side by side with new Gazebo": {
+    "title": "Gazebo 11 与新版共存安装",
+    "entries": []
+  },
+  "gazebo-nav|Migration from ROS 2 Gazebo Classic": {
+    "title": "ROS 2 Classic 项目迁移",
+    "entries": [
+      "gazebo-classic",
+      "gazebo-bridge"
+    ]
+  },
+  "gazebo-nav|Library Reference": {
+    "title": "组件库参考",
+    "entries": [
+      "gazebo-plugin",
+      "gazebo-physics"
+    ]
+  },
+  "gazebo-nav|cmake": {
+    "title": "CMake 构建库",
+    "entries": []
+  },
+  "gazebo-nav|common": {
+    "title": "通用工具库",
+    "entries": []
+  },
+  "gazebo-nav|fuel_tools": {
+    "title": "Fuel 工具库",
+    "entries": []
+  },
+  "gazebo-nav|gui": {
+    "title": "图形界面库",
+    "entries": []
+  },
+  "gazebo-nav|launch": {
+    "title": "启动管理库",
+    "entries": []
+  },
+  "gazebo-nav|math": {
+    "title": "数学计算库",
+    "entries": []
+  },
+  "gazebo-nav|msgs": {
+    "title": "消息定义库",
+    "entries": []
+  },
+  "gazebo-nav|physics": {
+    "title": "物理引擎库",
+    "entries": [
+      "gazebo-physics"
+    ]
+  },
+  "gazebo-nav|plugin": {
+    "title": "插件库",
+    "entries": []
+  },
+  "gazebo-nav|rendering": {
+    "title": "渲染库",
+    "entries": []
+  },
+  "gazebo-nav|sensors": {
+    "title": "传感器库",
+    "entries": [
+      "gazebo-camera",
+      "gazebo-lidar"
+    ]
+  },
+  "gazebo-nav|sim": {
+    "title": "仿真核心库",
+    "entries": [
+      "gazebo-plugin"
+    ]
+  },
+  "gazebo-nav|tools": {
+    "title": "命令行工具库",
+    "entries": []
+  },
+  "gazebo-nav|transport": {
+    "title": "传输通信库",
+    "entries": [
+      "gazebo-topic-inspect",
+      "gazebo-service"
+    ]
+  },
+  "gazebo-nav|utils": {
+    "title": "辅助工具库",
+    "entries": []
+  },
+  "gazebo-nav|sdformat": {
+    "title": "SDFormat 格式库",
+    "entries": [
+      "gazebo-world",
+      "gazebo-frames"
+    ]
+  },
+  "isaac-nav|Isaac Lab Ecosystem": {
+    "title": "Isaac Lab 生态系统",
+    "entries": [
+      "isaac-compatibility"
+    ]
+  },
+  "isaac-nav|Local Installation": {
+    "title": "本地安装",
+    "entries": [
+      "isaac-install",
+      "isaac-compatibility"
+    ]
+  },
+  "isaac-nav|Installation using Isaac Sim Pip Package": {
+    "title": "使用 Isaac Sim Pip 包安装",
+    "entries": [
+      "isaac-install"
+    ]
+  },
+  "isaac-nav|Installation using Isaac Sim Pre-built Binaries": {
+    "title": "使用 Isaac Sim 预编译包安装",
+    "entries": [
+      "isaac-compatibility"
+    ]
+  },
+  "isaac-nav|Installation using Isaac Sim Source Code": {
+    "title": "使用 Isaac Sim 源码安装",
+    "entries": []
+  },
+  "isaac-nav|Installation using Isaac Lab Pip Packages": {
+    "title": "使用 Isaac Lab Pip 包安装",
+    "entries": []
+  },
+  "isaac-nav|Asset Caching": {
+    "title": "资产缓存",
+    "entries": []
+  },
+  "isaac-nav|Container Deployment": {
+    "title": "容器部署",
+    "entries": []
+  },
+  "isaac-nav|Docker Guide": {
+    "title": "Docker 指南",
+    "entries": []
+  },
+  "isaac-nav|Running an example with Docker": {
+    "title": "通过 Docker 运行示例",
+    "entries": []
+  },
+  "isaac-nav|Cluster Guide": {
+    "title": "集群指南",
+    "entries": []
+  },
+  "isaac-nav|Deploying CloudXR Teleoperation on Kubernetes": {
+    "title": "在 Kubernetes 部署 CloudXR 遥操作",
+    "entries": []
+  },
+  "isaac-nav|Cloud Deployment": {
+    "title": "云端部署",
+    "entries": []
+  },
+  "isaac-nav|Reference Architecture": {
+    "title": "参考架构",
+    "entries": []
+  },
+  "isaac-nav|Quickstart Guide": {
+    "title": "快速入门",
+    "entries": [
+      "isaac-quickstart"
+    ]
+  },
+  "isaac-nav|Build your Own Project or Task": {
+    "title": "创建自己的项目或任务",
+    "entries": [
+      "isaac-randomized-project",
+      "isaac-register"
+    ]
+  },
+  "isaac-nav|Create new project or task": {
+    "title": "创建新项目或任务",
+    "entries": [
+      "isaac-randomized-project"
+    ]
+  },
+  "isaac-nav|Project Structure": {
+    "title": "项目目录结构",
+    "entries": [
+      "isaac-register"
+    ]
+  },
+  "isaac-nav|Walkthrough": {
+    "title": "逐步入门",
+    "entries": []
+  },
+  "isaac-nav|Environment Design Background": {
+    "title": "环境设计背景",
+    "entries": [
+      "isaac-manager",
+      "isaac-direct"
+    ]
+  },
+  "isaac-nav|Classes and Configs": {
+    "title": "类与配置",
+    "entries": [
+      "isaac-asset-cfg"
+    ]
+  },
+  "isaac-nav|Environment Design": {
+    "title": "环境设计",
+    "entries": [
+      "isaac-manager",
+      "isaac-observations",
+      "isaac-rewards"
+    ]
+  },
+  "isaac-nav|Training the Jetbot: Ground Truth": {
+    "title": "训练 Jetbot：真值观测",
+    "entries": []
+  },
+  "isaac-nav|Exploring the RL problem": {
+    "title": "探索强化学习问题",
+    "entries": []
+  },
+  "isaac-nav|Tutorials": {
+    "title": "教程总览",
+    "entries": [
+      "isaac-empty",
+      "isaac-articulation",
+      "isaac-quickstart"
+    ]
+  },
+  "isaac-nav|Creating an empty scene": {
+    "title": "创建空场景",
+    "entries": [
+      "isaac-empty",
+      "isaac-launcher"
+    ]
+  },
+  "isaac-nav|Spawning prims into the scene": {
+    "title": "在场景中生成对象",
+    "entries": [
+      "isaac-usd",
+      "isaac-rigid-object"
+    ]
+  },
+  "isaac-nav|Deep-dive into AppLauncher": {
+    "title": "深入 AppLauncher",
+    "entries": [
+      "isaac-launcher"
+    ]
+  },
+  "isaac-nav|Adding a New Robot to Isaac Lab": {
+    "title": "添加新机器人",
+    "entries": [
+      "isaac-asset-cfg"
+    ]
+  },
+  "isaac-nav|Interacting with a rigid object": {
+    "title": "与刚体交互",
+    "entries": [
+      "isaac-rigid-object"
+    ]
+  },
+  "isaac-nav|Interacting with an articulation": {
+    "title": "与关节机构交互",
+    "entries": [
+      "isaac-articulation"
+    ]
+  },
+  "isaac-nav|Interacting with a deformable object": {
+    "title": "与可变形物体交互",
+    "entries": []
+  },
+  "isaac-nav|Interacting with a surface gripper": {
+    "title": "与表面夹爪交互",
+    "entries": []
+  },
+  "isaac-nav|Using the Interactive Scene": {
+    "title": "使用交互场景",
+    "entries": [
+      "isaac-scene"
+    ]
+  },
+  "isaac-nav|Creating a Manager-Based Base Environment": {
+    "title": "创建管理器式基础环境",
+    "entries": [
+      "isaac-manager"
+    ]
+  },
+  "isaac-nav|Creating a Manager-Based RL Environment": {
+    "title": "创建管理器式强化学习环境",
+    "entries": [
+      "isaac-randomized-project",
+      "isaac-manager"
+    ]
+  },
+  "isaac-nav|Creating a Direct Workflow RL Environment": {
+    "title": "创建直接式强化学习环境",
+    "entries": [
+      "isaac-direct"
+    ]
+  },
+  "isaac-nav|Registering an Environment": {
+    "title": "注册环境",
+    "entries": [
+      "isaac-register",
+      "isaac-randomized-project"
+    ]
+  },
+  "isaac-nav|Training with an RL Agent": {
+    "title": "使用强化学习智能体训练",
+    "entries": [
+      "isaac-quickstart"
+    ]
+  },
+  "isaac-nav|Configuring an RL Agent": {
+    "title": "配置强化学习智能体",
+    "entries": [
+      "isaac-train",
+      "isaac-hydra"
+    ]
+  },
+  "isaac-nav|Modifying an existing Direct RL Environment": {
+    "title": "修改已有直接式环境",
+    "entries": [
+      "isaac-direct"
+    ]
+  },
+  "isaac-nav|Policy Inference in USD Environment": {
+    "title": "在 USD 环境中推理策略",
+    "entries": [
+      "isaac-play",
+      "isaac-export"
+    ]
+  },
+  "isaac-nav|Adding sensors on a robot": {
+    "title": "向机器人添加传感器",
+    "entries": [
+      "isaac-camera",
+      "isaac-contact",
+      "isaac-raycaster"
+    ]
+  },
+  "isaac-nav|Using a task-space controller": {
+    "title": "使用任务空间控制器",
+    "entries": [
+      "isaac-ik"
+    ]
+  },
+  "isaac-nav|Using an operational space controller": {
+    "title": "使用操作空间控制器",
+    "entries": [
+      "isaac-osc"
+    ]
+  },
+  "isaac-nav|How-to Guides": {
+    "title": "实践指南",
+    "entries": [
+      "isaac-usd",
+      "isaac-asset-cfg",
+      "isaac-video"
+    ]
+  },
+  "isaac-nav|Importing a New Asset": {
+    "title": "导入新资产",
+    "entries": [
+      "isaac-usd"
+    ]
+  },
+  "isaac-nav|Writing an Asset Configuration": {
+    "title": "编写资产配置",
+    "entries": [
+      "isaac-asset-cfg"
+    ]
+  },
+  "isaac-nav|Making a physics prim fixed in the simulation": {
+    "title": "固定物理对象",
+    "entries": []
+  },
+  "isaac-nav|Spawning Multiple Assets": {
+    "title": "生成多种资产",
+    "entries": []
+  },
+  "isaac-nav|Saving rendered images and 3D re-projection": {
+    "title": "保存渲染图像与三维重投影",
+    "entries": [
+      "isaac-camera"
+    ]
+  },
+  "isaac-nav|Find How Many/What Cameras You Should Train With": {
+    "title": "估算相机数量与配置",
+    "entries": [
+      "isaac-memory"
+    ]
+  },
+  "isaac-nav|Configuring Rendering Settings": {
+    "title": "配置渲染设置",
+    "entries": []
+  },
+  "isaac-nav|Creating Visualization Markers": {
+    "title": "创建可视化标记",
+    "entries": []
+  },
+  "isaac-nav|Wrapping environments": {
+    "title": "封装环境",
+    "entries": []
+  },
+  "isaac-nav|Adding your own learning library": {
+    "title": "接入自己的学习库",
+    "entries": []
+  },
+  "isaac-nav|Recording Animations of Simulations": {
+    "title": "录制仿真动画",
+    "entries": []
+  },
+  "isaac-nav|Recording video clips during training": {
+    "title": "录制训练视频",
+    "entries": [
+      "isaac-video"
+    ]
+  },
+  "isaac-nav|Curriculum Utilities": {
+    "title": "课程学习工具",
+    "entries": [
+      "isaac-curriculum"
+    ]
+  },
+  "isaac-nav|Mastering Omniverse for Robotics": {
+    "title": "面向机器人的 Omniverse 使用",
+    "entries": []
+  },
+  "isaac-nav|Setting up CloudXR Teleoperation": {
+    "title": "配置 CloudXR 遥操作",
+    "entries": []
+  },
+  "isaac-nav|Simulation Performance  and Tuning": {
+    "title": "仿真性能与调优",
+    "entries": [
+      "isaac-memory",
+      "isaac-decimation"
+    ]
+  },
+  "isaac-nav|Optimize Stage Creation": {
+    "title": "优化场景创建",
+    "entries": []
+  },
+  "isaac-nav|Developer’s Guide": {
+    "title": "开发者指南",
+    "entries": [
+      "isaac-install",
+      "isaac-register"
+    ]
+  },
+  "isaac-nav|Setting up Visual Studio Code": {
+    "title": "配置 Visual Studio Code",
+    "entries": []
+  },
+  "isaac-nav|Repository organization": {
+    "title": "仓库组织",
+    "entries": []
+  },
+  "isaac-nav|Extension Development": {
+    "title": "扩展开发",
+    "entries": []
+  },
+  "isaac-nav|Core Concepts": {
+    "title": "核心概念",
+    "entries": [
+      "isaac-manager",
+      "isaac-direct",
+      "isaac-scene"
+    ]
+  },
+  "isaac-nav|Task Design Workflows": {
+    "title": "任务设计工作流",
+    "entries": [
+      "isaac-manager",
+      "isaac-direct"
+    ]
+  },
+  "isaac-nav|Actuators": {
+    "title": "执行器",
+    "entries": [
+      "isaac-actuators"
+    ]
+  },
+  "isaac-nav|Sensors": {
+    "title": "传感器",
+    "entries": [
+      "isaac-camera",
+      "isaac-contact",
+      "isaac-raycaster",
+      "isaac-frame-transformer"
+    ]
+  },
+  "isaac-nav|Motion Generators": {
+    "title": "运动生成器",
+    "entries": [
+      "isaac-ik",
+      "isaac-osc"
+    ]
+  },
+  "isaac-nav|Available Environments": {
+    "title": "可用环境",
+    "entries": [
+      "isaac-list-envs"
+    ]
+  },
+  "isaac-nav|Reinforcement Learning": {
+    "title": "强化学习",
+    "entries": [
+      "isaac-train",
+      "isaac-play"
+    ]
+  },
+  "isaac-nav|Reinforcement Learning Scripts": {
+    "title": "强化学习运行脚本",
+    "entries": [
+      "isaac-quickstart",
+      "isaac-train",
+      "isaac-play"
+    ]
+  },
+  "isaac-nav|Reinforcement Learning Library Comparison": {
+    "title": "强化学习库比较",
+    "entries": []
+  },
+  "isaac-nav|Performance Benchmarks": {
+    "title": "性能基准",
+    "entries": []
+  },
+  "isaac-nav|Debugging and Training Guide": {
+    "title": "调试与训练指南",
+    "entries": [
+      "isaac-error-nan",
+      "isaac-error-reward"
+    ]
+  },
+  "isaac-nav|Imitation Learning": {
+    "title": "模仿学习",
+    "entries": [
+      "isaac-imitation"
+    ]
+  },
+  "isaac-nav|Teleoperation and Imitation Learning with Isaac Lab Mimic": {
+    "title": "使用 Isaac Lab Mimic 遥操作与模仿学习",
+    "entries": [
+      "isaac-imitation"
+    ]
+  },
+  "isaac-nav|Augmented Imitation Learning": {
+    "title": "增强模仿学习",
+    "entries": []
+  },
+  "isaac-nav|SkillGen for Automated Demonstration Generation": {
+    "title": "SkillGen 自动生成演示",
+    "entries": []
+  },
+  "isaac-nav|Showroom Demos": {
+    "title": "展示示例",
+    "entries": []
+  },
+  "isaac-nav|Simple Agents": {
+    "title": "简单智能体",
+    "entries": [
+      "isaac-zero-agent"
+    ]
+  },
+  "isaac-nav|Hydra Configuration System": {
+    "title": "Hydra 配置系统",
+    "entries": [
+      "isaac-hydra"
+    ]
+  },
+  "isaac-nav|Multi-GPU and Multi-Node Training": {
+    "title": "多 GPU 与多节点训练",
+    "entries": [
+      "isaac-multi-gpu"
+    ]
+  },
+  "isaac-nav|Population Based Training": {
+    "title": "种群训练",
+    "entries": []
+  },
+  "isaac-nav|Tiled Rendering": {
+    "title": "平铺渲染",
+    "entries": [
+      "isaac-camera"
+    ]
+  },
+  "isaac-nav|Ray Job Dispatch and Tuning": {
+    "title": "Ray 任务分发与调参",
+    "entries": []
+  },
+  "isaac-nav|Reproducibility and Determinism": {
+    "title": "可复现性与确定性",
+    "entries": [
+      "isaac-repro"
+    ]
+  },
+  "isaac-nav|Welcome to the bleeding edge!": {
+    "title": "实验性前沿功能",
+    "entries": []
+  },
+  "isaac-nav|Newton Physics Integration": {
+    "title": "Newton 物理集成",
+    "entries": []
+  },
+  "isaac-nav|Installation": {
+    "title": "Newton 安装",
+    "entries": []
+  },
+  "isaac-nav|Training Environments": {
+    "title": "Newton 训练环境",
+    "entries": []
+  },
+  "isaac-nav|Newton Visualizer": {
+    "title": "Newton 可视化",
+    "entries": []
+  },
+  "isaac-nav|Limitations": {
+    "title": "Newton 使用限制",
+    "entries": []
+  },
+  "isaac-nav|Solver Transitioning": {
+    "title": "求解器切换",
+    "entries": []
+  },
+  "isaac-nav|Sim-to-Sim Policy Transfer": {
+    "title": "仿真间策略迁移",
+    "entries": []
+  },
+  "isaac-nav|Sim-to-Real Policy Transfer": {
+    "title": "策略迁移到真实机器人",
+    "entries": []
+  },
+  "isaac-nav|Sim2Real Deployment of Policies Trained in Isaac Lab": {
+    "title": "部署 Isaac Lab 训练的真实机器人策略",
+    "entries": [
+      "isaac-sim2real",
+      "isaac-export"
+    ]
+  },
+  "isaac-nav|Training & Deploying HOVER Policy": {
+    "title": "训练并部署 HOVER 策略",
+    "entries": []
+  },
+  "isaac-nav|IO Descriptors 101": {
+    "title": "输入输出描述符入门",
+    "entries": []
+  },
+  "isaac-nav|From IsaacGymEnvs": {
+    "title": "从 IsaacGymEnvs 迁移",
+    "entries": [
+      "isaac-migration"
+    ]
+  },
+  "isaac-nav|From OmniIsaacGymEnvs": {
+    "title": "从 OmniIsaacGymEnvs 迁移",
+    "entries": [
+      "isaac-migration"
+    ]
+  },
+  "isaac-nav|From Orbit": {
+    "title": "从 Orbit 迁移",
+    "entries": [
+      "isaac-migration"
+    ]
+  },
+  "isaac-nav|API Reference": {
+    "title": "API 参考",
+    "entries": [
+      "isaac-tensor",
+      "isaac-scene"
+    ]
+  },
+  "isaac-nav|isaaclab.app": {
+    "title": "应用启动接口",
+    "entries": [
+      "isaac-launcher"
+    ]
+  },
+  "isaac-nav|isaaclab.actuators": {
+    "title": "执行器接口",
+    "entries": [
+      "isaac-actuators"
+    ]
+  },
+  "isaac-nav|isaaclab.assets": {
+    "title": "资产接口",
+    "entries": [
+      "isaac-articulation",
+      "isaac-rigid-object"
+    ]
+  },
+  "isaac-nav|isaaclab.controllers": {
+    "title": "控制器接口",
+    "entries": [
+      "isaac-ik",
+      "isaac-osc"
+    ]
+  },
+  "isaac-nav|isaaclab.devices": {
+    "title": "交互设备接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab.envs": {
+    "title": "环境接口",
+    "entries": [
+      "isaac-manager",
+      "isaac-direct"
+    ]
+  },
+  "isaac-nav|isaaclab.managers": {
+    "title": "管理器接口",
+    "entries": [
+      "isaac-rewards",
+      "isaac-events",
+      "isaac-curriculum"
+    ]
+  },
+  "isaac-nav|isaaclab.markers": {
+    "title": "可视化标记接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab.scene": {
+    "title": "场景接口",
+    "entries": [
+      "isaac-scene"
+    ]
+  },
+  "isaac-nav|isaaclab.sensors": {
+    "title": "传感器接口",
+    "entries": [
+      "isaac-camera",
+      "isaac-contact"
+    ]
+  },
+  "isaac-nav|isaaclab.sim": {
+    "title": "仿真接口",
+    "entries": [
+      "isaac-empty",
+      "isaac-step-order"
+    ]
+  },
+  "isaac-nav|isaaclab.terrains": {
+    "title": "地形接口",
+    "entries": [
+      "isaac-terrain"
+    ]
+  },
+  "isaac-nav|isaaclab.utils": {
+    "title": "辅助工具接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab.envs.mdp": {
+    "title": "马尔可夫决策过程接口",
+    "entries": [
+      "isaac-observations",
+      "isaac-rewards",
+      "isaac-termination"
+    ]
+  },
+  "isaac-nav|isaaclab.envs.ui": {
+    "title": "环境界面接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab.sensors.patterns": {
+    "title": "传感器采样模式接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab.sim.converters": {
+    "title": "资产转换接口",
+    "entries": [
+      "isaac-usd"
+    ]
+  },
+  "isaac-nav|isaaclab.sim.schemas": {
+    "title": "物理模式接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab.sim.spawners": {
+    "title": "场景生成接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab_rl": {
+    "title": "强化学习封装接口",
+    "entries": [
+      "isaac-train",
+      "isaac-play"
+    ]
+  },
+  "isaac-nav|isaaclab_mimic.datagen": {
+    "title": "模仿学习数据生成接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab_mimic.envs": {
+    "title": "模仿学习环境接口",
+    "entries": []
+  },
+  "isaac-nav|isaaclab_tasks.utils": {
+    "title": "任务工具接口",
+    "entries": [
+      "isaac-register"
+    ]
+  },
+  "isaac-nav|Additional Resources": {
+    "title": "扩展资源",
+    "entries": []
+  },
+  "isaac-nav|Contribution Guidelines": {
+    "title": "贡献指南",
+    "entries": []
+  },
+  "isaac-nav|Tricks and Troubleshooting": {
+    "title": "技巧与排障",
+    "entries": [
+      "isaac-error-driver",
+      "isaac-error-memory"
+    ]
+  },
+  "isaac-nav|Migration Guide (Isaac Sim)": {
+    "title": "Isaac Sim 迁移指南",
+    "entries": [
+      "isaac-compatibility",
+      "isaac-migration"
+    ]
+  },
+  "isaac-nav|Known Issues": {
+    "title": "已知问题",
+    "entries": [
+      "isaac-compatibility"
+    ]
+  },
+  "isaac-nav|Release Notes": {
+    "title": "发行说明",
+    "entries": []
+  },
+  "isaac-nav|Extensions Changelog": {
+    "title": "扩展变更日志",
+    "entries": []
+  },
+  "isaac-nav|License": {
+    "title": "许可说明",
+    "entries": []
+  },
+  "isaac-nav|Bibliography": {
+    "title": "参考文献",
+    "entries": []
+  },
+  "coreutils|Introduction": {
+    "title": "手册介绍",
+    "entries": []
+  },
+  "coreutils|Common options": {
+    "title": "通用选项",
+    "entries": [
+      "linux-man"
+    ]
+  },
+  "coreutils|Backup options": {
+    "title": "备份选项",
+    "entries": []
+  },
+  "coreutils|Block size": {
+    "title": "块大小",
+    "entries": []
+  },
+  "coreutils|Signal specifications": {
+    "title": "信号表示",
+    "entries": []
+  },
+  "coreutils|chown, chgrp, chroot, id: Disambiguating user names and IDs": {
+    "title": "用户名与数值标识的区分",
+    "entries": []
+  },
+  "coreutils|Sources of random data": {
+    "title": "随机数据来源",
+    "entries": []
+  },
+  "coreutils|Target directory": {
+    "title": "目标目录",
+    "entries": []
+  },
+  "coreutils|Trailing slashes": {
+    "title": "末尾斜杠",
+    "entries": []
+  },
+  "coreutils|Traversing symlinks": {
+    "title": "遍历符号链接",
+    "entries": []
+  },
+  "coreutils|Treating / specially": {
+    "title": "根目录特殊处理",
+    "entries": []
+  },
+  "coreutils|Special built-in utilities": {
+    "title": "特殊内建工具",
+    "entries": []
+  },
+  "coreutils|Exit status": {
+    "title": "退出状态",
+    "entries": [
+      "linux-pipefail"
+    ]
+  },
+  "coreutils|Floating point numbers": {
+    "title": "浮点数",
+    "entries": []
+  },
+  "coreutils|Standards conformance": {
+    "title": "标准兼容性",
+    "entries": []
+  },
+  "coreutils|coreutils: Multi-call program": {
+    "title": "coreutils 多调用程序",
+    "entries": []
+  },
+  "coreutils|Output of entire files": {
+    "title": "输出完整文件",
+    "entries": []
+  },
+  "coreutils|cat: Concatenate and write files": {
+    "title": "cat：连接并输出文件",
+    "entries": []
+  },
+  "coreutils|tac: Concatenate and write files in reverse": {
+    "title": "tac：逆序输出文件",
+    "entries": []
+  },
+  "coreutils|nl: Number lines and write files": {
+    "title": "nl：添加行号",
+    "entries": []
+  },
+  "coreutils|od: Write files in octal or other formats": {
+    "title": "od：以八进制等格式查看数据",
+    "entries": []
+  },
+  "coreutils|base32: Transform data into printable data": {
+    "title": "base32：可打印编码",
+    "entries": []
+  },
+  "coreutils|base64: Transform data into printable data": {
+    "title": "base64：可打印编码",
+    "entries": []
+  },
+  "coreutils|basenc: Transform data into printable data": {
+    "title": "basenc：通用编码转换",
+    "entries": []
+  },
+  "coreutils|Formatting file contents": {
+    "title": "格式化文件内容",
+    "entries": []
+  },
+  "coreutils|fmt: Reformat paragraph text": {
+    "title": "fmt：重排段落",
+    "entries": []
+  },
+  "coreutils|pr: Paginate or columnate files for printing": {
+    "title": "pr：分页与分栏",
+    "entries": []
+  },
+  "coreutils|fold: Wrap input lines to fit in specified width": {
+    "title": "fold：按宽度换行",
+    "entries": []
+  },
+  "coreutils|Output of parts of files": {
+    "title": "输出部分文件",
+    "entries": [
+      "linux-head-tail"
+    ]
+  },
+  "coreutils|head: Output the first part of files": {
+    "title": "head：输出文件开头",
+    "entries": []
+  },
+  "coreutils|tail: Output the last part of files": {
+    "title": "tail：输出文件末尾",
+    "entries": []
+  },
+  "coreutils|split: Split a file into pieces.": {
+    "title": "split：拆分文件",
+    "entries": []
+  },
+  "coreutils|csplit: Split a file into context-determined pieces": {
+    "title": "csplit：按上下文拆分文件",
+    "entries": []
+  },
+  "coreutils|Summarizing files": {
+    "title": "文件摘要",
+    "entries": [
+      "linux-wc",
+      "linux-sha256sum"
+    ]
+  },
+  "coreutils|wc: Print newline, word, and byte counts": {
+    "title": "wc：统计行词与字节",
+    "entries": [
+      "linux-wc"
+    ]
+  },
+  "coreutils|sum: Print checksum and block counts": {
+    "title": "sum：校验与块计数",
+    "entries": []
+  },
+  "coreutils|cksum: Print and verify file checksums": {
+    "title": "cksum：计算与验证校验和",
+    "entries": []
+  },
+  "coreutils|md5sum: Print or check MD5 digests": {
+    "title": "md5sum：MD5 摘要",
+    "entries": []
+  },
+  "coreutils|b2sum: Print or check BLAKE2 digests": {
+    "title": "b2sum：BLAKE2 摘要",
+    "entries": []
+  },
+  "coreutils|sha1sum: Print or check SHA-1 digests": {
+    "title": "sha1sum：SHA-1 摘要",
+    "entries": []
+  },
+  "coreutils|sha2 utilities: Print or check SHA-2 digests": {
+    "title": "SHA-2 摘要工具",
+    "entries": [
+      "linux-sha256sum"
+    ]
+  },
+  "coreutils|Operating on sorted files": {
+    "title": "处理有序文件",
+    "entries": [
+      "linux-sort",
+      "linux-uniq"
+    ]
+  },
+  "coreutils|sort: Sort text files": {
+    "title": "sort：文本排序",
+    "entries": [
+      "linux-sort"
+    ]
+  },
+  "coreutils|shuf: Shuffling text": {
+    "title": "shuf：随机排列",
+    "entries": []
+  },
+  "coreutils|uniq: Uniquify files": {
+    "title": "uniq：去除相邻重复行",
+    "entries": [
+      "linux-uniq"
+    ]
+  },
+  "coreutils|comm: Compare two sorted files line by line": {
+    "title": "comm：逐行比较有序文件",
+    "entries": []
+  },
+  "coreutils|ptx: Produce permuted indexes": {
+    "title": "ptx：生成排列索引",
+    "entries": []
+  },
+  "coreutils|tsort: Topological sort": {
+    "title": "tsort：拓扑排序",
+    "entries": []
+  },
+  "coreutils|Operating on fields": {
+    "title": "按字段处理",
+    "entries": [
+      "linux-cut"
+    ]
+  },
+  "coreutils|cut: Print selected parts of lines": {
+    "title": "cut：提取行内字段",
+    "entries": [
+      "linux-cut"
+    ]
+  },
+  "coreutils|paste: Merge lines of files": {
+    "title": "paste：合并文件行",
+    "entries": []
+  },
+  "coreutils|join: Join lines on a common field": {
+    "title": "join：按公共字段连接",
+    "entries": []
+  },
+  "coreutils|Operating on characters": {
+    "title": "按字符处理",
+    "entries": [
+      "linux-tr"
+    ]
+  },
+  "coreutils|tr: Translate, squeeze, and/or delete characters": {
+    "title": "tr：替换压缩与删除字符",
+    "entries": [
+      "linux-tr"
+    ]
+  },
+  "coreutils|expand: Convert tabs to spaces": {
+    "title": "expand：制表符转空格",
+    "entries": []
+  },
+  "coreutils|unexpand: Convert spaces to tabs": {
+    "title": "unexpand：空格转制表符",
+    "entries": []
+  },
+  "coreutils|Directory listing": {
+    "title": "目录列表",
+    "entries": [
+      "linux-ls"
+    ]
+  },
+  "coreutils|ls: List directory contents": {
+    "title": "ls：列出目录内容",
+    "entries": [
+      "linux-ls"
+    ]
+  },
+  "coreutils|dir: Briefly list directory contents": {
+    "title": "dir：简洁目录列表",
+    "entries": []
+  },
+  "coreutils|vdir: Verbosely list directory contents": {
+    "title": "vdir：详细目录列表",
+    "entries": []
+  },
+  "coreutils|dircolors: Color setup for ls": {
+    "title": "dircolors：配置列表颜色",
+    "entries": []
+  },
+  "coreutils|Basic operations": {
+    "title": "基本文件操作",
+    "entries": [
+      "linux-cp",
+      "linux-mv",
+      "linux-rm"
+    ]
+  },
+  "coreutils|cp: Copy files and directories": {
+    "title": "cp：复制文件与目录",
+    "entries": [
+      "linux-cp"
+    ]
+  },
+  "coreutils|dd: Convert and copy a file": {
+    "title": "dd：转换并复制数据",
+    "entries": []
+  },
+  "coreutils|install: Copy files and set attributes": {
+    "title": "install：复制并设置属性",
+    "entries": []
+  },
+  "coreutils|mv: Move (rename) files": {
+    "title": "mv：移动和重命名",
+    "entries": [
+      "linux-mv"
+    ]
+  },
+  "coreutils|rm: Remove files or directories": {
+    "title": "rm：移除文件与目录",
+    "entries": [
+      "linux-rm"
+    ]
+  },
+  "coreutils|shred: Remove files more securely": {
+    "title": "shred：更安全地覆盖文件",
+    "entries": []
+  },
+  "coreutils|Special file types": {
+    "title": "特殊文件类型",
+    "entries": [
+      "linux-ln",
+      "linux-mkdir"
+    ]
+  },
+  "coreutils|link: Make a hard link via the link syscall": {
+    "title": "link：创建硬链接",
+    "entries": []
+  },
+  "coreutils|ln: Make links between files": {
+    "title": "ln：创建文件链接",
+    "entries": [
+      "linux-ln"
+    ]
+  },
+  "coreutils|mkdir: Make directories": {
+    "title": "mkdir：创建目录",
+    "entries": [
+      "linux-mkdir"
+    ],
+    "status": "detailed"
+  },
+  "coreutils|mkfifo: Make FIFOs (named pipes)": {
+    "title": "mkfifo：创建命名管道",
+    "entries": []
+  },
+  "coreutils|mknod: Make block or character special files": {
+    "title": "mknod：创建块与字符设备",
+    "entries": []
+  },
+  "coreutils|readlink: Print value of a symlink or canonical file name": {
+    "title": "readlink：读取链接目标",
+    "entries": []
+  },
+  "coreutils|rmdir: Remove empty directories": {
+    "title": "rmdir：移除空目录",
+    "entries": []
+  },
+  "coreutils|unlink: Remove files via the unlink syscall": {
+    "title": "unlink：移除文件链接",
+    "entries": []
+  },
+  "coreutils|Changing file attributes": {
+    "title": "修改文件属性",
+    "entries": [
+      "linux-chmod",
+      "linux-chown"
+    ]
+  },
+  "coreutils|chown: Change file owner and group": {
+    "title": "chown：修改所有者与组",
+    "entries": [
+      "linux-chown"
+    ]
+  },
+  "coreutils|chgrp: Change group ownership": {
+    "title": "chgrp：修改所属组",
+    "entries": []
+  },
+  "coreutils|chmod: Change access permissions": {
+    "title": "chmod：修改访问权限",
+    "entries": [
+      "linux-chmod"
+    ]
+  },
+  "coreutils|touch: Change file timestamps": {
+    "title": "touch：修改时间戳",
+    "entries": []
+  },
+  "coreutils|File space usage": {
+    "title": "文件空间使用",
+    "entries": [
+      "linux-df",
+      "linux-du",
+      "linux-stat"
+    ]
+  },
+  "coreutils|df: Report file system space usage": {
+    "title": "df：文件系统空间",
+    "entries": [
+      "linux-df"
+    ]
+  },
+  "coreutils|du: Estimate file space usage": {
+    "title": "du：估算文件空间",
+    "entries": [
+      "linux-du"
+    ]
+  },
+  "coreutils|stat: Report file or file system status": {
+    "title": "stat：文件与文件系统状态",
+    "entries": [
+      "linux-stat"
+    ]
+  },
+  "coreutils|sync: Synchronize cached writes to persistent storage": {
+    "title": "sync：同步缓存写入",
+    "entries": []
+  },
+  "coreutils|truncate: Shrink or extend the size of a file": {
+    "title": "truncate：调整文件长度",
+    "entries": []
+  },
+  "coreutils|Printing text": {
+    "title": "输出文本",
+    "entries": []
+  },
+  "coreutils|echo: Print a line of text": {
+    "title": "echo：输出文本行",
+    "entries": []
+  },
+  "coreutils|printf: Format and print data": {
+    "title": "printf：格式化输出",
+    "entries": []
+  },
+  "coreutils|yes: Print a string until interrupted": {
+    "title": "yes：重复输出字符串",
+    "entries": []
+  },
+  "coreutils|Conditions": {
+    "title": "条件判断",
+    "entries": []
+  },
+  "coreutils|false: Do nothing, unsuccessfully": {
+    "title": "false：返回失败",
+    "entries": []
+  },
+  "coreutils|true: Do nothing, successfully": {
+    "title": "true：返回成功",
+    "entries": []
+  },
+  "coreutils|test: Check file types and compare values": {
+    "title": "test：文件属性与值比较",
+    "entries": []
+  },
+  "coreutils|expr: Evaluate expressions": {
+    "title": "expr：计算表达式",
+    "entries": []
+  },
+  "coreutils|Redirection": {
+    "title": "输出重定向",
+    "entries": [
+      "linux-tee"
+    ]
+  },
+  "coreutils|tee: Redirect output to multiple files or processes": {
+    "title": "tee：分发输出到文件与进程",
+    "entries": [
+      "linux-tee"
+    ],
+    "status": "detailed"
+  },
+  "coreutils|File name manipulation": {
+    "title": "文件名处理",
+    "entries": []
+  },
+  "coreutils|basename: Strip directory and suffix from a file name": {
+    "title": "basename：提取基本文件名",
+    "entries": []
+  },
+  "coreutils|dirname: Strip last file name component": {
+    "title": "dirname：提取目录部分",
+    "entries": []
+  },
+  "coreutils|pathchk: Check file name validity and portability": {
+    "title": "pathchk：检查路径有效性",
+    "entries": []
+  },
+  "coreutils|mktemp: Create temporary file or directory": {
+    "title": "mktemp：创建临时文件",
+    "entries": []
+  },
+  "coreutils|realpath: Print the resolved file name.": {
+    "title": "realpath：解析规范路径",
+    "entries": [
+      "linux-realpath"
+    ]
+  },
+  "coreutils|Working context": {
+    "title": "工作环境",
+    "entries": [
+      "linux-pwd",
+      "linux-env"
+    ]
+  },
+  "coreutils|pwd: Print working directory": {
+    "title": "pwd：当前工作目录",
+    "entries": [
+      "linux-pwd"
+    ],
+    "status": "detailed"
+  },
+  "coreutils|stty: Print or change terminal characteristics": {
+    "title": "stty：终端属性",
+    "entries": []
+  },
+  "coreutils|printenv: Print all or some environment variables": {
+    "title": "printenv：环境变量",
+    "entries": []
+  },
+  "coreutils|tty: Print file name of terminal on standard input": {
+    "title": "tty：终端设备名",
+    "entries": []
+  },
+  "coreutils|User information": {
+    "title": "用户信息",
+    "entries": [
+      "linux-id"
+    ]
+  },
+  "coreutils|id: Print user identity": {
+    "title": "id：用户身份",
+    "entries": [
+      "linux-id"
+    ]
+  },
+  "coreutils|logname: Print current login name": {
+    "title": "logname：登录名",
+    "entries": []
+  },
+  "coreutils|whoami: Print effective user name": {
+    "title": "whoami：有效用户名",
+    "entries": []
+  },
+  "coreutils|groups: Print group names a user is in": {
+    "title": "groups：所属用户组",
+    "entries": []
+  },
+  "coreutils|users: Print login names of users currently logged in": {
+    "title": "users：当前登录用户",
+    "entries": []
+  },
+  "coreutils|who: Print who is currently logged in": {
+    "title": "who：登录会话",
+    "entries": []
+  },
+  "coreutils|pinky: Print information about users": {
+    "title": "pinky：用户信息",
+    "entries": []
+  },
+  "coreutils|System context": {
+    "title": "系统环境",
+    "entries": [
+      "linux-hostname",
+      "linux-lscpu"
+    ]
+  },
+  "coreutils|date: Print or set system date and time": {
+    "title": "date：日期与时间",
+    "entries": []
+  },
+  "coreutils|arch: Print machine hardware name": {
+    "title": "arch：硬件架构",
+    "entries": []
+  },
+  "coreutils|nproc: Print the number of available processors": {
+    "title": "nproc：可用处理器数",
+    "entries": []
+  },
+  "coreutils|uname: Print system information": {
+    "title": "uname：系统信息",
+    "entries": []
+  },
+  "coreutils|hostname: Print or set system name": {
+    "title": "hostname：主机名",
+    "entries": [
+      "linux-hostname"
+    ]
+  },
+  "coreutils|hostid: Print numeric host identifier": {
+    "title": "hostid：主机数值标识",
+    "entries": []
+  },
+  "coreutils|uptime: Print system uptime and load": {
+    "title": "uptime：运行时间与负载",
+    "entries": []
+  },
+  "coreutils|SELinux context": {
+    "title": "SELinux 安全上下文",
+    "entries": []
+  },
+  "coreutils|chcon: Change SELinux context of file": {
+    "title": "chcon：修改安全上下文",
+    "entries": []
+  },
+  "coreutils|runcon: Run a command in specified SELinux context": {
+    "title": "runcon：指定上下文执行",
+    "entries": []
+  },
+  "coreutils|Modified command invocation": {
+    "title": "改变命令执行环境",
+    "entries": [
+      "linux-env",
+      "linux-nice",
+      "linux-nohup",
+      "linux-timeout"
+    ]
+  },
+  "coreutils|chroot: Run a command with a different root directory": {
+    "title": "chroot：改变根目录执行",
+    "entries": []
+  },
+  "coreutils|env: Run a command in a modified environment": {
+    "title": "env：修改环境执行",
+    "entries": [
+      "linux-env"
+    ]
+  },
+  "coreutils|nice: Run a command with modified niceness": {
+    "title": "nice：调整调度优先级",
+    "entries": [
+      "linux-nice"
+    ]
+  },
+  "coreutils|nohup: Run a command immune to hangups": {
+    "title": "nohup：忽略挂断信号",
+    "entries": [
+      "linux-nohup"
+    ]
+  },
+  "coreutils|stdbuf: Run a command with modified I/O stream buffering": {
+    "title": "stdbuf：修改流缓冲",
+    "entries": []
+  },
+  "coreutils|timeout: Run a command with a time limit": {
+    "title": "timeout：限定执行时间",
+    "entries": [
+      "linux-timeout"
+    ]
+  },
+  "coreutils|Process control": {
+    "title": "进程控制",
+    "entries": [
+      "linux-kill"
+    ]
+  },
+  "coreutils|kill: Send a signal to processes": {
+    "title": "kill：发送进程信号",
+    "entries": [
+      "linux-kill"
+    ]
+  },
+  "coreutils|Delaying": {
+    "title": "延时操作",
+    "entries": []
+  },
+  "coreutils|sleep: Delay for a specified time": {
+    "title": "sleep：等待指定时间",
+    "entries": []
+  },
+  "coreutils|Numeric operations": {
+    "title": "数值操作",
+    "entries": []
+  },
+  "coreutils|factor: Print prime factors": {
+    "title": "factor：质因数分解",
+    "entries": []
+  },
+  "coreutils|numfmt: Reformat numbers": {
+    "title": "numfmt：数值格式化",
+    "entries": []
+  },
+  "coreutils|seq: Print numeric sequences": {
+    "title": "seq：生成数字序列",
+    "entries": []
+  },
+  "coreutils|File permissions": {
+    "title": "文件权限",
+    "entries": [
+      "linux-chmod",
+      "linux-umask"
+    ]
+  },
+  "coreutils|File timestamps": {
+    "title": "文件时间戳",
+    "entries": [
+      "linux-stat"
+    ]
+  },
+  "coreutils|Opening the Software Toolbox": {
+    "title": "组合软件工具",
+    "entries": []
+  },
+  "findutils|Introduction": {
+    "title": "手册介绍",
+    "entries": []
+  },
+  "findutils|Scope": {
+    "title": "范围",
+    "entries": []
+  },
+  "findutils|Overview": {
+    "title": "工具概览",
+    "entries": []
+  },
+  "findutils|Finding Files": {
+    "title": "查找文件",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|find Expressions": {
+    "title": "find 表达式",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Starting points": {
+    "title": "搜索起点",
+    "entries": []
+  },
+  "findutils|Name": {
+    "title": "名称匹配",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Links": {
+    "title": "链接处理",
+    "entries": [
+      "linux-find",
+      "linux-ln"
+    ]
+  },
+  "findutils|Time": {
+    "title": "时间匹配",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Size": {
+    "title": "大小匹配",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Type": {
+    "title": "类型匹配",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Owner": {
+    "title": "所有者匹配",
+    "entries": []
+  },
+  "findutils|File Mode Bits": {
+    "title": "权限位",
+    "entries": []
+  },
+  "findutils|Contents": {
+    "title": "内容匹配",
+    "entries": []
+  },
+  "findutils|Directories": {
+    "title": "目录处理",
+    "entries": []
+  },
+  "findutils|Filesystems": {
+    "title": "文件系统",
+    "entries": []
+  },
+  "findutils|Combining Primaries With Operators": {
+    "title": "组合条件与运算符",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Actions": {
+    "title": "执行动作",
+    "entries": [
+      "linux-find",
+      "linux-xargs"
+    ]
+  },
+  "findutils|Print File Name": {
+    "title": "输出文件名",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Print File Information": {
+    "title": "输出文件信息",
+    "entries": []
+  },
+  "findutils|Run Commands": {
+    "title": "运行命令",
+    "entries": [
+      "linux-xargs"
+    ]
+  },
+  "findutils|Delete Files": {
+    "title": "删除文件",
+    "entries": []
+  },
+  "findutils|Adding Tests": {
+    "title": "添加测试条件",
+    "entries": []
+  },
+  "findutils|File Name Databases": {
+    "title": "文件名数据库",
+    "entries": []
+  },
+  "findutils|Database Locations": {
+    "title": "数据库位置",
+    "entries": []
+  },
+  "findutils|Database Formats": {
+    "title": "数据库格式",
+    "entries": []
+  },
+  "findutils|Newline Handling": {
+    "title": "换行符处理",
+    "entries": []
+  },
+  "findutils|File Permissions": {
+    "title": "文件权限",
+    "entries": [
+      "linux-chmod"
+    ]
+  },
+  "findutils|Configuration": {
+    "title": "配置",
+    "entries": []
+  },
+  "findutils|Leaf Optimisation": {
+    "title": "叶节点优化",
+    "entries": []
+  },
+  "findutils|d_type Optimisation": {
+    "title": "目录类型优化",
+    "entries": []
+  },
+  "findutils|Reference": {
+    "title": "命令参考",
+    "entries": [
+      "linux-find",
+      "linux-xargs"
+    ]
+  },
+  "findutils|Invoking find": {
+    "title": "调用 find",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Invoking locate": {
+    "title": "调用 locate",
+    "entries": []
+  },
+  "findutils|Invoking updatedb": {
+    "title": "调用 updatedb",
+    "entries": []
+  },
+  "findutils|Invoking xargs": {
+    "title": "调用 xargs",
+    "entries": [
+      "linux-xargs"
+    ]
+  },
+  "findutils|Regular Expressions": {
+    "title": "正则表达式",
+    "entries": []
+  },
+  "findutils|Environment Variables": {
+    "title": "环境变量",
+    "entries": []
+  },
+  "findutils|Common Tasks": {
+    "title": "常见任务",
+    "entries": [
+      "linux-find"
+    ]
+  },
+  "findutils|Viewing And Editing": {
+    "title": "查看与编辑",
+    "entries": []
+  },
+  "findutils|Archiving": {
+    "title": "归档文件",
+    "entries": [
+      "linux-tar"
+    ]
+  },
+  "findutils|Cleaning Up": {
+    "title": "清理文件",
+    "entries": []
+  },
+  "findutils|Strange File Names": {
+    "title": "特殊文件名",
+    "entries": []
+  },
+  "findutils|Fixing Permissions": {
+    "title": "修复权限",
+    "entries": []
+  },
+  "findutils|Classifying Files": {
+    "title": "文件分类",
+    "entries": []
+  },
+  "findutils|Worked Examples": {
+    "title": "完整示例",
+    "entries": []
+  },
+  "findutils|Deleting Files": {
+    "title": "删除文件示例",
+    "entries": []
+  },
+  "findutils|Copying A Subset of Files": {
+    "title": "复制文件子集",
+    "entries": []
+  },
+  "findutils|Updating A Timestamp File": {
+    "title": "更新时间戳文件",
+    "entries": []
+  },
+  "findutils|Finding the Shallowest Instance": {
+    "title": "查找最浅层实例",
+    "entries": []
+  },
+  "findutils|Security Considerations": {
+    "title": "安全注意事项",
+    "entries": [
+      "linux-xargs"
+    ]
+  },
+  "findutils|Levels of Risk": {
+    "title": "风险级别",
+    "entries": []
+  },
+  "findutils|Security Considerations for find": {
+    "title": "find 安全注意事项",
+    "entries": []
+  },
+  "findutils|Security Considerations for xargs": {
+    "title": "xargs 安全注意事项",
+    "entries": [
+      "linux-xargs"
+    ]
+  },
+  "findutils|Security Considerations for locate": {
+    "title": "locate 安全注意事项",
+    "entries": []
+  },
+  "findutils|Summary": {
+    "title": "安全总结",
+    "entries": []
+  },
+  "findutils|Further Reading on Security": {
+    "title": "安全扩展阅读",
+    "entries": []
+  },
+  "findutils|Error Messages": {
+    "title": "错误消息",
+    "entries": []
+  },
+  "findutils|Error Messages From find": {
+    "title": "find 错误消息",
+    "entries": []
+  },
+  "findutils|Error Messages From xargs": {
+    "title": "xargs 错误消息",
+    "entries": []
+  },
+  "findutils|Error Messages From locate": {
+    "title": "locate 错误消息",
+    "entries": []
+  },
+  "findutils|Error Messages From updatedb": {
+    "title": "updatedb 错误消息",
+    "entries": []
+  },
+  "bash|Introduction": {
+    "title": "介绍",
+    "entries": []
+  },
+  "bash|What is Bash": {
+    "title": "什么是 Bash",
+    "entries": []
+  },
+  "bash|What is a shell": {
+    "title": "什么是 Shell",
+    "entries": []
+  },
+  "bash|Definitions": {
+    "title": "术语",
+    "entries": []
+  },
+  "bash|Basic Shell Features": {
+    "title": "Shell 基础功能",
+    "entries": [
+      "linux-pipefail",
+      "linux-redirect",
+      "linux-quoting"
+    ]
+  },
+  "bash|Shell Syntax": {
+    "title": "Shell 语法",
+    "entries": [
+      "linux-pipefail",
+      "linux-redirect"
+    ]
+  },
+  "bash|Shell Commands": {
+    "title": "Shell 命令",
+    "entries": [
+      "linux-pipefail",
+      "linux-for"
+    ]
+  },
+  "bash|Shell Functions": {
+    "title": "Shell 函数",
+    "entries": []
+  },
+  "bash|Shell Parameters": {
+    "title": "Shell 参数",
+    "entries": [
+      "linux-env"
+    ]
+  },
+  "bash|Shell Expansions": {
+    "title": "Shell 展开",
+    "entries": []
+  },
+  "bash|Redirections": {
+    "title": "重定向",
+    "entries": [
+      "linux-redirect"
+    ]
+  },
+  "bash|Executing Commands": {
+    "title": "执行命令",
+    "entries": [
+      "linux-type"
+    ]
+  },
+  "bash|Shell Scripts": {
+    "title": "Shell 脚本",
+    "entries": [
+      "linux-pipefail",
+      "linux-experiment"
+    ]
+  },
+  "bash|Shell Builtin Commands": {
+    "title": "Shell 内建命令",
+    "entries": [
+      "linux-cd",
+      "linux-type"
+    ]
+  },
+  "bash|Bourne Shell Builtins": {
+    "title": "Bourne Shell 内建命令",
+    "entries": []
+  },
+  "bash|Bash Builtins": {
+    "title": "Bash 内建命令",
+    "entries": [
+      "linux-type"
+    ]
+  },
+  "bash|Modifying Shell Behavior": {
+    "title": "修改 Shell 行为",
+    "entries": [
+      "linux-pipefail"
+    ]
+  },
+  "bash|Special Builtins": {
+    "title": "特殊内建命令",
+    "entries": []
+  },
+  "bash|Shell Variables": {
+    "title": "Shell 变量",
+    "entries": [
+      "linux-env"
+    ]
+  },
+  "bash|Bourne Shell Variables": {
+    "title": "Bourne Shell 变量",
+    "entries": []
+  },
+  "bash|Bash Variables": {
+    "title": "Bash 变量",
+    "entries": [
+      "linux-env"
+    ]
+  },
+  "bash|Bash Features": {
+    "title": "Bash 功能",
+    "entries": []
+  },
+  "bash|Invoking Bash": {
+    "title": "调用 Bash",
+    "entries": []
+  },
+  "bash|Bash Startup Files": {
+    "title": "启动文件",
+    "entries": []
+  },
+  "bash|Interactive Shells": {
+    "title": "交互式 Shell",
+    "entries": []
+  },
+  "bash|Bash Conditional Expressions": {
+    "title": "条件表达式",
+    "entries": []
+  },
+  "bash|Shell Arithmetic": {
+    "title": "算术运算",
+    "entries": []
+  },
+  "bash|Aliases": {
+    "title": "别名",
+    "entries": []
+  },
+  "bash|Arrays": {
+    "title": "数组",
+    "entries": []
+  },
+  "bash|The Directory Stack": {
+    "title": "目录栈",
+    "entries": []
+  },
+  "bash|Controlling the Prompt": {
+    "title": "提示符控制",
+    "entries": []
+  },
+  "bash|The Restricted Shell": {
+    "title": "受限 Shell",
+    "entries": []
+  },
+  "bash|Bash POSIX Mode": {
+    "title": "POSIX 模式",
+    "entries": []
+  },
+  "bash|Shell Compatibility Mode": {
+    "title": "兼容模式",
+    "entries": []
+  },
+  "bash|Job Control": {
+    "title": "作业控制",
+    "entries": [
+      "linux-jobs"
+    ]
+  },
+  "bash|Job Control Basics": {
+    "title": "作业控制基础",
+    "entries": [
+      "linux-jobs"
+    ]
+  },
+  "bash|Job Control Builtins": {
+    "title": "作业控制内建命令",
+    "entries": [
+      "linux-jobs"
+    ]
+  },
+  "bash|Job Control Variables": {
+    "title": "作业控制变量",
+    "entries": [
+      "linux-jobs"
+    ]
+  },
+  "bash|Command Line Editing": {
+    "title": "命令行编辑",
+    "entries": []
+  },
+  "bash|Introduction and Notation": {
+    "title": "编辑介绍与符号",
+    "entries": []
+  },
+  "bash|Readline Interaction": {
+    "title": "Readline 交互",
+    "entries": []
+  },
+  "bash|Readline Init File": {
+    "title": "Readline 初始化文件",
+    "entries": []
+  },
+  "bash|Bindable Readline Commands": {
+    "title": "可绑定编辑命令",
+    "entries": []
+  },
+  "bash|Readline vi Mode": {
+    "title": "Readline 的 vi 模式",
+    "entries": []
+  },
+  "bash|Programmable Completion": {
+    "title": "可编程补全",
+    "entries": []
+  },
+  "bash|Programmable Completion Builtins": {
+    "title": "补全内建命令",
+    "entries": []
+  },
+  "bash|A Programmable Completion Example": {
+    "title": "补全示例",
+    "entries": []
+  },
+  "bash|Using History Interactively": {
+    "title": "交互式历史使用",
+    "entries": []
+  },
+  "bash|Bash History Facilities": {
+    "title": "历史记录机制",
+    "entries": []
+  },
+  "bash|Bash History Builtins": {
+    "title": "历史内建命令",
+    "entries": []
+  },
+  "bash|History Interaction": {
+    "title": "历史展开",
+    "entries": []
+  },
+  "bash|Installing Bash": {
+    "title": "安装 Bash",
+    "entries": []
+  },
+  "bash|Basic Installation": {
+    "title": "基本安装",
+    "entries": []
+  },
+  "bash|Compilers and Options": {
+    "title": "编译器与选项",
+    "entries": []
+  },
+  "bash|Compiling For Multiple Architectures": {
+    "title": "多架构编译",
+    "entries": []
+  },
+  "bash|Installation Names": {
+    "title": "安装名称",
+    "entries": []
+  },
+  "bash|Specifying the System Type": {
+    "title": "指定系统类型",
+    "entries": []
+  },
+  "bash|Sharing Defaults": {
+    "title": "共享默认配置",
+    "entries": []
+  },
+  "bash|Operation Controls": {
+    "title": "操作控制",
+    "entries": []
+  },
+  "bash|Optional Features": {
+    "title": "可选功能",
+    "entries": []
+  },
+  "bash|Reporting Bugs": {
+    "title": "报告问题",
+    "entries": []
+  },
+  "bash|Major Differences From The Bourne Shell": {
+    "title": "与 Bourne Shell 的主要差异",
+    "entries": []
+  },
+  "bash|Implementation Differences From The SVR4_002e2 Shell": {
+    "title": "与 SVR4.2 Shell 的实现差异",
+    "entries": []
+  },
+  "bash|GNU Free Documentation License": {
+    "title": "GNU 自由文档许可",
+    "entries": []
+  },
+  "bash|Indexes": {
+    "title": "索引",
+    "entries": []
+  },
+  "bash|Builtin Index": {
+    "title": "内建命令索引",
+    "entries": []
+  },
+  "bash|Reserved Word Index": {
+    "title": "保留字索引",
+    "entries": []
+  },
+  "bash|Variable Index": {
+    "title": "变量索引",
+    "entries": []
+  },
+  "bash|Function Index": {
+    "title": "函数索引",
+    "entries": []
+  },
+  "bash|Concept Index": {
+    "title": "概念索引",
+    "entries": []
+  },
+  "openssh|ssh(1)": {
+    "title": "SSH 客户端",
+    "entries": [
+      "linux-ssh",
+      "linux-ssh-tunnel"
+    ]
+  },
+  "openssh|sshd(8)": {
+    "title": "SSH 服务端",
+    "entries": []
+  },
+  "openssh|ssh_config(5)": {
+    "title": "SSH 客户端配置",
+    "entries": [
+      "linux-ssh"
+    ]
+  },
+  "openssh|sshd_config(5)": {
+    "title": "SSH 服务端配置",
+    "entries": []
+  },
+  "openssh|ssh-agent(1)": {
+    "title": "认证代理",
+    "entries": [
+      "linux-ssh-keygen"
+    ]
+  },
+  "openssh|ssh-add(1)": {
+    "title": "管理代理密钥",
+    "entries": [
+      "linux-ssh-keygen"
+    ]
+  },
+  "openssh|sftp(1)": {
+    "title": "SFTP 文件传输",
+    "entries": []
+  },
+  "openssh|scp(1)": {
+    "title": "SCP 文件复制",
+    "entries": [
+      "linux-scp"
+    ]
+  },
+  "openssh|ssh-keygen(1)": {
+    "title": "生成与管理密钥",
+    "entries": [
+      "linux-ssh-keygen"
+    ]
+  },
+  "openssh|sftp-server(8)": {
+    "title": "SFTP 服务端",
+    "entries": []
+  },
+  "openssh|ssh-keyscan(1)": {
+    "title": "获取主机公钥",
+    "entries": []
+  },
+  "openssh|ssh-keysign(8)": {
+    "title": "基于主机的签名辅助",
+    "entries": []
+  },
+  "systemd|Description": {
+    "title": "管理器说明",
+    "entries": [
+      "linux-systemctl"
+    ]
+  },
+  "systemd|Units": {
+    "title": "单元类型",
+    "entries": [
+      "linux-systemctl"
+    ]
+  },
+  "systemd|Directories": {
+    "title": "单元目录",
+    "entries": []
+  },
+  "systemd|Signals": {
+    "title": "信号处理",
+    "entries": [
+      "linux-kill"
+    ]
+  },
+  "systemd|Environment": {
+    "title": "环境变量",
+    "entries": []
+  },
+  "systemd|Kernel Command Line": {
+    "title": "内核命令行",
+    "entries": []
+  },
+  "systemd|System Credentials": {
+    "title": "系统凭据",
+    "entries": []
+  },
+  "systemd|Readiness Protocol": {
+    "title": "就绪通知协议",
+    "entries": []
+  },
+  "systemd|Options": {
+    "title": "启动选项",
+    "entries": []
+  },
+  "systemd|Files": {
+    "title": "相关文件",
+    "entries": []
+  },
+  "systemd|History": {
+    "title": "版本历史",
+    "entries": []
+  },
+  "systemd|See Also": {
+    "title": "另见参考",
+    "entries": [
+      "linux-journalctl",
+      "linux-systemctl"
+    ]
+  },
+  "ros2|First Steps": {
+    "title": "第一步",
+    "entries": [
+      "ros-versions"
+    ]
+  },
+  "ros2|Beginner: CLI tools": {
+    "title": "入门：命令行工具",
+    "entries": [
+      "ros-ros2-node",
+      "ros-ros2-topic"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Configuring-ROS2-Environment": {
+    "title": "配置 ROS 2 环境",
+    "entries": [
+      "ros-versions",
+      "ros-colcon"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim": {
+    "title": "认识 Turtlesim",
+    "entries": []
+  },
+  "ros2|Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes": {
+    "title": "理解节点",
+    "entries": [
+      "ros-ros2-node"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics": {
+    "title": "理解话题",
+    "entries": [
+      "ros-ros2-topic",
+      "ros-ros2-pub"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services": {
+    "title": "理解服务",
+    "entries": [
+      "ros-service"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters": {
+    "title": "理解参数",
+    "entries": [
+      "ros-params",
+      "ros-params-file"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions": {
+    "title": "理解动作",
+    "entries": [
+      "ros-action"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Using-Rqt-Console/Using-Rqt-Console": {
+    "title": "使用 RQt 日志控制台",
+    "entries": [
+      "ros-logging",
+      "ros-rqt"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes": {
+    "title": "启动多个节点",
+    "entries": [
+      "ros-launch"
+    ]
+  },
+  "ros2|Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data": {
+    "title": "记录与回放数据",
+    "entries": [
+      "ros-bag-record",
+      "ros-bag-play"
+    ]
+  },
+  "ros2|Beginner: Client libraries": {
+    "title": "入门：客户端库",
+    "entries": [
+      "ros-package",
+      "ros-quickstart"
+    ]
+  },
+  "ros2|Beginner-Client-Libraries/Colcon-Tutorial": {
+    "title": "Colcon 构建教程",
+    "entries": [
+      "ros-colcon"
+    ]
+  },
+  "ros2|Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace": {
+    "title": "创建工作空间",
+    "entries": [
+      "ros-colcon",
+      "ros-quickstart"
+    ]
+  },
+  "ros2|Beginner-Client-Libraries/Creating-Your-First-ROS2-Package": {
+    "title": "创建第一个 ROS 2 包",
+    "entries": [
+      "ros-package",
+      "ros-quickstart"
+    ]
+  },
+  "ros2|Beginner-Client-Libraries/Writing-A-Simple-Cpp-Publisher-And-Subscriber": {
+    "title": "编写 C++ 发布与订阅",
+    "entries": []
+  },
+  "ros2|Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber": {
+    "title": "编写 Python 发布与订阅",
+    "entries": [
+      "ros-quickstart"
+    ],
+    "status": "detailed"
+  },
+  "ros2|Beginner-Client-Libraries/Writing-A-Simple-Cpp-Service-And-Client": {
+    "title": "编写 C++ 服务与客户端",
+    "entries": []
+  },
+  "ros2|Beginner-Client-Libraries/Writing-A-Simple-Py-Service-And-Client": {
+    "title": "编写 Python 服务与客户端",
+    "entries": []
+  },
+  "ros2|Beginner-Client-Libraries/Custom-ROS2-Interfaces": {
+    "title": "自定义 ROS 2 接口",
+    "entries": [
+      "ros-custom-msg"
+    ]
+  },
+  "ros2|Beginner-Client-Libraries/Single-Package-Define-And-Use-Interface": {
+    "title": "在单包中定义和使用接口",
+    "entries": []
+  },
+  "ros2|Beginner-Client-Libraries/Using-Parameters-In-A-Class-CPP": {
+    "title": "C++ 类中的参数",
+    "entries": []
+  },
+  "ros2|Beginner-Client-Libraries/Using-Parameters-In-A-Class-Python": {
+    "title": "Python 类中的参数",
+    "entries": []
+  },
+  "ros2|Beginner-Client-Libraries/Getting-Started-With-Ros2doctor": {
+    "title": "使用 ros2 doctor",
+    "entries": [
+      "ros-doctor"
+    ]
+  },
+  "ros2|Beginner-Client-Libraries/Pluginlib": {
+    "title": "插件加载库",
+    "entries": []
+  },
+  "ros2|Intermediate": {
+    "title": "中级教程",
+    "entries": [
+      "ros-launch",
+      "ros-tf2",
+      "ros-test"
+    ]
+  },
+  "ros2|Intermediate/Rosdep": {
+    "title": "Rosdep 依赖管理",
+    "entries": [
+      "ros-rosdep"
+    ]
+  },
+  "ros2|Intermediate/Creating-an-Action": {
+    "title": "创建动作接口",
+    "entries": [
+      "ros-custom-msg",
+      "ros-action"
+    ]
+  },
+  "ros2|Intermediate/Writing-an-Action-Server-Client/Cpp": {
+    "title": "C++ 动作服务器与客户端",
+    "entries": []
+  },
+  "ros2|Intermediate/Writing-an-Action-Server-Client/Py": {
+    "title": "Python 动作服务器与客户端",
+    "entries": []
+  },
+  "ros2|Intermediate/Writing-a-Composable-Node": {
+    "title": "编写可组合节点",
+    "entries": [
+      "ros-composition"
+    ]
+  },
+  "ros2|Intermediate/Composition": {
+    "title": "组件组合",
+    "entries": [
+      "ros-composition"
+    ]
+  },
+  "ros2|Intermediate/Using-Node-Interfaces-Template-Class": {
+    "title": "节点接口模板类",
+    "entries": []
+  },
+  "ros2|Intermediate/Monitoring-For-Parameter-Changes-CPP": {
+    "title": "C++ 监控参数变化",
+    "entries": []
+  },
+  "ros2|Intermediate/Monitoring-For-Parameter-Changes-Python": {
+    "title": "Python 监控参数变化",
+    "entries": []
+  },
+  "ros2|Intermediate/Launch/Launch-Main": {
+    "title": "启动系统教程",
+    "entries": [
+      "ros-launch"
+    ]
+  },
+  "ros2|Intermediate/Tf2/Tf2-Main": {
+    "title": "TF2 教程",
+    "entries": [
+      "ros-tf2",
+      "ros-tf-tree",
+      "ros-tf-static"
+    ]
+  },
+  "ros2|Intermediate/Testing/Testing-Main": {
+    "title": "测试教程",
+    "entries": [
+      "ros-test"
+    ]
+  },
+  "ros2|Intermediate/URDF/URDF-Main": {
+    "title": "URDF 教程",
+    "entries": [
+      "ros-urdf"
+    ]
+  },
+  "ros2|Intermediate/RViz/RViz-Main": {
+    "title": "RViz 教程",
+    "entries": [
+      "ros-rviz"
+    ]
+  },
+  "ros2|Advanced": {
+    "title": "高级教程",
+    "entries": [
+      "ros-security",
+      "ros-multimachine"
+    ]
+  },
+  "ros2|Advanced/Supplementing-Custom-Rosdep-Keys": {
+    "title": "补充 Rosdep 键",
+    "entries": [
+      "ros-rosdep"
+    ]
+  },
+  "ros2|Advanced/Topic-Statistics-Tutorial/Topic-Statistics-Tutorial": {
+    "title": "话题统计",
+    "entries": [
+      "ros-topic-hz"
+    ]
+  },
+  "ros2|Advanced/Discovery-Server/Discovery-Server": {
+    "title": "发现服务器",
+    "entries": [
+      "ros-multimachine"
+    ]
+  },
+  "ros2|Advanced/Allocator-Template-Tutorial": {
+    "title": "自定义内存分配器",
+    "entries": []
+  },
+  "ros2|Advanced/Ament-Lint-For-Clean-Code": {
+    "title": "Ament 代码规范检查",
+    "entries": []
+  },
+  "ros2|Advanced/FastDDS-Configuration": {
+    "title": "Fast DDS 配置",
+    "entries": [
+      "ros-rmw"
+    ]
+  },
+  "ros2|Advanced/Improved-Dynamic-Discovery": {
+    "title": "改进的动态发现",
+    "entries": [
+      "ros-domain"
+    ]
+  },
+  "ros2|Advanced/Recording-A-Bag-From-Your-Own-Node-CPP": {
+    "title": "C++ 节点中记录 Bag",
+    "entries": []
+  },
+  "ros2|Advanced/Recording-A-Bag-From-Your-Own-Node-Py": {
+    "title": "Python 节点中记录 Bag",
+    "entries": []
+  },
+  "ros2|Advanced/Reading-From-A-Bag-File-CPP": {
+    "title": "C++ 读取 Bag 文件",
+    "entries": []
+  },
+  "ros2|Advanced/Create-An-Rqtbag-Plugin": {
+    "title": "创建 RQt Bag 插件",
+    "entries": []
+  },
+  "ros2|Advanced/ROS2-Tracing-Trace-and-Analyze": {
+    "title": "ROS 2 跟踪与分析",
+    "entries": []
+  },
+  "ros2|Advanced/Creating-An-RMW-Implementation": {
+    "title": "实现新的 RMW",
+    "entries": []
+  },
+  "ros2|Advanced/Simulators/Simulation-Main": {
+    "title": "仿真器集成",
+    "entries": [
+      "ros-sim-time",
+      "ros-navigation-project"
+    ]
+  },
+  "ros2|Advanced/Security/Security-Main": {
+    "title": "安全教程",
+    "entries": [
+      "ros-security"
+    ]
+  },
+  "ros2|Demos": {
+    "title": "演示",
+    "entries": [
+      "ros-qos",
+      "ros-lifecycle"
+    ]
+  },
+  "ros2|Demos/Quality-of-Service": {
+    "title": "服务质量",
+    "entries": [
+      "ros-qos",
+      "ros-durability"
+    ]
+  },
+  "ros2|Demos/Managed-Nodes": {
+    "title": "生命周期节点",
+    "entries": [
+      "ros-lifecycle"
+    ]
+  },
+  "ros2|Demos/Intra-Process-Communication": {
+    "title": "进程内通信",
+    "entries": [
+      "ros-composition"
+    ]
+  },
+  "ros2|Demos/Rosbag-with-ROS1-Bridge": {
+    "title": "通过 ROS 1 桥接记录",
+    "entries": [
+      "ros-migration"
+    ]
+  },
+  "ros2|Demos/Real-Time-Programming": {
+    "title": "实时编程",
+    "entries": []
+  },
+  "ros2|Demos/dummy-robot-demo": {
+    "title": "虚拟机器人演示",
+    "entries": []
+  },
+  "ros2|Demos/Logging-and-logger-configuration": {
+    "title": "日志与记录器配置",
+    "entries": [
+      "ros-logging"
+    ]
+  },
+  "ros2|Demos/Content-Filtering-Subscription": {
+    "title": "内容过滤订阅",
+    "entries": []
+  },
+  "ros2|Demos/Service-Introspection": {
+    "title": "服务自省",
+    "entries": []
+  },
+  "ros2|Demos/Wait-for-Acknowledgment": {
+    "title": "等待确认",
+    "entries": []
+  },
+  "ros2|Miscellaneous": {
+    "title": "其他教程",
+    "entries": []
+  },
+  "ros2|Miscellaneous/Deploying-ROS-2-on-IBM-Cloud": {
+    "title": "部署到 IBM 云",
+    "entries": []
+  },
+  "ros2|Miscellaneous/Eclipse-Oxygen-with-ROS-2-and-rviz2": {
+    "title": "Eclipse Oxygen 与 RViz",
+    "entries": []
+  },
+  "ros2|Miscellaneous/Building-Realtime-rt_preempt-kernel-for-ROS-2": {
+    "title": "构建实时内核",
+    "entries": []
+  },
+  "ros2|Miscellaneous/Building-ROS2-Package-with-eclipse-2021-06": {
+    "title": "使用 Eclipse 构建包",
+    "entries": []
+  },
+  "ros2|Basic Concepts": {
+    "title": "基础概念",
+    "entries": [
+      "ros-ros2-node",
+      "ros-interface"
+    ]
+  },
+  "ros2|Basic/Interfaces-Topics-Services-Actions": {
+    "title": "接口、话题、服务和动作",
+    "entries": [
+      "ros-interface",
+      "ros-service",
+      "ros-action"
+    ]
+  },
+  "ros2|Basic/About-Nodes": {
+    "title": "节点概念",
+    "entries": [
+      "ros-ros2-node"
+    ]
+  },
+  "ros2|Basic/About-Discovery": {
+    "title": "发现机制",
+    "entries": [
+      "ros-domain",
+      "ros-multimachine"
+    ]
+  },
+  "ros2|Basic/About-Parameters": {
+    "title": "参数概念",
+    "entries": [
+      "ros-params"
+    ]
+  },
+  "ros2|Basic/About-Command-Line-Tools": {
+    "title": "命令行工具概念",
+    "entries": [
+      "ros-ros2-run"
+    ]
+  },
+  "ros2|Basic/About-Launch": {
+    "title": "启动概念",
+    "entries": [
+      "ros-launch"
+    ]
+  },
+  "ros2|Basic/About-Client-Libraries": {
+    "title": "客户端库概念",
+    "entries": [
+      "ros-quickstart"
+    ]
+  },
+  "ros2|Intermediate Concepts": {
+    "title": "中级概念",
+    "entries": [
+      "ros-qos",
+      "ros-executors"
+    ]
+  },
+  "ros2|Intermediate/About-Domain-ID": {
+    "title": "通信域 ID",
+    "entries": [
+      "ros-domain"
+    ]
+  },
+  "ros2|Intermediate/About-Different-Middleware-Vendors": {
+    "title": "中间件供应商",
+    "entries": [
+      "ros-rmw"
+    ]
+  },
+  "ros2|Intermediate/About-Logging": {
+    "title": "日志概念",
+    "entries": [
+      "ros-logging"
+    ]
+  },
+  "ros2|Intermediate/About-Quality-of-Service-Settings": {
+    "title": "服务质量设置",
+    "entries": [
+      "ros-qos"
+    ]
+  },
+  "ros2|Intermediate/About-Executors": {
+    "title": "执行器",
+    "entries": [
+      "ros-executors"
+    ]
+  },
+  "ros2|Intermediate/About-Topic-Statistics": {
+    "title": "话题统计概念",
+    "entries": [
+      "ros-topic-hz"
+    ]
+  },
+  "ros2|Intermediate/About-RQt": {
+    "title": "RQt 工具",
+    "entries": [
+      "ros-rqt"
+    ]
+  },
+  "ros2|Intermediate/About-Composition": {
+    "title": "组件组合概念",
+    "entries": [
+      "ros-composition"
+    ]
+  },
+  "ros2|Intermediate/About-Cross-Compilation": {
+    "title": "交叉编译",
+    "entries": []
+  },
+  "ros2|Intermediate/About-Security": {
+    "title": "安全概念",
+    "entries": [
+      "ros-security"
+    ]
+  },
+  "ros2|Intermediate/About-Tf2": {
+    "title": "TF2 概念",
+    "entries": [
+      "ros-tf2"
+    ]
+  },
+  "ros2|Advanced Concepts": {
+    "title": "高级概念",
+    "entries": []
+  },
+  "ros2|Advanced/About-Build-System": {
+    "title": "构建系统",
+    "entries": [
+      "ros-colcon"
+    ]
+  },
+  "ros2|Advanced/About-Internal-Interfaces": {
+    "title": "内部接口",
+    "entries": []
+  },
+  "ros2|Advanced/About-Middleware-Implementations": {
+    "title": "中间件实现",
+    "entries": [
+      "ros-rmw"
+    ]
+  },
+  "ros2-how|How-To-Guides/Installation-Troubleshooting": {
+    "title": "安装排障",
+    "entries": [
+      "ros-error-package",
+      "ros-error-dependency"
+    ]
+  },
+  "ros2-how|How-To-Guides/Developing-a-ROS-2-Package": {
+    "title": "开发 ROS 2 功能包",
+    "entries": [
+      "ros-package",
+      "ros-quickstart"
+    ]
+  },
+  "ros2-how|How-To-Guides/Documenting-a-ROS-2-Package": {
+    "title": "为功能包编写文档",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Ament-CMake-Documentation": {
+    "title": "Ament CMake 文档",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Ament-CMake-Python-Documentation": {
+    "title": "Ament CMake Python 文档",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Migrating-from-ROS1": {
+    "title": "从 ROS 1 迁移",
+    "entries": [
+      "ros-migration"
+    ]
+  },
+  "ros2-how|How-To-Guides/Launch-file-different-formats": {
+    "title": "不同格式的启动文件",
+    "entries": [
+      "ros-launch"
+    ]
+  },
+  "ros2-how|How-To-Guides/Launching-composable-nodes": {
+    "title": "启动可组合节点",
+    "entries": [
+      "ros-composition"
+    ]
+  },
+  "ros2-how|How-To-Guides/Node-arguments": {
+    "title": "节点参数",
+    "entries": [
+      "ros-remap",
+      "ros-params"
+    ]
+  },
+  "ros2-how|How-To-Guides/Sync-Vs-Async": {
+    "title": "同步与异步调用",
+    "entries": [
+      "ros-executors"
+    ]
+  },
+  "ros2-how|How-To-Guides/DDS-tuning": {
+    "title": "DDS 调优",
+    "entries": [
+      "ros-qos",
+      "ros-multimachine"
+    ]
+  },
+  "ros2-how|How-To-Guides/Overriding-QoS-Policies-For-Recording-And-Playback": {
+    "title": "记录回放时覆盖 QoS",
+    "entries": [
+      "ros-qos",
+      "ros-bag-record"
+    ]
+  },
+  "ros2-how|How-To-Guides/Working-with-multiple-RMW-implementations": {
+    "title": "使用多种 RMW 实现",
+    "entries": [
+      "ros-rmw"
+    ]
+  },
+  "ros2-how|How-To-Guides/Cross-compilation": {
+    "title": "交叉编译",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Releasing/Releasing-a-Package": {
+    "title": "发布功能包",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Using-Python-Packages": {
+    "title": "使用 Python 包",
+    "entries": [
+      "ros-quickstart"
+    ]
+  },
+  "ros2-how|How-To-Guides/Run-2-nodes-in-single-or-separate-docker-containers": {
+    "title": "在一个或多个容器中运行节点",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Visualizing-ROS-2-Data-With-Foxglove-Studio": {
+    "title": "使用 Foxglove 可视化",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Core-maintainer-guide": {
+    "title": "核心维护者指南",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Building-a-Custom-Deb-Package": {
+    "title": "构建自定义 Deb 包",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Building-ROS-2-with-Tracing": {
+    "title": "带跟踪支持构建 ROS 2",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Using-Variants": {
+    "title": "使用变体",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Using-ros2-param": {
+    "title": "使用 ros2 param",
+    "entries": [
+      "ros-params"
+    ]
+  },
+  "ros2-how|How-To-Guides/Using-ros1_bridge-Jammy-upstream": {
+    "title": "Ubuntu Jammy 的 ROS 1 桥接",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Configure-ZeroCopy-loaned-messages": {
+    "title": "零拷贝借用消息",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Installing-on-Raspberry-Pi": {
+    "title": "树莓派安装",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Using-callback-groups": {
+    "title": "使用回调组",
+    "entries": [
+      "ros-executors"
+    ]
+  },
+  "ros2-how|How-To-Guides/Getting-Backtraces-in-ROS-2": {
+    "title": "获取回溯",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/ROS-2-IDEs": {
+    "title": "ROS 2 开发环境",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Setup-ROS-2-with-VSCode-and-Docker-Container": {
+    "title": "VSCode 与 Docker 开发",
+    "entries": []
+  },
+  "ros2-how|How-To-Guides/Using-Custom-Rosdistro": {
+    "title": "自定义发行版索引",
+    "entries": []
+  },
+  "ros1|安装与配置": {
+    "title": "安装与配置环境",
+    "entries": [
+      "ros-versions",
+      "ros-ros1-core"
+    ]
+  },
+  "ros1|文件系统": {
+    "title": "浏览文件系统",
+    "entries": [
+      "ros-ros1-run"
+    ]
+  },
+  "ros1|创建功能包": {
+    "title": "创建功能包",
+    "entries": [
+      "ros-ros1-create"
+    ]
+  },
+  "ros1|构建功能包": {
+    "title": "构建功能包",
+    "entries": [
+      "ros-ros1-catkin"
+    ]
+  },
+  "ros1|理解节点": {
+    "title": "理解节点",
+    "entries": [
+      "ros-ros1-node"
+    ]
+  },
+  "ros1|理解话题": {
+    "title": "理解话题",
+    "entries": [
+      "ros-ros1-topic"
+    ]
+  },
+  "ros1|理解服务与参数": {
+    "title": "理解服务与参数",
+    "entries": [
+      "ros-ros1-service",
+      "ros-ros1-param"
+    ]
+  },
+  "ros1|日志与启动": {
+    "title": "日志控制台与启动文件",
+    "entries": [
+      "ros-ros1-launch",
+      "ros-ros1-debug"
+    ]
+  },
+  "ros1|创建消息与服务": {
+    "title": "创建消息与服务",
+    "entries": []
+  },
+  "ros1|Python 发布订阅": {
+    "title": "Python 发布订阅",
+    "entries": []
+  },
+  "ros1|C++ 发布订阅": {
+    "title": "C++ 发布订阅",
+    "entries": []
+  },
+  "ros1|测试发布订阅": {
+    "title": "测试发布订阅",
+    "entries": [
+      "ros-ros1-topic",
+      "ros-ros1-pub"
+    ]
+  },
+  "ros1|Python 服务客户端": {
+    "title": "Python 服务客户端",
+    "entries": []
+  },
+  "ros1|C++ 服务客户端": {
+    "title": "C++ 服务客户端",
+    "entries": []
+  },
+  "ros1|记录与回放": {
+    "title": "记录与回放",
+    "entries": [
+      "ros-ros1-bag"
+    ]
+  },
+  "ros1|roswtf 检查": {
+    "title": "使用 roswtf 检查",
+    "entries": [
+      "ros-ros1-debug"
+    ]
+  },
+  "gh-get-started|Start your journey": {
+    "title": "开始使用",
+    "entries": [
+      "github-concepts"
+    ]
+  },
+  "gh-get-started|Onboarding": {
+    "title": "账号入门",
+    "entries": [
+      "github-auth"
+    ]
+  },
+  "gh-get-started|Using GitHub": {
+    "title": "使用 GitHub",
+    "entries": [
+      "github-research-release"
+    ]
+  },
+  "gh-get-started|Learning about GitHub": {
+    "title": "了解 GitHub",
+    "entries": []
+  },
+  "gh-get-started|Learn to code": {
+    "title": "学习编程",
+    "entries": []
+  },
+  "gh-get-started|Accessibility": {
+    "title": "无障碍使用",
+    "entries": []
+  },
+  "gh-get-started|Writing on GitHub": {
+    "title": "在 GitHub 编写文档",
+    "entries": [
+      "github-readme"
+    ]
+  },
+  "gh-get-started|Explore projects": {
+    "title": "探索项目",
+    "entries": [
+      "github-issue-search"
+    ]
+  },
+  "gh-get-started|Git basics": {
+    "title": "Git 基础",
+    "entries": [
+      "github-clone",
+      "github-remote",
+      "github-branch"
+    ]
+  },
+  "gh-get-started|Using Git": {
+    "title": "使用 Git",
+    "entries": [
+      "github-fetch",
+      "github-pull",
+      "github-push"
+    ]
+  },
+  "gh-get-started|Archive account and public repos": {
+    "title": "归档账号与公开仓库",
+    "entries": []
+  },
+  "gh-get-started|Using GitHub Docs": {
+    "title": "使用 GitHub 文档",
+    "entries": []
+  },
+  "gh-get-started|GitHub Certifications": {
+    "title": "GitHub 认证考试",
+    "entries": []
+  },
+  "gh-authentication|Account security": {
+    "title": "账号安全",
+    "entries": [
+      "github-auth",
+      "github-token"
+    ]
+  },
+  "gh-authentication|Secure your account with 2FA": {
+    "title": "双因素认证",
+    "entries": []
+  },
+  "gh-authentication|Authenticate with a passkey": {
+    "title": "通行密钥认证",
+    "entries": []
+  },
+  "gh-authentication|Connect with SSH": {
+    "title": "SSH 连接",
+    "entries": [
+      "github-ssh"
+    ]
+  },
+  "gh-authentication|Troubleshooting SSH": {
+    "title": "SSH 排障",
+    "entries": [
+      "github-error-ssh"
+    ]
+  },
+  "gh-authentication|Verify commit signatures": {
+    "title": "验证提交签名",
+    "entries": []
+  },
+  "gh-authentication|Troubleshoot verification": {
+    "title": "提交签名排障",
+    "entries": []
+  },
+  "gh-repositories|Create & manage repositories": {
+    "title": "创建与管理仓库",
+    "entries": [
+      "github-create",
+      "github-clone"
+    ]
+  },
+  "gh-repositories|Manage repository settings": {
+    "title": "仓库设置",
+    "entries": [
+      "github-rules",
+      "github-codeowners"
+    ]
+  },
+  "gh-repositories|Branches and merges": {
+    "title": "分支与合并",
+    "entries": [
+      "github-branch",
+      "github-merge",
+      "github-conflict"
+    ]
+  },
+  "gh-repositories|Work with files": {
+    "title": "处理文件",
+    "entries": [
+      "github-ignore",
+      "github-lfs",
+      "github-submodule"
+    ]
+  },
+  "gh-repositories|Release projects": {
+    "title": "发布项目",
+    "entries": [
+      "github-release",
+      "github-research-release"
+    ]
+  },
+  "gh-repositories|View activity and data": {
+    "title": "查看活动与数据",
+    "entries": []
+  },
+  "gh-repositories|Archive a repository": {
+    "title": "归档仓库",
+    "entries": []
+  },
+  "gh-pull-requests|Get started": {
+    "title": "入门",
+    "entries": [
+      "github-pr-create"
+    ]
+  },
+  "gh-pull-requests|Concepts": {
+    "title": "核心概念",
+    "entries": [
+      "github-pr-review",
+      "github-merge"
+    ]
+  },
+  "gh-pull-requests|How-tos": {
+    "title": "实践指南",
+    "entries": [
+      "github-pr-create",
+      "github-pr-review",
+      "github-conflict"
+    ]
+  },
+  "gh-pull-requests|Reference": {
+    "title": "参考手册",
+    "entries": [
+      "github-pr-review"
+    ]
+  },
+  "gh-pull-requests|Tutorials": {
+    "title": "教程",
+    "entries": []
+  },
+  "gh-actions|Get started": {
+    "title": "入门",
+    "entries": [
+      "github-actions",
+      "github-ci-project"
+    ]
+  },
+  "gh-actions|Concepts": {
+    "title": "核心概念",
+    "entries": [
+      "github-actions",
+      "github-runner",
+      "github-artifacts"
+    ]
+  },
+  "gh-actions|How-tos": {
+    "title": "实践指南",
+    "entries": [
+      "github-ci-project",
+      "github-matrix",
+      "github-secrets"
+    ]
+  },
+  "gh-actions|Reference": {
+    "title": "参考手册",
+    "entries": [
+      "github-actions"
+    ]
+  },
+  "gh-actions|Tutorials": {
+    "title": "教程",
+    "entries": [
+      "github-python-ci",
+      "github-ci-project"
+    ]
+  },
+  "gh-issues|Issues": {
+    "title": "问题管理",
+    "entries": [
+      "github-issues",
+      "github-templates"
+    ]
+  },
+  "gh-issues|Projects": {
+    "title": "项目管理",
+    "entries": [
+      "github-projects"
+    ]
+  },
+  "gh-issues|Labels and milestones": {
+    "title": "标签与里程碑",
+    "entries": [
+      "github-issues"
+    ]
+  },
+  "gh-code-security|Getting started": {
+    "title": "入门",
+    "entries": [
+      "github-secrets"
+    ]
+  },
+  "gh-code-security|Concepts": {
+    "title": "核心概念",
+    "entries": [
+      "github-secrets"
+    ]
+  },
+  "gh-code-security|How-tos": {
+    "title": "实践指南",
+    "entries": []
+  },
+  "gh-code-security|Reference": {
+    "title": "参考手册",
+    "entries": []
+  },
+  "gh-code-security|Tutorials": {
+    "title": "教程",
+    "entries": []
+  },
+  "gh-code-security|Responsible use": {
+    "title": "负责任地使用",
+    "entries": []
+  },
+  "gh-pages|Quickstart": {
+    "title": "快速入门",
+    "entries": [
+      "github-pages"
+    ]
+  },
+  "gh-pages|Get started": {
+    "title": "开始使用",
+    "entries": [
+      "github-pages"
+    ]
+  },
+  "gh-pages|Set up site with Jekyll": {
+    "title": "使用 Jekyll 建站",
+    "entries": []
+  },
+  "gh-pages|Configure a custom domain": {
+    "title": "配置自定义域名",
+    "entries": []
+  },
+  "gh-rest|Quickstart": {
+    "title": "快速入门",
+    "entries": [
+      "github-api"
+    ]
+  },
+  "gh-rest|About the REST API": {
+    "title": "REST API 概览",
+    "entries": [
+      "github-api"
+    ]
+  },
+  "gh-rest|Using the REST API": {
+    "title": "使用 REST API",
+    "entries": [
+      "github-api"
+    ]
+  },
+  "gh-rest|Authentication": {
+    "title": "身份认证",
+    "entries": [
+      "github-token",
+      "github-api"
+    ]
+  },
+  "gh-rest|Guides": {
+    "title": "指南",
+    "entries": []
+  },
+  "gh-rest|Actions": {
+    "title": "自动化接口",
+    "entries": []
+  },
+  "gh-rest|Activity": {
+    "title": "活动接口",
+    "entries": []
+  },
+  "gh-rest|Agent tasks": {
+    "title": "智能体任务接口",
+    "entries": []
+  },
+  "gh-rest|Agents": {
+    "title": "智能体接口",
+    "entries": []
+  },
+  "gh-rest|Apps": {
+    "title": "应用接口",
+    "entries": []
+  },
+  "gh-rest|Billing": {
+    "title": "账单接口",
+    "entries": []
+  },
+  "gh-rest|Branches": {
+    "title": "分支接口",
+    "entries": []
+  },
+  "gh-rest|Campaigns": {
+    "title": "安全活动接口",
+    "entries": []
+  },
+  "gh-rest|Checks": {
+    "title": "检查接口",
+    "entries": []
+  },
+  "gh-rest|Classroom": {
+    "title": "课堂接口",
+    "entries": []
+  },
+  "gh-rest|Code quality": {
+    "title": "代码质量接口",
+    "entries": []
+  },
+  "gh-rest|Code scanning": {
+    "title": "代码扫描接口",
+    "entries": []
+  },
+  "gh-rest|Code security settings": {
+    "title": "代码安全设置接口",
+    "entries": []
+  },
+  "gh-rest|Codes of conduct": {
+    "title": "行为准则接口",
+    "entries": []
+  },
+  "gh-rest|Codespaces": {
+    "title": "云开发空间接口",
+    "entries": []
+  },
+  "gh-rest|Collaborators": {
+    "title": "协作者接口",
+    "entries": []
+  },
+  "gh-rest|Commits": {
+    "title": "提交接口",
+    "entries": []
+  },
+  "gh-rest|Copilot": {
+    "title": "Copilot 接口",
+    "entries": []
+  },
+  "gh-rest|Copilot Spaces": {
+    "title": "Copilot Spaces 接口",
+    "entries": []
+  },
+  "gh-rest|Credentials": {
+    "title": "凭据接口",
+    "entries": []
+  },
+  "gh-rest|Dependabot": {
+    "title": "Dependabot 接口",
+    "entries": []
+  },
+  "gh-rest|Dependency graph": {
+    "title": "依赖关系图接口",
+    "entries": []
+  },
+  "gh-rest|Deploy keys": {
+    "title": "部署密钥接口",
+    "entries": []
+  },
+  "gh-rest|Deployments": {
+    "title": "部署接口",
+    "entries": []
+  },
+  "gh-rest|Emojis": {
+    "title": "表情符号接口",
+    "entries": []
+  },
+  "gh-rest|Enterprise teams": {
+    "title": "企业团队接口",
+    "entries": []
+  },
+  "gh-rest|Gists": {
+    "title": "代码片段接口",
+    "entries": []
+  },
+  "gh-rest|Git database": {
+    "title": "Git 数据库接口",
+    "entries": []
+  },
+  "gh-rest|Gitignore": {
+    "title": "忽略规则接口",
+    "entries": []
+  },
+  "gh-rest|Interactions": {
+    "title": "交互限制接口",
+    "entries": []
+  },
+  "gh-rest|Issues": {
+    "title": "问题接口",
+    "entries": []
+  },
+  "gh-rest|Licenses": {
+    "title": "许可证接口",
+    "entries": []
+  },
+  "gh-rest|Markdown": {
+    "title": "Markdown 接口",
+    "entries": []
+  },
+  "gh-rest|Meta": {
+    "title": "平台元信息接口",
+    "entries": []
+  },
+  "gh-rest|Metrics": {
+    "title": "指标接口",
+    "entries": []
+  },
+  "gh-rest|Migrations": {
+    "title": "迁移接口",
+    "entries": []
+  },
+  "gh-rest|Organizations": {
+    "title": "组织接口",
+    "entries": []
+  },
+  "gh-rest|Packages": {
+    "title": "软件包接口",
+    "entries": []
+  },
+  "gh-rest|Pages": {
+    "title": "静态站点接口",
+    "entries": []
+  },
+  "gh-rest|Private registries": {
+    "title": "私有注册表接口",
+    "entries": []
+  },
+  "gh-rest|Projects": {
+    "title": "项目接口",
+    "entries": []
+  },
+  "gh-rest|Pull requests": {
+    "title": "拉取请求接口",
+    "entries": []
+  },
+  "gh-rest|Rate limit": {
+    "title": "速率限制接口",
+    "entries": [
+      "github-api"
+    ]
+  },
+  "gh-rest|Reactions": {
+    "title": "表情回应接口",
+    "entries": []
+  },
+  "gh-rest|Releases": {
+    "title": "发行版本接口",
+    "entries": []
+  },
+  "gh-rest|Repositories": {
+    "title": "仓库接口",
+    "entries": []
+  },
+  "gh-rest|Search": {
+    "title": "搜索接口",
+    "entries": []
+  },
+  "gh-rest|Secret scanning": {
+    "title": "密钥扫描接口",
+    "entries": []
+  },
+  "gh-rest|Security advisories": {
+    "title": "安全公告接口",
+    "entries": []
+  },
+  "gh-rest|Teams": {
+    "title": "团队接口",
+    "entries": []
+  },
+  "gh-rest|Users": {
+    "title": "用户接口",
+    "entries": []
+  },
+  "gh-github-cli|GitHub CLI": {
+    "title": "GitHub 命令行工具",
+    "entries": [
+      "github-auth",
+      "github-run-inspect",
+      "github-pr-create"
+    ]
+  }
+}

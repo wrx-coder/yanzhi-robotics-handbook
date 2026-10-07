@@ -1,0 +1,616 @@
+{
+  "date": "2026-09-20",
+  "sources": [
+    {
+      "key": "gh-start",
+      "title": "GitHub：入门文档",
+      "url": "https://docs.github.com/en/get-started",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/get-started",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-flow",
+      "title": "GitHub：分支协作流程",
+      "url": "https://docs.github.com/en/get-started/using-github/github-flow",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/get-started/using-github/github-flow",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-pr",
+      "title": "GitHub：Pull Request 与代码审查",
+      "url": "https://docs.github.com/en/pull-requests",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/pull-requests",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-issues",
+      "title": "GitHub：Issue 与项目管理",
+      "url": "https://docs.github.com/en/issues",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/issues",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-actions",
+      "title": "GitHub Actions：自动化工作流",
+      "url": "https://docs.github.com/en/actions",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/actions",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-security",
+      "title": "GitHub：代码安全",
+      "url": "https://docs.github.com/en/code-security",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/code-security",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-auth",
+      "title": "GitHub：身份验证",
+      "url": "https://docs.github.com/en/authentication",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/authentication",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-repo",
+      "title": "GitHub：仓库管理",
+      "url": "https://docs.github.com/en/repositories",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/repositories",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-pages",
+      "title": "GitHub Pages：静态网站",
+      "url": "https://docs.github.com/en/pages",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/pages",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-cli",
+      "title": "GitHub CLI 官方手册",
+      "url": "https://cli.github.com/manual/",
+      "status": 200,
+      "final_url": "https://cli.github.com/manual/",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-api",
+      "title": "GitHub REST API 文档",
+      "url": "https://docs.github.com/en/rest",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/rest",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-limits",
+      "title": "GitHub：大文件管理",
+      "url": "https://docs.github.com/en/repositories/working-with-files/managing-large-files",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/repositories/working-with-files/managing-large-files",
+      "access": "可访问"
+    },
+    {
+      "key": "gh-cite",
+      "title": "GitHub：使用引用文件",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files",
+      "access": "可访问"
+    },
+    {
+      "key": "core",
+      "title": "GNU Coreutils 官方手册",
+      "url": "https://www.gnu.org/software/coreutils/manual/",
+      "status": 200,
+      "final_url": "https://www.gnu.org/software/coreutils/manual/",
+      "access": "可访问"
+    },
+    {
+      "key": "bash",
+      "title": "GNU Bash 官方手册",
+      "url": "https://www.gnu.org/software/bash/manual/bash.html",
+      "status": 200,
+      "final_url": "https://www.gnu.org/software/bash/manual/bash.html",
+      "access": "可访问"
+    },
+    {
+      "key": "find",
+      "title": "GNU Findutils 官方手册",
+      "url": "https://www.gnu.org/software/findutils/manual/html_mono/find.html",
+      "status": 404,
+      "access": "HTTP Error 404: Not Found",
+      "follow_up": {
+        "url": "https://www.gnu.org/software/findutils/manual/",
+        "result": "已改用官网索引；复查网络连接超时，未声称验证通过。"
+      }
+    },
+    {
+      "key": "grep",
+      "title": "GNU grep 官方手册",
+      "url": "https://www.gnu.org/software/grep/manual/grep.html",
+      "status": 200,
+      "final_url": "https://www.gnu.org/software/grep/manual/grep.html",
+      "access": "可访问"
+    },
+    {
+      "key": "sed",
+      "title": "GNU sed 官方手册",
+      "url": "https://www.gnu.org/software/sed/manual/sed.html",
+      "status": 200,
+      "final_url": "https://www.gnu.org/software/sed/manual/sed.html",
+      "access": "可访问"
+    },
+    {
+      "key": "awk",
+      "title": "GNU awk 官方手册",
+      "url": "https://www.gnu.org/software/gawk/manual/gawk.html",
+      "status": 200,
+      "final_url": "https://www.gnu.org/software/gawk/manual/gawk.html",
+      "access": "可访问"
+    },
+    {
+      "key": "linux",
+      "title": "Linux man-pages 项目",
+      "url": "https://www.kernel.org/doc/man-pages/",
+      "status": 200,
+      "final_url": "https://www.kernel.org/doc/man-pages/",
+      "access": "可访问"
+    },
+    {
+      "key": "systemd",
+      "title": "systemd 官方手册",
+      "url": "https://www.freedesktop.org/software/systemd/man/latest/",
+      "status": 200,
+      "final_url": "https://www.freedesktop.org/software/systemd/man/latest/",
+      "access": "可访问"
+    },
+    {
+      "key": "ssh",
+      "title": "OpenSSH 官方手册",
+      "url": "https://www.openssh.com/manual.html",
+      "status": 200,
+      "final_url": "https://www.openssh.org/manual.html",
+      "access": "可访问"
+    },
+    {
+      "key": "rsync",
+      "title": "rsync 官方手册",
+      "url": "https://download.samba.org/pub/rsync/rsync.1",
+      "status": 200,
+      "final_url": "https://download.samba.org/pub/rsync/rsync.1",
+      "access": "可访问"
+    },
+    {
+      "key": "tar",
+      "title": "GNU tar 官方手册",
+      "url": "https://www.gnu.org/software/tar/manual/",
+      "status": 200,
+      "final_url": "https://www.gnu.org/software/tar/manual/",
+      "access": "可访问"
+    },
+    {
+      "key": "git",
+      "title": "Git 官方参考",
+      "url": "https://git-scm.com/docs",
+      "status": 200,
+      "final_url": "https://git-scm.com/docs",
+      "access": "可访问"
+    },
+    {
+      "key": "docker",
+      "title": "Docker 命令行官方参考",
+      "url": "https://docs.docker.com/reference/cli/docker/",
+      "status": 200,
+      "final_url": "https://docs.docker.com/reference/cli/docker/",
+      "access": "可访问"
+    },
+    {
+      "key": "python",
+      "title": "Python venv 官方文档",
+      "url": "https://docs.python.org/3/library/venv.html",
+      "status": 200,
+      "final_url": "https://docs.python.org/3/library/venv.html",
+      "access": "可访问"
+    },
+    {
+      "key": "pip",
+      "title": "pip 命令行官方参考",
+      "url": "https://pip.pypa.io/en/stable/cli/",
+      "status": 200,
+      "final_url": "https://pip.pypa.io/en/stable/cli/",
+      "access": "可访问"
+    },
+    {
+      "key": "cmake",
+      "title": "CMake 官方手册",
+      "url": "https://cmake.org/cmake/help/latest/manual/cmake.1.html",
+      "status": 200,
+      "final_url": "https://cmake.org/cmake/help/latest/manual/cmake.1.html",
+      "access": "可访问"
+    },
+    {
+      "key": "gdb",
+      "title": "GDB 官方文档",
+      "url": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/",
+      "status": 200,
+      "final_url": "https://sourceware.org/gdb/current/onlinedocs/gdb.html/",
+      "access": "可访问"
+    },
+    {
+      "key": "nvidia",
+      "title": "NVIDIA System Management Interface",
+      "url": "https://docs.nvidia.com/deploy/nvidia-smi/",
+      "status": 200,
+      "final_url": "https://docs.nvidia.com/deploy/nvidia-smi/",
+      "access": "可访问"
+    },
+    {
+      "key": "slurm",
+      "title": "Slurm 官方命令",
+      "url": "https://slurm.schedmd.com/man_index.html",
+      "status": 200,
+      "final_url": "https://slurm.schedmd.com/man_index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "apt",
+      "title": "Ubuntu apt 官方手册",
+      "url": "https://manpages.ubuntu.com/manpages/jammy/en/man8/apt.8.html",
+      "status": 200,
+      "final_url": "https://manpages.ubuntu.com/manpages/jammy/man8/apt.8.html",
+      "access": "可访问"
+    },
+    {
+      "key": "tmux",
+      "title": "tmux 官方使用指南",
+      "url": "https://github.com/tmux/tmux/wiki/Getting-Started",
+      "status": 200,
+      "final_url": "https://github.com/tmux/tmux/wiki/Getting-Started",
+      "access": "可访问"
+    },
+    {
+      "key": "curl",
+      "title": "curl 官方命令手册",
+      "url": "https://curl.se/docs/manpage.html",
+      "status": 200,
+      "final_url": "https://curl.se/docs/manpage.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-overview",
+      "title": "MuJoCo：引擎概览",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/overview.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/overview.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-python",
+      "title": "MuJoCo：Python 接口",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/python.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/python.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-model",
+      "title": "MuJoCo：建模指南",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/modeling.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/modeling.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-xml",
+      "title": "MuJoCo：MJCF 元素参考",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/XMLreference.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/XMLreference.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-compute",
+      "title": "MuJoCo：计算原理",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/computation/index.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/computation/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-sim",
+      "title": "MuJoCo：仿真编程",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/simulation.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/programming/simulation.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-api",
+      "title": "MuJoCo：函数参考",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/APIfunctions.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/APIfunctions.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-edit",
+      "title": "MuJoCo：程序化模型编辑",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/modeledit.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/programming/modeledit.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-mjx",
+      "title": "MuJoCo：MJX 加速后端",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/mjx.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/mjx.html",
+      "access": "可访问"
+    },
+    {
+      "key": "mj-vis",
+      "title": "MuJoCo：可视化",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/visualization.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/programming/visualization.html",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-start",
+      "title": "Gazebo：开始使用",
+      "url": "https://gazebosim.org/docs/harmonic/getstarted/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/getstarted/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-install",
+      "title": "Gazebo：ROS 版本配对",
+      "url": "https://gazebosim.org/docs/harmonic/ros_installation/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/ros_installation/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-robot",
+      "title": "Gazebo：构建机器人",
+      "url": "https://gazebosim.org/docs/harmonic/building_robot/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/building_robot/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-move",
+      "title": "Gazebo：驱动机器人",
+      "url": "https://gazebosim.org/docs/harmonic/moving_robot/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/moving_robot/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-world",
+      "title": "Gazebo：SDF 世界",
+      "url": "https://gazebosim.org/docs/harmonic/sdf_worlds/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/sdf_worlds/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-sensor",
+      "title": "Gazebo：传感器教程",
+      "url": "https://gazebosim.org/docs/harmonic/sensors/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/sensors/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-api",
+      "title": "Gazebo Sim 8 官方教程",
+      "url": "https://gazebosim.org/api/sim/8/tutorials.html",
+      "status": 200,
+      "final_url": "https://gazebosim.org/api/sim/8/tutorials.html",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-bridge",
+      "title": "ros_gz_bridge 官方源码与用法",
+      "url": "https://github.com/gazebosim/ros_gz/tree/jazzy/ros_gz_bridge",
+      "status": 200,
+      "final_url": "https://github.com/gazebosim/ros_gz/tree/jazzy/ros_gz_bridge",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-ros",
+      "title": "Gazebo：ROS 2 集成",
+      "url": "https://gazebosim.org/docs/harmonic/ros2_integration/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/ros2_integration/",
+      "access": "可访问"
+    },
+    {
+      "key": "gz-migrate",
+      "title": "Gazebo：Classic 迁移",
+      "url": "https://gazebosim.org/docs/harmonic/gazebo_classic_migration/",
+      "status": 200,
+      "final_url": "https://gazebosim.org/docs/harmonic/gazebo_classic_migration/",
+      "access": "可访问"
+    },
+    {
+      "key": "sdf",
+      "title": "SDFormat 官方规范",
+      "url": "http://sdformat.org/spec",
+      "status": 200,
+      "final_url": "http://sdformat.org/spec/",
+      "access": "可访问"
+    },
+    {
+      "key": "ros1",
+      "title": "ROS 1 官方教程（可能触发访问验证）",
+      "url": "https://wiki.ros.org/ROS/Tutorials",
+      "status": 200,
+      "final_url": "https://wiki.ros.org/ROS/Tutorials",
+      "access": "需访问验证"
+    },
+    {
+      "key": "ros2",
+      "title": "ROS 2 Jazzy 官方教程",
+      "url": "https://docs.ros.org/en/jazzy/Tutorials.html",
+      "status": 200,
+      "final_url": "https://docs.ros.org/en/jazzy/Tutorials.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "ros2-concept",
+      "title": "ROS 2 Jazzy 核心概念",
+      "url": "https://docs.ros.org/en/jazzy/Concepts.html",
+      "status": 200,
+      "final_url": "https://docs.ros.org/en/jazzy/Concepts.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "ros2-how",
+      "title": "ROS 2 Jazzy 实践指南",
+      "url": "https://docs.ros.org/en/jazzy/How-To-Guides.html",
+      "status": 200,
+      "final_url": "https://docs.ros.org/en/jazzy/How-To-Guides.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "ros2-raw",
+      "title": "ROS 2 文档官方源码（Jazzy）",
+      "url": "https://github.com/ros2/ros2_documentation/tree/jazzy/source",
+      "status": 200,
+      "final_url": "https://github.com/ros2/ros2_documentation/tree/jazzy/source",
+      "access": "可访问"
+    },
+    {
+      "key": "ros-rep",
+      "title": "ROS 官方平台与发行版规范",
+      "url": "https://www.ros.org/reps/rep-2000.html",
+      "status": 200,
+      "final_url": "https://www.ros.org/reps/rep-2000.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "ros-control",
+      "title": "ros2_control 官方文档",
+      "url": "https://control.ros.org/jazzy/index.html",
+      "status": 200,
+      "final_url": "https://control.ros.org/jazzy/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "nav2",
+      "title": "Nav2 官方文档",
+      "url": "https://docs.nav2.org/",
+      "status": 200,
+      "final_url": "https://docs.nav2.org/",
+      "access": "可访问"
+    },
+    {
+      "key": "moveit",
+      "title": "MoveIt 2 官方教程",
+      "url": "https://moveit.picknik.ai/main/index.html",
+      "status": 200,
+      "final_url": "https://moveit.picknik.ai/main/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-install",
+      "title": "Isaac Lab：安装与兼容性",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/setup/installation/index.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/setup/installation/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-tutorial",
+      "title": "Isaac Lab：教程目录",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/tutorials/index.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/tutorials/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-how",
+      "title": "Isaac Lab：实践指南",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/how-to/index.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/how-to/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-api",
+      "title": "Isaac Lab：API 参考",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/api/index.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/api/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-env",
+      "title": "Isaac Lab：环境设计工作流",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/core-concepts/task_workflows.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/core-concepts/task_workflows.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-train",
+      "title": "Isaac Lab：强化学习脚本",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/reinforcement-learning/rl_existing_scripts.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/reinforcement-learning/rl_existing_scripts.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-code",
+      "title": "Isaac Lab v2.3.0 官方源码",
+      "url": "https://github.com/isaac-sim/IsaacLab/tree/v2.3.0",
+      "status": 200,
+      "final_url": "https://github.com/isaac-sim/IsaacLab/tree/v2.3.0",
+      "access": "可访问"
+    },
+    {
+      "key": "il-sensor",
+      "title": "Isaac Lab：传感器概念",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/core-concepts/sensors/index.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/core-concepts/sensors/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-hydra",
+      "title": "Isaac Lab：Hydra 配置",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/features/hydra.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/features/hydra.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-multi",
+      "title": "Isaac Lab：多 GPU 训练",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/features/multi_gpu.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/features/multi_gpu.html",
+      "access": "可访问"
+    },
+    {
+      "key": "il-repro",
+      "title": "Isaac Lab：可复现性",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/features/reproducibility.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/features/reproducibility.html",
+      "access": "可访问"
+    }
+  ]
+}

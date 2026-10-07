@@ -1,0 +1,392 @@
+{
+  "date": "2026-09-21",
+  "scope": "新增具身技能来源入口可达性；不代表实验运行验证",
+  "sources": [
+    {
+      "key": "emb-rep103",
+      "title": "ROS REP 103：单位与坐标约定",
+      "url": "https://www.ros.org/reps/rep-0103.html",
+      "status": 200,
+      "final_url": "https://www.ros.org/reps/rep-0103.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "emb-mr",
+      "title": "Modern Robotics：作者教材与章节",
+      "url": "https://hades.mech.northwestern.edu/index.php/Modern_Robotics",
+      "status": 200,
+      "final_url": "https://hades.mech.northwestern.edu/index.php/Modern_Robotics",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-scipy-rotation",
+      "title": "SciPy：Rotation 空间旋转",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.transform.Rotation.html",
+      "status": 200,
+      "final_url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.transform.Rotation.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-scipy-opt",
+      "title": "SciPy：least_squares 非线性最小二乘",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html",
+      "status": 200,
+      "final_url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-mj-model",
+      "title": "MuJoCo：模型与执行器",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/modeling.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/modeling.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-mj-compute",
+      "title": "MuJoCo：动力学与接触计算",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/computation/index.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/computation/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-mj-xml",
+      "title": "MuJoCo：MJCF 字段",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/XMLreference.html",
+      "status": 200,
+      "final_url": "https://mujoco.readthedocs.io/en/3.3.7/XMLreference.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-urdf",
+      "title": "ROS 2：URDF 教程",
+      "url": "https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/URDF-Main.html",
+      "status": 200,
+      "final_url": "https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/URDF-Main.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "emb-sdf",
+      "title": "SDFormat：模型规范",
+      "url": "https://sdformat.org/spec",
+      "status": 200,
+      "final_url": "https://sdformat.org/spec/",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-calib",
+      "title": "OpenCV：标定与三维重建",
+      "url": "https://docs.opencv.org/4.13.0/d9/d0c/group__calib3d.html",
+      "status": 200,
+      "final_url": "https://docs.opencv.org/4.13.0/d9/d0c/group__calib3d.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-img",
+      "title": "OpenCV：图像处理",
+      "url": "https://docs.opencv.org/4.13.0/d7/dbd/group__imgproc.html",
+      "status": 200,
+      "final_url": "https://docs.opencv.org/4.13.0/d7/dbd/group__imgproc.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-flow",
+      "title": "OpenCV：视频运动分析与跟踪",
+      "url": "https://docs.opencv.org/4.13.0/dc/d6b/group__video__track.html",
+      "status": 200,
+      "final_url": "https://docs.opencv.org/4.13.0/dc/d6b/group__video__track.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-detection",
+      "title": "TorchVision：检测与实例分割微调教程",
+      "url": "https://docs.pytorch.org/tutorials/intermediate/torchvision_tutorial.html",
+      "status": 200,
+      "final_url": "https://docs.pytorch.org/tutorials/intermediate/torchvision_tutorial.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-o3d",
+      "title": "Open3D：点云处理",
+      "url": "https://www.open3d.org/docs/release/tutorial/geometry/pointcloud.html",
+      "status": 200,
+      "final_url": "https://www.open3d.org/docs/release/tutorial/geometry/pointcloud.html",
+      "access": "可访问",
+      "browserIndexCheck": "2026-09-21：另经网页检索工具取得官方文档正文（Open3D 0.19.0）"
+    },
+    {
+      "key": "emb-icp",
+      "title": "Open3D：ICP 配准",
+      "url": "https://www.open3d.org/docs/release/tutorial/pipelines/icp_registration.html",
+      "status": 200,
+      "final_url": "https://www.open3d.org/docs/release/tutorial/pipelines/icp_registration.html",
+      "access": "可访问",
+      "browserIndexCheck": "2026-09-21：另经网页检索工具取得官方文档正文（Open3D 0.19.0）"
+    },
+    {
+      "key": "emb-sync",
+      "title": "ROS 2 message_filters：近似时间同步",
+      "url": "https://docs.ros.org/en/jazzy/p/message_filters/doc/Tutorials/Approximate-Synchronizer-Python.html",
+      "status": 200,
+      "final_url": "https://docs.ros.org/en/jazzy/p/message_filters/doc/Tutorials/Approximate-Synchronizer-Python.html",
+      "access": "需访问验证"
+    },
+    {
+      "key": "emb-moveit",
+      "title": "MoveIt 2：规划与操作教程",
+      "url": "https://moveit.picknik.ai/main/index.html",
+      "status": 200,
+      "final_url": "https://moveit.picknik.ai/main/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-control",
+      "title": "ros2_control：关节轨迹控制器",
+      "url": "https://control.ros.org/jazzy/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html",
+      "status": 200,
+      "final_url": "https://control.ros.org/jazzy/doc/ros2_controllers/joint_trajectory_controller/doc/userdoc.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-underactuated",
+      "title": "MIT Underactuated Robotics：接触与操作",
+      "url": "https://underactuated.mit.edu/manipulation.html",
+      "status": 200,
+      "final_url": "https://underactuated.mit.edu/manipulation.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-trajopt",
+      "title": "MIT Underactuated Robotics：轨迹优化",
+      "url": "https://underactuated.mit.edu/trajopt.html",
+      "status": 200,
+      "final_url": "https://underactuated.mit.edu/trajopt.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-lerobot",
+      "title": "LeRobot：机器人学习文档",
+      "url": "https://huggingface.co/docs/lerobot/index",
+      "status": 200,
+      "final_url": "https://huggingface.co/docs/lerobot/index",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-dataset",
+      "title": "LeRobotDataset：v3.0 数据格式",
+      "url": "https://huggingface.co/docs/lerobot/lerobot-dataset-v3",
+      "status": 200,
+      "final_url": "https://huggingface.co/docs/lerobot/lerobot-dataset-v3",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-bc",
+      "title": "LeRobot：机器人模仿学习教程",
+      "url": "https://huggingface.co/docs/lerobot/il_robots",
+      "status": 200,
+      "final_url": "https://huggingface.co/docs/lerobot/il_robots",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-dagger",
+      "title": "DAgger：原始论文",
+      "url": "https://proceedings.mlr.press/v15/ross11a.html",
+      "status": 200,
+      "final_url": "https://proceedings.mlr.press/v15/ross11a.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-act",
+      "title": "ACT：Learning Fine-Grained Bimanual Manipulation",
+      "url": "https://arxiv.org/abs/2304.13705",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2304.13705",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-act-doc",
+      "title": "LeRobot：ACT 策略",
+      "url": "https://huggingface.co/docs/lerobot/act",
+      "status": 200,
+      "final_url": "https://huggingface.co/docs/lerobot/act",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-diffusion",
+      "title": "Diffusion Policy：原始论文",
+      "url": "https://arxiv.org/abs/2303.04137",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2303.04137",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-ppo",
+      "title": "Proximal Policy Optimization Algorithms：原始论文",
+      "url": "https://arxiv.org/abs/1707.06347",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/1707.06347",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-sac",
+      "title": "Soft Actor-Critic：原始论文",
+      "url": "https://proceedings.mlr.press/v80/haarnoja18b.html",
+      "status": 200,
+      "final_url": "https://proceedings.mlr.press/v80/haarnoja18b.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-gym",
+      "title": "Gymnasium：处理时间上限",
+      "url": "https://gymnasium.farama.org/tutorials/gymnasium_basics/handling_time_limits/",
+      "status": 200,
+      "final_url": "https://gymnasium.farama.org/tutorials/gymnasium_basics/handling_time_limits/",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-spinning",
+      "title": "Spinning Up：强化学习概念",
+      "url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html",
+      "status": 200,
+      "final_url": "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-cql",
+      "title": "Conservative Q-Learning：原始论文",
+      "url": "https://arxiv.org/abs/2006.04779",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2006.04779",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-isaac",
+      "title": "Isaac Lab：任务工作流",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/core-concepts/task_workflows.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/overview/core-concepts/task_workflows.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-isaac-api",
+      "title": "Isaac Lab：API 参考",
+      "url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/api/index.html",
+      "status": 200,
+      "final_url": "https://isaac-sim.github.io/IsaacLab/v2.3.0/source/api/index.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-openvla",
+      "title": "OpenVLA：原始论文",
+      "url": "https://arxiv.org/abs/2406.09246",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2406.09246",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-openvla-code",
+      "title": "OpenVLA：作者实现与动作接口",
+      "url": "https://github.com/openvla/openvla",
+      "status": 200,
+      "final_url": "https://github.com/openvla/openvla",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-rt2",
+      "title": "RT-2：视觉语言动作模型",
+      "url": "https://arxiv.org/abs/2307.15818",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2307.15818",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-lora",
+      "title": "LoRA：原始论文",
+      "url": "https://arxiv.org/abs/2106.09685",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2106.09685",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-oxe",
+      "title": "Open X-Embodiment：跨机器人数据与模型",
+      "url": "https://arxiv.org/abs/2310.08864",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2310.08864",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-random",
+      "title": "Domain Randomization：原始论文",
+      "url": "https://arxiv.org/abs/1703.06907",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/1703.06907",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-dynamics",
+      "title": "Sim-to-Real Transfer with Dynamics Randomization",
+      "url": "https://arxiv.org/abs/1710.06537",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/1710.06537",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-onnx",
+      "title": "PyTorch：导出模型到 ONNX",
+      "url": "https://docs.pytorch.org/tutorials/beginner/onnx/export_simple_model_to_onnx_tutorial.html",
+      "status": 200,
+      "final_url": "https://docs.pytorch.org/tutorials/beginner/onnx/export_simple_model_to_onnx_tutorial.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-profiler",
+      "title": "PyTorch：Profiler 性能分析",
+      "url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+      "status": 200,
+      "final_url": "https://docs.pytorch.org/tutorials/recipes/recipes/profiler_recipe.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-torch-repro",
+      "title": "PyTorch：可复现性",
+      "url": "https://docs.pytorch.org/docs/stable/notes/randomness.html",
+      "status": 200,
+      "final_url": "https://docs.pytorch.org/docs/stable/notes/randomness.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-rliable",
+      "title": "Deep RL at the Edge of the Statistical Precipice",
+      "url": "https://arxiv.org/abs/2108.13264",
+      "status": 200,
+      "final_url": "https://arxiv.org/abs/2108.13264",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-binomial",
+      "title": "SciPy：二项比例置信区间",
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html",
+      "status": 200,
+      "final_url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-libero",
+      "title": "LIBERO：作者基准协议与实现",
+      "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+      "status": 200,
+      "final_url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+      "access": "可访问"
+    },
+    {
+      "key": "emb-robomimic",
+      "title": "robomimic：数据集与算法文档",
+      "url": "https://robomimic.github.io/docs/introduction/overview.html",
+      "status": 200,
+      "final_url": "https://robomimic.github.io/docs/introduction/overview.html",
+      "access": "可访问"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "gazebo-diffdrive": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "已检查 4 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+  },
+  "gazebo-falling": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "已检查 1 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+  },
+  "github-ci": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "本机三个单元测试通过，两个 Actions YAML 已解析。未在 GitHub Runner 运行 Python 矩阵或发布工作流。"
+  },
+  "github-release": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "Python 实验和临时仓库的初始化、提交、分支操作运行通过。未连接 GitHub；PR、推送、标签与 Release 的远端流程未运行。"
+  },
+  "isaac-cartpole": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "已检查 1 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+  },
+  "isaac-randomized": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "已检查 4 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+  },
+  "linux-experiment": {
+    "status": "目标环境运行通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "Bash 流水线与真实训练运行成功，loss=0.003008，CSV/JSON/日志/tar.gz 均生成。未运行 tmux 交互会话；其命令已静态核对。"
+  },
+  "linux-sweep": {
+    "status": "目标环境运行通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "六组扫描全部成功；注入故障后四组成功、两组失败，程序退出码 1；CSV 与分组统计保留失败记录。"
+  },
+  "mujoco-arm": {
+    "status": "目标环境运行通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python / MuJoCo / NumPy：3.11.15 3.3.7 2.4.6",
+    "evidence": "CPU 无图形运行通过；3000 条轨迹，去掉首秒后的末端 RMSE=0.009382 m，小于 0.03 m 阈值。"
+  },
+  "mujoco-pendulum": {
+    "status": "目标环境运行通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python / MuJoCo / NumPy：3.11.15 3.3.7 2.4.6",
+    "evidence": "CPU 无图形运行通过；1000 条有限数值日志，最终仿真时间 2 秒。"
+  },
+  "ros-navigation": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "已检查 7 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+  },
+  "ros-pubsub": {
+    "status": "静态检查通过",
+    "date": "2026-09-21",
+    "environment": "Linux x86_64 · Python 3.10.12",
+    "evidence": "已检查 4 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+  }
+}

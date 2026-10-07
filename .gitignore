@@ -1,0 +1,11 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 打包产物（由 scripts/package_site.py 生成，内容等同于 dist/）
+研知-本地科研手册.zip
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store

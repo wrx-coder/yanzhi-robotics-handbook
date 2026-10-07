@@ -1,0 +1,42 @@
+{
+  "browser": "153.0.8010.36",
+  "viewports": [
+    1440,
+    768,
+    390,
+    320
+  ],
+  "routesPerViewport": 18,
+  "overflow": [],
+  "errors": [],
+  "networkRequests": [],
+  "checks": [
+    "file offline",
+    "correct and incorrect feedback",
+    "refresh",
+    "hints and solution",
+    "reset",
+    "mobile navigation",
+    "200% root font",
+    "storage denied"
+  ],
+  "screenshots": [
+    "desktop-overview.png",
+    "desktop-stage.png",
+    "mobile-overview.png",
+    "mobile-stage.png"
+  ],
+  "date": "2026-09-21",
+  "scope": "网站与教学内容；未运行 ROS/GPU/真机练习",
+  "learningCounts": {
+    "paths": 4,
+    "stages": 16,
+    "exercises": 16,
+    "questions": 48
+  },
+  "legacyBehaviorGroups": 23,
+  "learningBehaviorGroups": 7,
+  "entryCount": 503,
+  "moduleCount": 7,
+  "chapterCount": 797
+}

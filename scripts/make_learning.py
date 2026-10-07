@@ -1,0 +1,86 @@
+"""人工编写的学习路线；只引用已有正文，不新增知识库条目。"""
+import json
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+paths = []
+def path(id, title, audience, description):
+    paths.append(dict(id=id,title=title,audience=audience,description=description,stages=[]))
+def stage(id,title,goal,prerequisites,environment,readings,projects,errors,task,steps,expected,checklist,hints,solution,questions):
+    stages=paths[-1]['stages']
+    previous=[dict(path=paths[-1]['id'],stage=stages[-1]['id'])] if stages else []
+    stages.append(dict(id=id,title=title,level=['基础','基础 → 进阶','进阶','综合'][len(stages)],goal=goal,prerequisites=prerequisites,environment=environment,suggested=previous,readings=readings.split(),exercise=dict(task=task,steps=steps.split('｜'),expected=expected,checklist=checklist.split('｜'),hints=hints.split('｜'),solution=solution,projects=projects.split(),troubleshooting=errors.split()),quiz=[dict(id=f'q{i+1}',kind=['概念','操作判断','常见错误'][i],question=q[0],options=q[1].split('｜'),answer=q[2],explanation=q[3],reading=q[4]) for i,q in enumerate(questions)]))
+path('research-foundations','科研基础','刚开始使用终端、管理代码和记录实验的同学','从独立环境到多种子复现，建立可追溯的实验习惯。')
+stage('environment','Linux 与环境','能确认工作目录、解释器和依赖归属，并完成最小环境实验。','会创建文件、打开终端；无需服务器或 GPU。','Ubuntu 22.04/24.04、Bash、Python 3.10+；依赖安装需网络或本地包。','linux-pwd linux-type linux-venv linux-pip linux-experiment','linux-experiment','linux-error-command linux-error-module','为环境工程建立独立环境并记录解释器证据。','下载环境工程，在新目录解压并读 README。｜按 README 创建并激活 venv；用 pwd、command -v python 和 python -V 记录目录与解释器。｜按工程 README 执行实验；另开终端比较激活前后的解释器路径。','得到环境记录和工程真实输出；能解释新终端为何没有自动继承激活状态。','记录 Python 路径及版本｜保存运行命令和输出｜说明依赖属于哪个环境','先检查 command -v python，不要仅看提示符。｜使用 python -m pip 确保 pip 与解释器一致。','环境记录应包含工作目录、.venv 内的 Python 路径和版本。新终端需重新激活；安装成功却导入失败时先比对解释器，再检查包。工程输出按 README 验收。',[
+('venv 主要隔离什么？','整台机器的内核｜项目 Python 包环境｜GPU 驱动',1,'venv 隔离 Python 依赖，不隔离内核或驱动。','linux-venv'),
+('要让 pip 安装到当前 Python，应使用？','sudo pip install｜任意 pip3｜python -m pip install',2,'通过当前解释器调用 pip 可减少环境错位。','linux-pip'),
+('安装后仍报 ModuleNotFoundError，首先检查？','安装与运行是否使用同一解释器｜删除全部环境｜更换显卡',0,'先定位解释器路径和包位置，再处理缺包。','linux-error-module')])
+stage('git','Git 版本管理','能在本地创建实验分支、查看差异并保存可追溯提交。','已掌握目录与环境；知道源文件和运行产物的区别。','Git；任意可写练习目录，无需 GitHub 登录。','github-concepts linux-git-status linux-git-commit github-branch github-ignore','linux-experiment','github-error-detached github-error-conflict','为环境工程建立本地版本记录。','复制工程到新的练习目录并 git init；按需配置本仓库提交身份。｜创建 .gitignore，排除 .venv 与运行输出；检查 git status。｜提交初始源码，创建实验分支，修改一处说明；用 git diff 审阅后提交。｜保存 git log --oneline 和 git rev-parse HEAD 的输出。','得到两个本地提交和独立实验分支；无须向远程发送任何内容。','提交包含源码和说明｜环境及大体积产物不在暂存区｜保存完整提交 SHA','先用 git status 看暂存区，再提交。｜已被跟踪的文件不会因加入 .gitignore 自动消失。','初始提交固定基线，第二次提交只含有意修改。git diff 查看未暂存改动，git diff --cached 查看待提交改动；用完整 SHA 关联后续实验。',[
+('Git 与 GitHub 的关系是？','Git 管本地版本，GitHub 提供远程协作｜两者必须同时联网｜GitHub 是 Python 环境',0,'本地 Git 提交不依赖 GitHub 服务。','github-concepts'),
+('提交前想检查暂存区内容，应该？','直接 push｜git diff --cached｜删除 .git',1,'暂存差异能显示下一次提交实际包含什么。','linux-git-commit'),
+('加入 .gitignore 后，已跟踪日志仍出现，原因是？','Git 没安装｜分支必须上传｜忽略规则不会自动取消跟踪',2,'应核对跟踪状态，有意取消跟踪时保留本地文件。','github-ignore')])
+stage('archive','实验日志与归档','能同时记录输出、失败状态、配置和校验信息。','能保存 Git 提交；了解标准输出与标准错误。','Bash、Python 3.10+、tar、sha256sum；使用新输出目录。','linux-redirect linux-tee linux-pipefail linux-tar linux-sha256sum','linux-experiment linux-sweep','linux-error-space linux-error-permission','将一次成功和一次失败扫描归档成可审计实验记录。','运行扫描工程的正常命令与 --fail-seed 1 命令，使用不同输出目录。｜直接运行失败命令后立即记录 echo $?；若使用 tee 管道，先启用 pipefail。｜保存命令、Python 版本、源码 SHA 与两组日志。｜用 tar 归档结果，用 sha256sum 生成摘要，并 tar -tzf 查看归档清单。','成功和失败日志均可追溯；归档清单与摘要可核对。','保留标准错误和退出码｜包含配置与版本信息｜归档可列出且有 SHA-256','2>&1 将错误流一起记录；管道退出码需特别检查。｜校验摘要用于确认文件一致，不证明实验方法正确。','失败扫描应返回 1，摘要表保留失败行。归档包含命令、版本、配置与日志；重新计算 SHA-256 应与保存摘要相同。不能仅凭终端显示“完成”判断实验成功。',[
+('文件 SHA-256 一致说明什么？','实验结论正确｜环境完全一致｜文件内容一致性校验通过',2,'哈希用于检查文件字节一致，不验证科学结论。','linux-sha256sum'),
+('要把标准错误也传给 tee，应使用？','command 2>&1 | tee run.log｜command > /dev/null｜只复制终端最后一行',0,'2>&1 将标准错误合并到标准输出后进入管道。','linux-redirect'),
+('训练失败但 tee 管道返回成功，优先检查？','屏幕分辨率｜pipefail 是否启用｜文件扩展名',1,'默认管道状态常由最后一个命令决定，需保留真实失败。','linux-pipefail')])
+stage('seeds','多种子实验与复现','能汇总多种子结果和失败比例，区分复现证据与单次好结果。','已完成日志归档；理解均值和标准差的含义。','Python 3.10+，扫描工程只用标准库，无 GPU 依赖。','linux-for linux-sweep embodied-multiple-seeds embodied-confidence-interval embodied-reproduction','linux-sweep','linux-error-oom linux-error-space','对照正常扫描与故障扫描，写出一份不隐瞒失败的复现摘要。','按 README 运行两档学习率、三个种子的正常扫描。｜运行 --fail-seed 1 对照并立即记录退出码。｜核对 summary.csv 六行数据及 aggregate.json 两组统计。｜报告每组成功数、失败数、均值和样本标准差；说明统计只含成功样本。','正常 6 条 ok；故障对照 4 条 ok、2 条 failed，退出码 1。','分组统计对应原始行｜报告失败比例｜保留种子、配置与环境｜不把三个种子当性能保证','先按学习率分组，再统计种子。｜失败行不能按零分混入，也不能从报告中消失。','每个学习率正常有三个成功样本；注入故障后各有两个成功和一个失败。成功样本统计带有条件性，需同时披露失败数；同预算多种子也不等于所有平台逐位相同。',[
+('多种子实验主要帮助评估？','随机性造成的结果波动｜网络带宽｜代码行数',0,'多种子重复能观察随机初始化和采样造成的波动。','embodied-multiple-seeds'),
+('一个种子失败，报告应如何处理？','悄悄删除｜保留失败数并说明统计口径｜把它替换成最好结果',1,'成功样本统计必须与失败比例同时报告。','linux-sweep'),
+('只固定种子仍不能逐位复现，可能因为？','种子完全无用｜必须只运行一次｜软件版本、硬件或非确定性算子不同',2,'复现还依赖实现、依赖版本与计算环境。','embodied-reproduction')])
+path('arm-control','机械臂仿真与控制','希望从 MuJoCo 模型走到机械臂控制与抓取分析的同学','用单摆与二维机械臂理解模型、坐标、控制和接触边界。')
+stage('model','MuJoCo 入门与建模','区分模型与状态，运行单摆并验收有限数值日志。','基础 Python、数组和独立环境；建议先学科研基础。','Python 3.10+、MuJoCo 3.3.7、NumPy；CPU，无需图形窗口。','mujoco-install mujoco-model-data mujoco-body mujoco-step mujoco-quickstart','mujoco-quickstart','mujoco-error-import mujoco-error-xml','运行单摆工程并验证日志而非仅观察程序退出。','下载单摆工程，在新环境按 README 安装依赖。｜运行 mujoco_minimal.py。｜执行 README 的 CSV 验收代码，检查条数、末行时间与有限性。｜记录步长、控制限幅和引擎版本。','pendulum.csv 有 1000 条数据，结束时间约 2 秒，力矩在 ±2 N·m 内。','保存真实 CSV｜检查数值有限｜解释 MjModel 与 MjData 的分工','1000 条数据不含表头。｜末行时间用容差比较，不用浮点完全相等。','MjModel 保存编译后模型结构，MjData 保存状态。步长 0.002 秒、1000 步对应 2 秒；每步写 ctrl 后 mj_step，再保存数值快照。',[
+('关节状态主要存放在？','MjModel 的 XML 路径｜MjData｜安装目录',1,'MjData 存放运行时状态及派生量。','mujoco-model-data'),
+('0.002 秒步长运行 1000 步，仿真时长为？','1000 秒｜0.002 秒｜2 秒',2,'仿真时间是步长与步数的乘积，不等于墙钟时间。','mujoco-step'),
+('XML 编译失败后应该首先？','定位报错元素并核对结构｜反复增大控制力矩｜忽略错误',0,'模型未编译成功时应核对 MJCF 元素与属性。','mujoco-error-xml')])
+stage('kinematics','坐标与运动学','能说明末端坐标、雅可比和逆解在机械臂工程中的关系。','理解模型状态、向量和矩阵乘法。','MuJoCo 3.3.7、NumPy；二维零重力教学机械臂。','embodied-frames embodied-fk embodied-ik mujoco-site mujoco-jacobian','mujoco-arm-project','mujoco-error-name mujoco-error-shape','审阅机械臂逆解并画出目标到关节解的计算链。','下载机械臂工程，阅读 arm.xml 中关节与末端 site。｜阅读 track.py，找出 mj_jacSite、阻尼逆解及独立 MjData。｜写出末端位置、关节增量和雅可比的维度及参考坐标。｜按 README 运行基线，比较 trajectory.csv 中目标与实际位置。','一份坐标与维度表，说明逆解状态和动力学状态为何分开。','标明末端 site 名称｜记录世界坐标与平面分量｜不把逆解直接覆盖物理状态','读取 XML 的 name，再查名称解析。｜本工程只控制平面分量，完整雅可比仍含三维平移分量。','关节增量通过雅可比近似映射到末端位移。二维任务取平面分量构造误差；逆解用独立状态求目标，真实状态由力矩与积分推进。阻尼可限制奇异处的增益，但不能保证任意目标可达。',[
+('雅可比描述的是？','关节微小变化与末端微小变化关系｜图像压缩率｜文件依赖',0,'雅可比是局部微分关系，不能替代任意大位移的完整运动学。','mujoco-jacobian'),
+('逆解与动力学状态应如何使用？','把逆解位置每步强写真实状态｜独立求目标，再由控制器驱动真实状态｜只更新显示',1,'分离状态避免将瞬间改位置误当控制效果。','mujoco-arm-project'),
+('具名对象查找返回 -1 时应该？','继续用作数组索引｜换随机名称｜核对 XML 名称与对象类型',2,'-1 表示未找到，继续索引可能误用最后一项。','mujoco-error-name')])
+stage('tracking','轨迹跟踪与控制','建立 PD 跟踪基线并用误差指标比较单因素改动。','已理解逆解与真实动力学状态；了解采样周期。','同机械臂工程；每次对照使用独立目录。','embodied-pid embodied-joint-interpolation mujoco-ctrl mujoco-integrator mujoco-arm-project','mujoco-arm-project','mujoco-error-nan mujoco-error-trajectory','完成基线与一次 PD 增益对照，解释 RMSE 变化。','按 README 运行原始 track.py，保存 metrics.json 和 trajectory.csv。｜核对 3000 条轨迹及去掉首秒后的 RMSE。｜复制工程到新目录，只改变一个 PD 增益后再次运行。｜比较误差与退出码；若发散，保留失败记录并恢复基线。','基线验收条件为 RMSE < 0.03 m；对照结果以实际数据为准。','每次输出独立保存｜报告去掉首秒的口径｜保留失败对照｜不预设增益越大越好','查看控制限幅和步长后再改增益。｜逐步日志需要数值副本，不能重复保存同一数组引用。','参考基线应有 3000 条记录且 acceptance=true；对照可能改善也可能恶化。只有增益一个因素变化时才有较清晰的归因，阈值只适用于此教学轨迹。',[
+('PD 中 D 项通常依据什么？','文件大小｜目标文件名｜速度或误差变化',2,'微分项与变化率相关，常用于抑制振荡。','embodied-pid'),
+('公平比较两个增益，应当？','保持轨迹、步长、统计区间一致｜同时更换所有参数｜只展示最好一帧',0,'一致的评估条件使对照具有可解释性。','mujoco-arm-project'),
+('轨迹历史每帧完全相同，首先检查？','CPU 颜色｜是否重复保存数组引用｜ZIP 名字',1,'共享引用可能让历史全部指向最后一次状态。','mujoco-error-trajectory')])
+stage('contact','接触与抓取','能解释接触力坐标系，并提出可达性、摩擦与稳定性检查。','了解坐标变换、逆解与基本控制；不要求真机。','文本阅读即可；配套机械臂无碰撞与夹爪，本阶段为分析练习。','mujoco-contact mujoco-contact-force embodied-grasp-reachability embodied-contact-friction embodied-grasp-stability','mujoco-arm-project','mujoco-error-contact mujoco-error-nan','为抓取扩展写一份可检验方案，判断“接触力为零”和“抓到”有何区别。','检查机械臂 XML 与 README，列出当前缺少的碰撞、物体和夹爪。｜设定一个桌面物体抓取任务，明确物体质量、摩擦、夹爪行程及目标姿态。｜写出接触配对、力坐标变换、可达性与夹爪闭合的检查顺序。｜定义抬升保持、滑移和掉落的成功/失败标准；分析“夹爪关闭但力为零”的原因。','得到设计与诊断表；这是方案练习，不产生抓取实测结论。','说明工程不含碰撞｜区分接触局部系与世界系｜成功标准含保持时间与掉落判据','先确认是否有接触对，再读取力。｜接触存在不代表摩擦足够或能稳定抬升。','先补齐物体、碰撞几何、夹爪和限位设计，再查 contact 配对与过滤。mj_contactForce 的输出需按接触坐标理解；抓取成功要独立验证可达、闭合、抬升及保持，现有二维工程不能直接证明抓取成功。',[
+('mj_contactForce 的力应按什么坐标理解？','接触局部坐标｜总是相机坐标｜像素坐标',0,'接触力默认在接触局部系，比较世界方向前需转换。','mujoco-contact-force'),
+('夹爪闭合且接触力非零，下一步应？','立即宣布成功｜验证抬升保持和滑移｜删除失败记录',1,'接触不是稳定抓取的充分条件。','embodied-grasp-stability'),
+('现有二维机械臂没有接触力，可能因为？','一定是显卡坏了｜必须调大所有力矩｜模型本身没有碰撞和抓取物体',2,'先核对模型能力边界，不能把不存在的接触误判为测量故障。','mujoco-arm-project')])
+path('ros-mobile','ROS 移动机器人','希望从 ROS 2 通信走到仿真建图与导航的同学','沿节点、时钟、坐标和底盘链路建立可检查的导航闭环。')
+stage('topics','节点与话题','能构建发布订阅包并用命令验证通信。','基础终端与 Python；建议先学科研基础。','Ubuntu 24.04 / ROS 2 Jazzy；若用 Humble，按文章核对版本，勿混 source。','ros-versions ros-colcon ros-ros2-node ros-ros2-topic ros-quickstart','ros-quickstart','ros-error-package ros-error-qos','运行双终端发布订阅并保留节点、话题与消息证据。','下载发布订阅工程，按 README 构建工作空间。｜每个终端加载对应 ROS 和工作空间环境，分别启动两个节点。｜用 ros2 node list、ros2 topic list 和 topic echo 检查实际话题。｜停止发布端，观察订阅输出变化并记录。','能看到两个节点和不断更新的消息；停止发布后无新消息。','记录发行版与 source 路径｜保存构建结果｜确认消息实际到达','Package not found 时检查是否加载 install/setup.bash。｜话题能列出但无数据时再看类型和 QoS。','构建成功与通信成功是不同证据。加载环境后应发现可执行入口，两个节点运行时用 echo 观察实际消息；异常时依次查进程、环境、类型和 QoS。',[
+('节点与话题分别是？','日志与压缩包｜执行计算的进程实体与消息通道｜显卡与驱动',1,'节点参与通信，话题承载有类型的消息。','ros-ros2-node'),
+('新终端启动自建包前需要？','只 source ROS 1｜只改窗口标题｜加载对应 ROS 及工作空间环境',2,'工作空间环境让 ROS 找到新构建的包。','ros-colcon'),
+('话题存在但无消息时，应核对？','消息类型、发布端与 QoS｜网页字体｜GitHub 星标数',0,'发现话题并不保证端点策略兼容或正在发布。','ros-error-qos')])
+stage('tf-time','TF、时间与数据记录','能检查仿真时钟与坐标树并设计可回放记录。','已理解话题通信；知道坐标父子关系。','Jazzy + Harmonic，导航工程提供 /clock、TF、扫描与里程计；传感器需支持渲染。','ros-tf2 ros-tf-tree ros-sim-time ros-bag-record ros-bag-play','ros-navigation-project','ros-error-clock ros-error-tf','用导航工程仿真记录一段数据，检查 TF 与时间一致性。','按导航 README 准备环境，只启动 sim.sh。｜查询 /clock，并用 tf2_echo 检查工程定义的 odom 到 base_link 变换。｜用 ros2 bag record 记录 /clock、/tf、/tf_static、/scan、/odom，运行片刻后停止记录。｜用 ros2 bag info 核对话题与时长；停止原仿真发布者后回放，配置消费节点 use_sim_time。','获得非空 bag 和时钟/TF 检查记录；能说明记录与回放的时钟来源。','核对 frame 名称｜仿真消费节点使用仿真时间｜避免重复时钟发布｜记录静态 TF 的 QoS 注意事项','TF 连通与时间有效是两个独立条件。｜回放已录 /clock 时，不再额外生成第二个时钟；静态 TF 要检查 transient local。','检查 odom→base_link→传感器链。回放前停止相同话题的原发布者；可回放录制的 /clock，或排除它后由回放器生成时钟，二者选一。bag info 只能证实数据存在，仍需验证 TF 查询和消费节点。',[
+('use_sim_time=true 的节点主要使用？','计算机开机时间｜Git 提交时间｜/clock 提供的时间',2,'仿真时钟来自 /clock，缺失时节点可能等待。','ros-sim-time'),
+('回放含 /clock 的 bag，应该？','确保只有一个时钟来源｜同时启动多个时钟｜关闭全部 TF 检查',0,'重复时钟来源可造成时间跳变和外推错误。','ros-bag-play'),
+('TF 树连通仍报外推错误，需检查？','文件名长度｜时间戳与缓存范围｜终端字体',1,'连通性不保证目标时间上有可用变换。','ros-error-tf')])
+stage('diffdrive','Gazebo 差速机器人','沿速度命令、驱动、里程计和扫描逐段检查底盘。','已掌握 TF、仿真时间和话题诊断。','Ubuntu 24.04、Jazzy、Harmonic；激光渲染需要兼容 GPU/驱动。','gazebo-diff-drive gazebo-cmd-vel gazebo-bridge gazebo-lidar gazebo-diffdrive-project','gazebo-diffdrive-project','gazebo-error-drive gazebo-error-bridge gazebo-error-sensor','运行差速工程，验证有限时长运动与零速度停止。','按工程 README 启动仿真与桥接。｜先检查时钟、扫描和里程计是否更新。｜按 README 的 drive.py 参数执行短时低速直行和转向。｜记录 /cmd_vel、/odom、/scan，观察结束后零速度命令及里程计变化。','底盘按命令移动，结束时发零速度；扫描与里程计持续更新。','保存三类话题证据｜核对桥接类型与方向｜验证运动结束停止｜不把渲染画面当里程计证据','先查 Gazebo 内部话题，再查 ROS 桥接。｜机器人不动时还要检查暂停状态与轮关节名称。','先证明仿真时间推进，再逐段确认 ROS 速度到桥接、DiffDrive 到轮关节、odom 回传。仅看 cmd_vel 不足以证明驱动成功；有扫描也不代表 TF 与时间已正确。',[
+('差速底盘转向主要通过？','两轮速度差｜更换地图颜色｜增大相机亮度',0,'左右轮差速产生角速度，参数须匹配轮距与半径。','gazebo-diff-drive'),
+('ROS 有速度消息但底盘不动，先检查？','立即训练策略｜桥接方向、驱动插件和仿真暂停状态｜删除地图',1,'应沿控制链分段检查，定位命令在哪一段中断。','gazebo-error-drive'),
+('模型可见但激光无数据，可能缺少？','Git 分支｜SSH 密钥｜传感器系统或正确渲染支持',2,'可视模型与传感器数据由不同系统条件决定。','gazebo-error-sensor')])
+stage('navigation','SLAM 与导航','能区分建图与定位，完成地图保存和一次目标导航验收。','已验证差速运动、扫描、TF 和时钟。','同导航工程 README；Nav2、slam_toolbox 与 ros_gz 版本保持一致。','ros-slam ros-nav2 ros-lifecycle ros-navigation-project','ros-navigation-project','ros-error-nav ros-error-tf ros-error-clock','从建图切换到 AMCL 定位，记录一次导航的真实结果。','按导航 README 启动仿真与 SLAM，低速探索并保存 maps/room。｜停止 SLAM，保留仿真，运行 navigate.sh。｜在 RViz 设置初始位姿，确认激光与地图对齐。｜发送非障碍区域的近距离目标；记录 action 结果、节点状态、地图与配置来源。','地图 YAML 和图像存在，关键节点 active，成功与否由实际 action 和位置证据判断。','map→odom 只有一个负责发布的节点｜地图和配置已保存｜检查目标可达｜记录结果与停止状态','建图的 SLAM 和定位的 AMCL 不要同时争用变换。｜action 存在仅说明接口已发现，还要看执行结果。','切换后由 AMCL 维护 map→odom；导航需地图、定位、扫描、TF 与 active 节点一起正常。保存成功 action 结果和到达证据；失败时记录代价地图/TF 症状，不能以启动无报错代替到达。',[
+('建图与已知地图定位的区别是？','都只负责轮速｜前者估计地图，后者估计地图中的位姿｜都不需要传感器',1,'SLAM 联合估计地图与位姿；AMCL 在已知地图中定位。','ros-slam'),
+('从 SLAM 切到 AMCL，应当？','保留两个 map→odom 发布者｜删除全部 TF｜停止 SLAM 再启动定位',2,'同一变换应避免多个节点竞争发布。','ros-navigation-project'),
+('Nav2 action 可见就代表到达目标吗？','不代表，还需执行结果与到达证据｜代表｜只要 RViz 打开就代表',0,'接口存在和任务执行成功是不同层面的证据。','ros-nav2')])
+path('embodied-learning','具身智能学习','已有仿真基础，希望理解 IL、RL 与 VLA 实验的同学','先明确观测动作和数据，再讨论策略、迁移与科研评估。')
+stage('data','观测动作与示范数据','能定义接口并发现时间错位、跨回合切片与数据泄漏。','了解机器人关节与传感器；建议先学机械臂或移动机器人路线。','纸笔或文本编辑器即可；使用题中合成记录，无训练依赖。','embodied-observation-action embodied-episodes embodied-data-alignment embodied-data-cleaning embodied-split-leakage','','ros-error-clock isaac-error-device','审查一份含错误的演示数据设计。','审查样例：观测为 7 关节弧度，动作却标为 6 维末端增量且无坐标系；写出缺失字段。｜审查时间：图像为 0、100、200 ms，动作 50、150、250 ms；提出时间戳与延迟记录方案。｜审查分割：同一回合前 80% 训练、后 20% 测试；说明泄漏风险。｜输出数据字典与清洗清单，明确回合边界、缺帧和异常动作的处理。','形成接口、对齐和划分三张检查表；不将合成样例视为真实示范。','注明维度、单位、坐标系与频率｜保留原始时间戳｜按回合或场景划分｜记录清洗理由','关节动作和末端动作不能仅靠补一个零适配。｜相邻帧高度相关，随机拆帧通常高估泛化。','先统一动作语义，再确定时间对齐策略；50 ms 偏移需查采集/执行时序，不能无证据平移。测试应隔离完整回合，必要时隔离场景与操作者；清洗保留原始数据及处理版本。',[
+('动作接口至少应说明？','维度、单位、坐标系和控制语义｜只写数组长度｜只写模型名字',0,'相同维度仍可能对应完全不同的控制语义。','embodied-observation-action'),
+('划分示范训练与测试，优先？','随机拆相邻帧｜按完整回合或场景隔离｜复制训练集作测试',1,'回合隔离降低相邻帧关联造成的泄漏。','embodied-split-leakage'),
+('图像与动作时间戳偏移，正确处理是？','直接删除全部时间戳｜默认完全同步｜核对采集与执行延迟再对齐',2,'时间对齐必须基于记录语义和真实延迟。','embodied-data-alignment')])
+stage('imitation','BC、ACT 与 Diffusion Policy','能比较三类策略的输入输出，并设计一致的离线检查与闭环评估。','已完成数据字典；理解监督学习与训练/测试划分。','文本编辑器即可，无配套训练工程；无需下载模型。','embodied-bc embodied-act embodied-diffusion-policy embodied-action-chunking embodied-normalization','','isaac-error-device isaac-error-checkpoint','设计一个固定示范预算下的 BC、ACT、Diffusion Policy 对照。','沿用上一阶段数据字典，固定回合划分和示范数量。｜列出三种方法的输入历史、单步或分块动作、执行频率与延迟测量方式。｜规定归一化统计只由训练集计算，并保存统计版本。｜设计离线误差检查与相同初始条件的闭环成功率评估；列出缺失的实现和算力条件。','得到比较表与评估协议，不产生虚构的训练结果。','固定数据预算与划分｜区分预测块长和执行步数｜测试集不参与统计拟合｜闭环指标独立于训练损失','ACT 与扩散策略都可能预测动作序列，不能只比较模型标签。｜低离线损失不保证遇到偏离示范的状态仍能恢复。','BC 可作监督基线，ACT 使用动作分块，Diffusion Policy 通过迭代去噪生成动作。公平比较需统一接口与执行预算，同时报告推理时延、闭环成功率和失败类型；模型优劣不能仅由离线损失推断。',[
+('行为克隆主要从什么学习？','人工定义全部奖励｜示范观测与动作配对｜随机网页文本',1,'BC 用示范动作作为监督目标。','embodied-bc'),
+('归一化统计应该由什么计算？','训练与测试混合｜仅测试集｜仅训练集，并在评估复用',2,'测试信息进入预处理统计也会造成泄漏。','embodied-normalization'),
+('训练损失低但闭环失败，可能是？','策略偏离示范后出现分布偏移｜训练损失证明一定成功｜必须删除失败回合',0,'误差累积会把状态带离示范分布，需闭环评估。','embodied-bc')])
+stage('reinforcement','RL 与仿真迁移','理解观测、奖励与结束语义，运行或审计 Cartpole 到随机化的实验流程。','理解策略动作、数据记录、多种子对照；运行需 GPU 环境。','运行：Isaac Lab v2.3.0、兼容 Isaac Sim/NVIDIA GPU/驱动、RSL-RL；无环境可审计方案，但不能勾选为运行完成。','isaac-observations isaac-termination isaac-quickstart isaac-randomized-project embodied-domain-randomization','isaac-quickstart isaac-randomized-project','isaac-error-task isaac-error-memory isaac-error-checkpoint','完成 Cartpole 基线与随机化对照；环境不足时只保存待运行方案。','按 Cartpole README 依次执行 check、train、play，保存实际检查点和版本。｜按随机化工程 README 验证注册任务、训练基线和自定义任务，分开日志目录。｜核对奖励与重置分布同时变化这一限制，设计单因素补充实验。｜用相同评估分布、多种子统计回合长度与失败率；记录仍未完成的运行。','运行后有真实事件与检查点；尚未运行时只有方案，不记运行练习完成。','零动作与重置无异常｜检查点接口一致｜基线与对照日志独立｜结论不超出仿真证据','先用少量环境验证，不要先扩大训练。｜随机化工程同时改奖励和重置范围，不能作为单因素结论。','先打通环境、训练、回放闭环，再做有控制的随机化对照。奖励定义改变后总回报不可直接比较；迁移需独立目标分布评估，仿真通过不等于真机成功。无 GPU 时把验收项留作未完成。',[
+('时间上限截断与任务终止是？','完全相同且无需区分｜都说明策略成功｜两种不同结束语义',2,'terminated 与 truncated 的区别会影响价值目标和统计。','isaac-termination'),
+('更换奖励后比较实验，应当？','用共同评估条件与指标｜直接按总回报大小排名｜只看训练时长',0,'奖励尺度变了，总回报不再是直接可比的性能证据。','isaac-randomized-project'),
+('回放报维度不匹配，首先核对？','显示器｜任务、观测动作与网络配置｜ZIP 压缩率',1,'检查点必须和任务及模型接口匹配。','isaac-error-checkpoint')])
+stage('vla-evaluation','VLA 与科研评估','能审查 VLA 动作接口并写出隔离测试数据的可复现实验协议。','理解观测动作、示范划分、控制频率与多种子实验。','文本编辑器即可；无完整 VLA 训练工程，不需要真机。','embodied-vla-interface embodied-cross-embodiment embodied-inference-timing embodied-benchmark-protocol embodied-success-rate','','isaac-error-checkpoint ros-error-tf','为 VLA 输出到机器人控制器的适配写一份接口审查与评估方案。','审查假设输出：相机坐标下 6 维位姿增量加夹爪标量，归一化范围 [-1,1]；控制器接收基座坐标下绝对目标。｜列出反归一化、坐标变换、当前位姿组合与夹爪映射的必要参数。｜规定推理时延、动作有效期、过期处理、限幅与停止条件。｜设计已见/未见物体及指令测试，记录成功定义、试验数、失败类型、模型与数据版本。','得到接口映射表与实验协议；所有未测数字保持为空或注明待测。','不能直接把增量当绝对位置｜坐标、单位与姿态表示明确｜训练测试隔离｜报告分母和失败案例','7 维向量不一定是 7 个关节目标。｜先确定旋转表示与组合次序，再讨论策略输出是否可执行。','先反归一化再按已声明约定变换和组合位姿，夹爪量单独映射；接口不明时停止执行。评估按任务和分布分层报告成功次数/总次数及不确定性，保留失败与时延；本练习只完成分析，不证明模型或真机可用。',[
+('VLA 输出 7 维动作就必然是 7 关节位置吗？','不是，需核对接口语义｜是｜只看数值范围即可',0,'维度相同不能保证坐标、单位或控制模式相同。','embodied-vla-interface'),
+('评估成功率应报告？','只有最好一次视频｜成功次数、总次数和协议｜只有训练损失',1,'分母、成功定义和任务分布决定成功率如何解释。','embodied-success-rate'),
+('推理动作过期仍直接执行的问题是？','只会影响网页速度｜没有问题｜动作可能不再匹配当前状态',2,'应明确动作有效期、频率和延迟处理，避免执行陈旧目标。','embodied-inference-timing')])
+# 跨路线前置只作建议，不锁课。
+for p in paths[1:]:
+    p['stages'][0]['suggested']=[dict(path='research-foundations',stage='environment')]
+paths[3]['stages'][0]['suggested'].append(dict(path='arm-control',stage='kinematics'))
+if __name__ == '__main__':
+    (ROOT/'data/learning-paths.json').write_text(json.dumps(paths,ensure_ascii=False,indent=2)+'\n')
+    print('已生成 4 条学习路线、16 个阶段、16 项练习、48 道自测题')

@@ -1,0 +1,27 @@
+{
+  "url": "https://docs.github.com/en/pull-requests",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Get started",
+      "url": "https://docs.github.com/en/pull-requests/get-started/about-pull-requests"
+    },
+    {
+      "title": "Concepts",
+      "url": "https://docs.github.com/en/pull-requests/concepts/writing-code-for-a-project"
+    },
+    {
+      "title": "How-tos",
+      "url": "https://docs.github.com/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository"
+    },
+    {
+      "title": "Reference",
+      "url": "https://docs.github.com/en/pull-requests/reference/pull-requests"
+    },
+    {
+      "title": "Tutorials",
+      "url": "https://docs.github.com/en/pull-requests/tutorials/stack-code-changes-in-pull-requests"
+    }
+  ]
+}

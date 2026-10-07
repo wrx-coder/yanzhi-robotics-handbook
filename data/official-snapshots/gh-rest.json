@@ -1,0 +1,231 @@
+{
+  "url": "https://docs.github.com/en/rest",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Quickstart",
+      "url": "https://docs.github.com/en/rest/quickstart"
+    },
+    {
+      "title": "About the REST API",
+      "url": "https://docs.github.com/en/rest/about-the-rest-api/about-the-rest-api"
+    },
+    {
+      "title": "Using the REST API",
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api"
+    },
+    {
+      "title": "Authentication",
+      "url": "https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api"
+    },
+    {
+      "title": "Guides",
+      "url": "https://docs.github.com/en/rest/guides/scripting-with-the-rest-api-and-javascript"
+    },
+    {
+      "title": "Actions",
+      "url": "https://docs.github.com/en/rest/actions/artifacts"
+    },
+    {
+      "title": "Activity",
+      "url": "https://docs.github.com/en/rest/activity/events"
+    },
+    {
+      "title": "Agent tasks",
+      "url": "https://docs.github.com/en/rest/agent-tasks/agent-tasks"
+    },
+    {
+      "title": "Agents",
+      "url": "https://docs.github.com/en/rest/agents/secrets"
+    },
+    {
+      "title": "Apps",
+      "url": "https://docs.github.com/en/rest/apps/apps"
+    },
+    {
+      "title": "Billing",
+      "url": "https://docs.github.com/en/rest/billing/budgets"
+    },
+    {
+      "title": "Branches",
+      "url": "https://docs.github.com/en/rest/branches/branches"
+    },
+    {
+      "title": "Campaigns",
+      "url": "https://docs.github.com/en/rest/campaigns/campaigns"
+    },
+    {
+      "title": "Checks",
+      "url": "https://docs.github.com/en/rest/checks/runs"
+    },
+    {
+      "title": "Classroom",
+      "url": "https://docs.github.com/en/rest/classroom/classroom"
+    },
+    {
+      "title": "Code quality",
+      "url": "https://docs.github.com/en/rest/code-quality/code-quality"
+    },
+    {
+      "title": "Code scanning",
+      "url": "https://docs.github.com/en/rest/code-scanning/code-scanning"
+    },
+    {
+      "title": "Code security settings",
+      "url": "https://docs.github.com/en/rest/code-security/configurations"
+    },
+    {
+      "title": "Codes of conduct",
+      "url": "https://docs.github.com/en/rest/codes-of-conduct/codes-of-conduct"
+    },
+    {
+      "title": "Codespaces",
+      "url": "https://docs.github.com/en/rest/codespaces/codespaces"
+    },
+    {
+      "title": "Collaborators",
+      "url": "https://docs.github.com/en/rest/collaborators/collaborators"
+    },
+    {
+      "title": "Commits",
+      "url": "https://docs.github.com/en/rest/commits/commits"
+    },
+    {
+      "title": "Copilot",
+      "url": "https://docs.github.com/en/rest/copilot/copilot-cloud-agent-management"
+    },
+    {
+      "title": "Copilot Spaces",
+      "url": "https://docs.github.com/en/rest/copilot-spaces/collaborators"
+    },
+    {
+      "title": "Credentials",
+      "url": "https://docs.github.com/en/rest/credentials/revoke"
+    },
+    {
+      "title": "Dependabot",
+      "url": "https://docs.github.com/en/rest/dependabot/alerts"
+    },
+    {
+      "title": "Dependency graph",
+      "url": "https://docs.github.com/en/rest/dependency-graph/dependency-review"
+    },
+    {
+      "title": "Deploy keys",
+      "url": "https://docs.github.com/en/rest/deploy-keys/deploy-keys"
+    },
+    {
+      "title": "Deployments",
+      "url": "https://docs.github.com/en/rest/deployments/branch-policies"
+    },
+    {
+      "title": "Emojis",
+      "url": "https://docs.github.com/en/rest/emojis/emojis"
+    },
+    {
+      "title": "Enterprise teams",
+      "url": "https://docs.github.com/en/rest/enterprise-teams/enterprise-team-members"
+    },
+    {
+      "title": "Gists",
+      "url": "https://docs.github.com/en/rest/gists/gists"
+    },
+    {
+      "title": "Git database",
+      "url": "https://docs.github.com/en/rest/git/blobs"
+    },
+    {
+      "title": "Gitignore",
+      "url": "https://docs.github.com/en/rest/gitignore/gitignore"
+    },
+    {
+      "title": "Interactions",
+      "url": "https://docs.github.com/en/rest/interactions/orgs"
+    },
+    {
+      "title": "Issues",
+      "url": "https://docs.github.com/en/rest/issues/assignees"
+    },
+    {
+      "title": "Licenses",
+      "url": "https://docs.github.com/en/rest/licenses/licenses"
+    },
+    {
+      "title": "Markdown",
+      "url": "https://docs.github.com/en/rest/markdown/markdown"
+    },
+    {
+      "title": "Meta",
+      "url": "https://docs.github.com/en/rest/meta/meta"
+    },
+    {
+      "title": "Metrics",
+      "url": "https://docs.github.com/en/rest/metrics/community"
+    },
+    {
+      "title": "Migrations",
+      "url": "https://docs.github.com/en/rest/migrations/orgs"
+    },
+    {
+      "title": "Organizations",
+      "url": "https://docs.github.com/en/rest/orgs/api-insights"
+    },
+    {
+      "title": "Packages",
+      "url": "https://docs.github.com/en/rest/packages/packages"
+    },
+    {
+      "title": "Pages",
+      "url": "https://docs.github.com/en/rest/pages/pages"
+    },
+    {
+      "title": "Private registries",
+      "url": "https://docs.github.com/en/rest/private-registries/organization-configurations"
+    },
+    {
+      "title": "Projects",
+      "url": "https://docs.github.com/en/rest/projects/drafts"
+    },
+    {
+      "title": "Pull requests",
+      "url": "https://docs.github.com/en/rest/pulls/comments"
+    },
+    {
+      "title": "Rate limit",
+      "url": "https://docs.github.com/en/rest/rate-limit/rate-limit"
+    },
+    {
+      "title": "Reactions",
+      "url": "https://docs.github.com/en/rest/reactions/reactions"
+    },
+    {
+      "title": "Releases",
+      "url": "https://docs.github.com/en/rest/releases/releases"
+    },
+    {
+      "title": "Repositories",
+      "url": "https://docs.github.com/en/rest/repos/attestations"
+    },
+    {
+      "title": "Search",
+      "url": "https://docs.github.com/en/rest/search/search"
+    },
+    {
+      "title": "Secret scanning",
+      "url": "https://docs.github.com/en/rest/secret-scanning/custom-patterns"
+    },
+    {
+      "title": "Security advisories",
+      "url": "https://docs.github.com/en/rest/security-advisories/global-advisories"
+    },
+    {
+      "title": "Teams",
+      "url": "https://docs.github.com/en/rest/teams/members"
+    },
+    {
+      "title": "Users",
+      "url": "https://docs.github.com/en/rest/users/attestations"
+    }
+  ]
+}

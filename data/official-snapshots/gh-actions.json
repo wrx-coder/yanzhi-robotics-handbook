@@ -1,0 +1,27 @@
+{
+  "url": "https://docs.github.com/en/actions",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Get started",
+      "url": "https://docs.github.com/en/actions/get-started/quickstart"
+    },
+    {
+      "title": "Concepts",
+      "url": "https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows"
+    },
+    {
+      "title": "How-tos",
+      "url": "https://docs.github.com/en/actions/how-tos/write-workflows/use-workflow-templates"
+    },
+    {
+      "title": "Reference",
+      "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax"
+    },
+    {
+      "title": "Tutorials",
+      "url": "https://docs.github.com/en/actions/tutorials/create-an-example-workflow"
+    }
+  ]
+}

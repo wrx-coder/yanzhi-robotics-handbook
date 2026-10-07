@@ -1,0 +1,19 @@
+{
+  "url": "https://docs.github.com/en/issues",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Issues",
+      "url": "https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues"
+    },
+    {
+      "title": "Projects",
+      "url": "https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects"
+    },
+    {
+      "title": "Labels and milestones",
+      "url": "https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels"
+    }
+  ]
+}

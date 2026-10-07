@@ -1,0 +1,6 @@
+{
+  "url": "https://raw.githubusercontent.com/ros2/ros2_documentation/jazzy/source/Concepts/Intermediate.rst",
+  "status": 200,
+  "date": "2026-09-21",
+  "links": ".. toctree::\n   :maxdepth: 1\n\n   Intermediate/About-Domain-ID\n   Intermediate/About-Different-Middleware-Vendors\n   Intermediate/About-Logging\n   Intermediate/About-Quality-of-Service-Settings\n   Intermediate/About-Executors\n   Intermediate/About-Topic-Statistics\n   Intermediate/About-RQt\n   Intermediate/About-Composition\n   Intermediate/About-Cross-Compilation\n   Intermediate/About-Security\n   Intermediate/About-Tf2"
+}

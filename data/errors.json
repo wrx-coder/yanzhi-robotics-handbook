@@ -1,0 +1,3613 @@
+[
+  {
+    "id": "linux-error-command",
+    "module": "linux",
+    "title": "command not found · 命令找不到",
+    "category": "环境与依赖",
+    "summary": "遇到“command not found”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Shell 通过内建命令、函数和 PATH 查找程序；程序未安装、环境未激活或拼写错误都会导致查找失败。",
+    "code": "type -a python3\nprintf '%s\n' \"$PATH\"",
+    "language": "bash",
+    "explain": [
+      "先确认实际查找结果，再按冒号分隔的 PATH 检查程序安装目录。",
+      "type 能列出可执行入口，PATH 包含对应 bin 目录。",
+      "没有入口通常是未安装或未加载环境；存在多个入口时检查实际优先级。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "bash",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-type",
+      "linux-venv"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "command not found",
+        "命令找不到"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "type -a python3\nprintf '%s\n' \"$PATH\"",
+          "reason": "先确认实际查找结果，再按冒号分隔的 PATH 检查程序安装目录。",
+          "normal": "type 能列出可执行入口，PATH 包含对应 bin 目录。",
+          "abnormal": "没有入口通常是未安装或未加载环境；存在多个入口时检查实际优先级。"
+        }
+      ],
+      "fixes": [
+        "若软件未安装，按发行版官方方式安装对应包",
+        "若已安装到虚拟环境，激活该环境后重试，不要直接改系统 Python。"
+      ],
+      "verification": {
+        "code": "command -v python3\npython3 --version",
+        "expected": "路径属于预期环境，版本与实验要求一致。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-permission",
+    "module": "linux",
+    "title": "Permission denied · 文件或目录无权限",
+    "category": "权限与路径",
+    "summary": "遇到“Permission denied”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "访问由文件所有权、权限位及各级目录的穿越权限共同决定，也可能受 ACL 或挂载选项限制。",
+    "code": "id\nls -ld . ./run.sh\nnamei -l ./run.sh",
+    "language": "bash",
+    "explain": [
+      "id 查身份；ls 看目标权限；namei 逐层检查路径。run.sh 替换为目标脚本。",
+      "当前用户能穿越父目录，脚本有读取及执行权限。",
+      "脚本不可执行与父目录不可进入需要不同修复；只改最终文件不一定有效。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "core",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-chmod",
+      "linux-chown"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Permission denied",
+        "权限不够"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "id\nls -ld . ./run.sh\nnamei -l ./run.sh",
+          "reason": "id 查身份；ls 看目标权限；namei 逐层检查路径。run.sh 替换为目标脚本。",
+          "normal": "当前用户能穿越父目录，脚本有读取及执行权限。",
+          "abnormal": "脚本不可执行与父目录不可进入需要不同修复；只改最终文件不一定有效。"
+        }
+      ],
+      "fixes": [
+        "若只有自己的脚本缺执行位，使用 chmod u+x run.sh",
+        "若所有权异常，仅对明确属于自己的目标修复所有权，不递归修改系统目录。"
+      ],
+      "verification": {
+        "code": "test -r ./run.sh && test -x ./run.sh && printf '脚本可读且可执行\n'",
+        "expected": "检查返回成功，随后在正确环境运行脚本。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-space",
+    "module": "linux",
+    "title": "No space left on device · 空间或 inode 耗尽",
+    "category": "磁盘与内存",
+    "summary": "遇到“No space left on device”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "文件创建同时需要数据块和 inode；任一耗尽都可能报空间不足，删除后仍被占用的文件也会保留磁盘块。",
+    "code": "df -h .\ndf -i .\ndu -h --max-depth=1 .",
+    "language": "bash",
+    "explain": [
+      "先查看当前文件系统容量，再查 inode，最后定位目录占用。",
+      "数据块和 inode 都有余量，实验目录处在预期挂载盘。",
+      "df 满而 du 不大时检查已删除但仍打开的文件；inode 满常见于大量小文件。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-df",
+      "linux-du",
+      "linux-lsof"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "No space left on device",
+        "磁盘空间不足"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "df -h .\ndf -i .\ndu -h --max-depth=1 .",
+          "reason": "先查看当前文件系统容量，再查 inode，最后定位目录占用。",
+          "normal": "数据块和 inode 都有余量，实验目录处在预期挂载盘。",
+          "abnormal": "df 满而 du 不大时检查已删除但仍打开的文件；inode 满常见于大量小文件。"
+        }
+      ],
+      "fixes": [
+        "若块空间耗尽，归档或移动已确认可清理的实验结果",
+        "若 inode 耗尽，合并小文件并核对目录；已打开的旧日志需让持有程序正常关闭。"
+      ],
+      "verification": {
+        "code": "df -h .\ndf -i .",
+        "expected": "两类容量均恢复余量，应用能在目标目录创建测试输出。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-oom",
+    "module": "linux",
+    "title": "Killed / OOM · 进程被系统终止",
+    "category": "磁盘与内存",
+    "summary": "遇到“Out of memory”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "内核或 cgroup 在内存不足时可能终止进程；终端只显示 Killed 时也需排除人为信号，不能直接判定 GPU 显存问题。",
+    "code": "free -h\njournalctl -k -b --no-pager -n 100\ncat /sys/fs/cgroup/memory.max 2>/dev/null",
+    "language": "bash",
+    "explain": [
+      "比较可用 RAM、内核事件和当前 cgroup 限制；后者路径适用于 cgroup v2 根视图。",
+      "内存有余量且对应时间无 OOM 事件。",
+      "日志出现明确 OOM victim 可确认系统内存问题；容器限制可能小于宿主机内存。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-free",
+      "linux-ps"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Out of memory",
+        "Killed process",
+        "进程被杀"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "free -h\njournalctl -k -b --no-pager -n 100\ncat /sys/fs/cgroup/memory.max 2>/dev/null",
+          "reason": "比较可用 RAM、内核事件和当前 cgroup 限制；后者路径适用于 cgroup v2 根视图。",
+          "normal": "内存有余量且对应时间无 OOM 事件。",
+          "abnormal": "日志出现明确 OOM victim 可确认系统内存问题；容器限制可能小于宿主机内存。"
+        }
+      ],
+      "fixes": [
+        "若数据加载占满内存，降低 worker、预取和缓存规模",
+        "若容器配额不足，调整作业资源或缩小批量，并检查是否存在持续内存增长。"
+      ],
+      "verification": {
+        "code": "free -h\nps -eo pid,rss,args --sort=-rss",
+        "expected": "代表性负载运行时内存稳定，目标进程不再被终止。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-ssh-key",
+    "module": "linux",
+    "title": "SSH publickey · 公钥认证失败",
+    "category": "网络与认证",
+    "summary": "遇到“Permission denied (publickey)”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "服务端按登录用户校验客户端提供的密钥；用户不对、密钥未加载或服务端未授权都可能失败。",
+    "code": "ssh -G researcher@server.example\nssh-add -l",
+    "language": "bash",
+    "explain": [
+      "-G 显示最终配置而不连接；ssh-add -l 列出 agent 中的公钥指纹。替换示例账户和主机。",
+      "User、IdentityFile、HostName 对应目标，agent 有预期密钥或配置直接指定密钥。",
+      "不同账户的 authorized_keys 不共用；agent 无身份不代表私钥文件一定缺失。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ssh",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-ssh",
+      "linux-ssh-keygen"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Permission denied (publickey)",
+        "公钥认证失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ssh -G researcher@server.example\nssh-add -l",
+          "reason": "-G 显示最终配置而不连接；ssh-add -l 列出 agent 中的公钥指纹。替换示例账户和主机。",
+          "normal": "User、IdentityFile、HostName 对应目标，agent 有预期密钥或配置直接指定密钥。",
+          "abnormal": "不同账户的 authorized_keys 不共用；agent 无身份不代表私钥文件一定缺失。"
+        }
+      ],
+      "fixes": [
+        "若选错密钥，在该主机的 SSH config 指定 IdentityFile",
+        "若公钥未授权，由有权限的管理员把公钥加入正确账户，私钥始终留在本地。"
+      ],
+      "verification": {
+        "code": "ssh -T researcher@server.example",
+        "expected": "连接使用预期身份成功；不要通过禁用主机密钥校验来处理认证错误。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-refused",
+    "module": "linux",
+    "title": "Connection refused · 目标端口拒绝连接",
+    "category": "网络与认证",
+    "summary": "遇到“Connection refused”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "拒绝连接通常表示目标没有监听服务或连接被主动拒绝；与长时间超时的排查方向不同。",
+    "code": "ss -ltnp\ngetent hosts server.example",
+    "language": "bash",
+    "explain": [
+      "在服务所在机器查看监听；在客户端查域名解析。核对实际端口和目标地址。",
+      "服务监听在客户端可达地址与正确端口，域名解析符合预期。",
+      "只监听 127.0.0.1 的服务无法直接接受远端连接；端口填错也会拒绝。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-ss",
+      "linux-ssh-tunnel"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Connection refused",
+        "连接被拒绝"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ss -ltnp\ngetent hosts server.example",
+          "reason": "在服务所在机器查看监听；在客户端查域名解析。核对实际端口和目标地址。",
+          "normal": "服务监听在客户端可达地址与正确端口，域名解析符合预期。",
+          "abnormal": "只监听 127.0.0.1 的服务无法直接接受远端连接；端口填错也会拒绝。"
+        }
+      ],
+      "fixes": [
+        "若服务未启动，先查看服务日志并正常启动",
+        "若仅本机监听，按用途使用 SSH 隧道或调整授权的监听配置。"
+      ],
+      "verification": {
+        "code": "ss -ltnp",
+        "expected": "目标服务处于监听状态，客户端通过预期路径能建立连接。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-dns",
+    "module": "linux",
+    "title": "Name resolution · 域名解析失败",
+    "category": "网络与认证",
+    "summary": "遇到“Temporary failure in name resolution”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "应用需先把域名解析成地址；解析失败发生在访问远端服务之前，不是包管理器自身的依赖错误。",
+    "code": "getent hosts github.com\ncat /etc/resolv.conf\nip route",
+    "language": "bash",
+    "explain": [
+      "按应用使用的 NSS 解析路径查域名，并查看解析器与默认路由配置。",
+      "域名返回有效地址，DNS 配置及路由可用。",
+      "无解析器或网络路由断开会影响所有域名；只有一个域名失败需核对拼写和服务状态。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-hostname",
+      "linux-ip"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Temporary failure in name resolution",
+        "Could not resolve host",
+        "域名解析失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "getent hosts github.com\ncat /etc/resolv.conf\nip route",
+          "reason": "按应用使用的 NSS 解析路径查域名，并查看解析器与默认路由配置。",
+          "normal": "域名返回有效地址，DNS 配置及路由可用。",
+          "abnormal": "无解析器或网络路由断开会影响所有域名；只有一个域名失败需核对拼写和服务状态。"
+        }
+      ],
+      "fixes": [
+        "若网络未连接，先恢复网络和默认路由",
+        "若 DNS 配置错误，通过系统网络管理工具修复，不随意永久覆盖受管理的 resolv.conf。"
+      ],
+      "verification": {
+        "code": "getent hosts github.com",
+        "expected": "系统解析成功，原请求能进入实际连接阶段。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-module",
+    "module": "linux",
+    "title": "ModuleNotFoundError · Python 环境错位",
+    "category": "环境与依赖",
+    "summary": "遇到“ModuleNotFoundError”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Python 仅从当前解释器的搜索路径加载模块；pip 安装成功但装到另一解释器时，当前进程仍无法导入。",
+    "code": "command -v python3\npython3 -c \"import sys; print(sys.executable); print(sys.path)\"\npython3 -m pip --version",
+    "language": "bash",
+    "explain": [
+      "对照解释器入口和 pip 归属，不输出全量环境变量。",
+      "Python 与 pip 同属目标环境，包安装路径在 sys.path 中。",
+      "系统 Python、Conda 与 venv 混用，或包分发名与导入名不同，是常见原因。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "python",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-venv",
+      "linux-pip"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "ModuleNotFoundError",
+        "No module named",
+        "模块导入失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "command -v python3\npython3 -c \"import sys; print(sys.executable); print(sys.path)\"\npython3 -m pip --version",
+          "reason": "对照解释器入口和 pip 归属，不输出全量环境变量。",
+          "normal": "Python 与 pip 同属目标环境，包安装路径在 sys.path 中。",
+          "abnormal": "系统 Python、Conda 与 venv 混用，或包分发名与导入名不同，是常见原因。"
+        }
+      ],
+      "fixes": [
+        "若装错环境，用目标解释器的 python -m pip 安装依赖",
+        "若本地文件名遮蔽包，重命名冲突文件并重新启动解释器。"
+      ],
+      "verification": {
+        "code": "python3 -m pip check",
+        "expected": "依赖检查无冲突，并用目标模块的 import 命令确认可导入。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-shared-lib",
+    "module": "linux",
+    "title": "共享库 not found · 动态链接失败",
+    "category": "构建与运行",
+    "summary": "遇到“error while loading shared libraries”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "动态链接器按架构、依赖和运行时路径解析共享库；同名库也可能 ABI 不兼容。",
+    "code": "file ./build/controller\nldd ./build/controller",
+    "language": "bash",
+    "explain": [
+      "仅对可信的项目二进制使用 ldd；先核对 ELF 架构，再检查依赖解析。",
+      "架构与机器一致，依赖都有实际解析路径。",
+      "not found 指向缺失库；已找到但 undefined symbol 更可能是版本或 ABI 冲突。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-ldd",
+      "linux-cmake"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "error while loading shared libraries",
+        "cannot open shared object file"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "file ./build/controller\nldd ./build/controller",
+          "reason": "仅对可信的项目二进制使用 ldd；先核对 ELF 架构，再检查依赖解析。",
+          "normal": "架构与机器一致，依赖都有实际解析路径。",
+          "abnormal": "not found 指向缺失库；已找到但 undefined symbol 更可能是版本或 ABI 冲突。"
+        }
+      ],
+      "fixes": [
+        "若库缺失，安装对应发行版运行依赖或重新 source 工作空间",
+        "若 ABI 混用，统一工具链后重新编译，不创建指向不同大版本的伪兼容软链接。"
+      ],
+      "verification": {
+        "code": "ldd ./build/controller",
+        "expected": "没有 not found，程序在相同环境中正常启动。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-port",
+    "module": "linux",
+    "title": "Address already in use · 端口占用",
+    "category": "构建与运行",
+    "summary": "遇到“Address already in use”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "同一地址端口组合已被其他监听 socket 占用，第二个服务通常无法绑定。",
+    "code": "ss -ltnp\nlsof -i TCP:8765",
+    "language": "bash",
+    "explain": [
+      "先找到监听地址、端口与拥有进程，8765 替换为报错端口。",
+      "目标端口为空闲，或确认为正在使用的正确服务。",
+      "旧服务未退出、重复启动或其他程序占用都可产生同样报错。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-ss",
+      "linux-lsof"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Address already in use",
+        "端口被占用"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ss -ltnp\nlsof -i TCP:8765",
+          "reason": "先找到监听地址、端口与拥有进程，8765 替换为报错端口。",
+          "normal": "目标端口为空闲，或确认为正在使用的正确服务。",
+          "abnormal": "旧服务未退出、重复启动或其他程序占用都可产生同样报错。"
+        }
+      ],
+      "fixes": [
+        "若已有正确服务，直接访问并复用",
+        "若确实需要另开实例，选择不同端口，停止进程前核对身份和用途。"
+      ],
+      "verification": {
+        "code": "ss -ltnp",
+        "expected": "新实例监听预期端口，原服务没有被误终止。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-cuda-driver",
+    "module": "linux",
+    "title": "nvidia-smi 失败 · 驱动链路",
+    "category": "GPU 与设备",
+    "summary": "遇到“couldn't communicate with the NVIDIA driver”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "驱动内核模块、用户空间 NVML 和容器设备映射必须配合；Toolkit 版本与驱动状态是不同检查项。",
+    "code": "nvidia-smi\nlspci -nnk\nuname -r",
+    "language": "bash",
+    "explain": [
+      "检查驱动管理接口、设备绑定和当前内核；命令失败也需保留错误原文。",
+      "GPU 被识别并绑定合适驱动，nvidia-smi 能列出设备。",
+      "驱动更新后模块未重新加载、内核变更或容器未暴露 GPU 都可能失败。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "nvidia",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-nvidia-smi",
+      "linux-docker-gpu"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "couldn't communicate with the NVIDIA driver",
+        "Driver/library version mismatch",
+        "驱动不匹配"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "nvidia-smi\nlspci -nnk\nuname -r",
+          "reason": "检查驱动管理接口、设备绑定和当前内核；命令失败也需保留错误原文。",
+          "normal": "GPU 被识别并绑定合适驱动，nvidia-smi 能列出设备。",
+          "abnormal": "驱动更新后模块未重新加载、内核变更或容器未暴露 GPU 都可能失败。"
+        }
+      ],
+      "fixes": [
+        "若宿主机失败，按系统和 NVIDIA 官方路线修复匹配驱动并安排重启",
+        "若仅容器失败，检查 NVIDIA Container Toolkit 和 --gpus 配置。"
+      ],
+      "verification": {
+        "code": "nvidia-smi --query-gpu=name,driver_version --format=csv",
+        "expected": "驱动查询成功，再验证仿真所需图形或计算运行时。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "linux-error-files",
+    "module": "linux",
+    "title": "Too many open files · 文件描述符耗尽",
+    "category": "构建与运行",
+    "summary": "遇到“Too many open files”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "进程打开的文件、socket 和管道都占用描述符，达到限制时新的打开操作失败。",
+    "code": "ulimit -n\nls /proc/12345/fd | wc -l",
+    "language": "bash",
+    "explain": [
+      "12345 替换成自己的目标 PID；比较实际句柄数和该进程继承的限制。",
+      "句柄数量稳定且明显低于限额。",
+      "数量随迭代持续增长通常是资源未关闭；Shell 限制未必等于服务进程的实际限制。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "linux",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "linux-ulimit",
+      "linux-lsof"
+    ],
+    "prerequisites": "终端示例默认使用 Ubuntu 上的 Bash。先阅读说明，并将文件、目录、用户、设备和进程编号替换为实际值。sudo 命令会修改系统；本网站只展示代码，不执行命令。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Too many open files",
+        "文件描述符耗尽"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ulimit -n\nls /proc/12345/fd | wc -l",
+          "reason": "12345 替换成自己的目标 PID；比较实际句柄数和该进程继承的限制。",
+          "normal": "句柄数量稳定且明显低于限额。",
+          "abnormal": "数量随迭代持续增长通常是资源未关闭；Shell 限制未必等于服务进程的实际限制。"
+        }
+      ],
+      "fixes": [
+        "若存在泄漏，使用上下文管理和显式关闭修复根因",
+        "若是合理大规模并发，在服务或作业配置中适度提高限制并复测。"
+      ],
+      "verification": {
+        "code": "ls /proc/12345/fd | wc -l",
+        "expected": "长时间代表性运行中句柄数量不再持续增长。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-import",
+    "module": "mujoco",
+    "title": "mujoco 无法导入 · 解释器与旧包混用",
+    "category": "安装与渲染",
+    "summary": "遇到“No module named 'mujoco'”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "mujoco 与 mujoco-py 是不同 Python 分发和接口；把一个包安装到另一环境不会使当前解释器可见。",
+    "code": "python -c \"import sys; print(sys.executable)\"\npython -m pip show mujoco mujoco-py",
+    "language": "bash",
+    "explain": [
+      "先核对解释器，再区分官方绑定和历史项目绑定。",
+      "当前环境安装 mujoco 3.3.7，代码使用其 API。",
+      "只有 mujoco-py 或没有官方包时，不能直接运行使用 MjModel 的脚本。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-python",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-install",
+      "linux-venv"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "No module named 'mujoco'",
+        "mujoco-py",
+        "无法导入 MuJoCo"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import sys; print(sys.executable)\"\npython -m pip show mujoco mujoco-py",
+          "reason": "先核对解释器，再区分官方绑定和历史项目绑定。",
+          "normal": "当前环境安装 mujoco 3.3.7，代码使用其 API。",
+          "abnormal": "只有 mujoco-py 或没有官方包时，不能直接运行使用 MjModel 的脚本。"
+        }
+      ],
+      "fixes": [
+        "若使用本手册，安装固定版本官方包",
+        "若维护旧项目，保留其独立环境并按迁移指南转换 API。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; print(mujoco.__version__)\"",
+        "expected": "输出目标版本且没有导入异常。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-xml",
+    "module": "mujoco",
+    "title": "XML Error · MJCF 结构不合法",
+    "category": "模型加载",
+    "summary": "遇到“XML Error”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "MJCF 元素有固定层级和属性语义；合法 XML 不一定是合法物理模型。",
+    "code": "python -c \"import xml.etree.ElementTree as E; E.parse('robot.xml'); print('XML 结构可解析')\"\npython -c \"import mujoco; mujoco.MjModel.from_xml_path('robot.xml')\"",
+    "language": "bash",
+    "explain": [
+      "分别检查通用 XML 结构与 MuJoCo 编译，定位到报错行对应元素。",
+      "两阶段均通过；模型名称引用都能解析。",
+      "第一阶段失败是 XML 语法；第二阶段失败多为 MJCF 层级、属性或对象引用错误。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-xml",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-body",
+      "mujoco-defaults"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "XML Error",
+        "unrecognized element",
+        "MJCF 解析失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import xml.etree.ElementTree as E; E.parse('robot.xml'); print('XML 结构可解析')\"\npython -c \"import mujoco; mujoco.MjModel.from_xml_path('robot.xml')\"",
+          "reason": "分别检查通用 XML 结构与 MuJoCo 编译，定位到报错行对应元素。",
+          "normal": "两阶段均通过；模型名称引用都能解析。",
+          "abnormal": "第一阶段失败是 XML 语法；第二阶段失败多为 MJCF 层级、属性或对象引用错误。"
+        }
+      ],
+      "fixes": [
+        "若元素层级错误，按对应版本 XML Reference 调整位置",
+        "若属性来自其他版本，使用 3.3.7 支持的配置，不删除未知属性后盲目继续。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print(m.nbody,m.nv)\"",
+        "expected": "模型编译成功，自由度与预期一致。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-asset",
+    "module": "mujoco",
+    "title": "网格文件找不到 · 相对资源路径",
+    "category": "模型加载",
+    "summary": "遇到“Error opening file”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "模型中的资源路径由 XML 位置、编译器路径配置和文件名共同决定，终端工作目录改变可能暴露错误假设。",
+    "code": "pwd -P\nls -l robot.xml meshes/\npython -c \"from pathlib import Path; print(Path('robot.xml').resolve())\"",
+    "language": "bash",
+    "explain": [
+      "检查模型实际位置、网格目录及大小写，替换为真实路径。",
+      "所有被引用资源存在且当前用户可读。",
+      "只复制 XML、缺少模型子目录或大小写不一致均可能失败。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-model",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-assets",
+      "mujoco-urdf"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Error opening file",
+        "mesh file not found",
+        "网格加载失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "pwd -P\nls -l robot.xml meshes/\npython -c \"from pathlib import Path; print(Path('robot.xml').resolve())\"",
+          "reason": "检查模型实际位置、网格目录及大小写，替换为真实路径。",
+          "normal": "所有被引用资源存在且当前用户可读。",
+          "abnormal": "只复制 XML、缺少模型子目录或大小写不一致均可能失败。"
+        }
+      ],
+      "fixes": [
+        "若资源未随模型复制，补齐授权网格和纹理",
+        "若路径写错，使用与 XML 布局一致的相对路径，并记录整个资产目录。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; mujoco.MjModel.from_xml_path('robot.xml'); print('模型及资产加载成功')\"",
+        "expected": "从项目说明规定的工作目录可重复加载。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-glfw",
+    "module": "mujoco",
+    "title": "GLFW / DISPLAY · 无可用窗口环境",
+    "category": "安装与渲染",
+    "summary": "遇到“DISPLAY environment variable is missing”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "交互查看器需要有效窗口系统与 OpenGL 上下文；纯物理运算不依赖桌面窗口。",
+    "code": "printf '%s\n' \"${DISPLAY:-未设置}\"\npython -c \"import mujoco; print(mujoco.__version__)\"",
+    "language": "bash",
+    "explain": [
+      "区分包能否导入和窗口能否创建；DISPLAY 只反映当前进程环境。",
+      "本地桌面可建立显示连接，或明确使用不创建窗口的脚本。",
+      "SSH 终端没有显示会话时，viewer 可能失败但 mj_step 仍可用。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-python",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-viewer",
+      "mujoco-headless"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "DISPLAY environment variable is missing",
+        "GLFWError",
+        "无法打开窗口"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "printf '%s\n' \"${DISPLAY:-未设置}\"\npython -c \"import mujoco; print(mujoco.__version__)\"",
+          "reason": "区分包能否导入和窗口能否创建；DISPLAY 只反映当前进程环境。",
+          "normal": "本地桌面可建立显示连接，或明确使用不创建窗口的脚本。",
+          "abnormal": "SSH 终端没有显示会话时，viewer 可能失败但 mj_step 仍可用。"
+        }
+      ],
+      "fixes": [
+        "若仅需动力学，运行无查看器脚本",
+        "若需服务器图像，按离屏渲染路线配置 EGL，而不是给 DISPLAY 随意填一个数字。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_string('<mujoco/>'); d=mujoco.MjData(m); mujoco.mj_step(m,d); print(d.time)\"",
+        "expected": "无窗口物理步可执行；图形能力另行用真实渲染例验证。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-egl",
+    "module": "mujoco",
+    "title": "EGL 初始化失败 · 离屏渲染",
+    "category": "安装与渲染",
+    "summary": "遇到“Cannot initialize a EGL device display”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "EGL 需要可用驱动、设备和图形上下文；设置环境变量只选择后端，不能替代驱动安装。",
+    "code": "nvidia-smi\npython -c \"import os; print(os.environ.get('MUJOCO_GL','未设置'))\"",
+    "language": "bash",
+    "explain": [
+      "先确认 GPU 可见，再确认变量在导入前设置；容器需检查设备映射。",
+      "驱动可访问，渲染脚本从进程启动时即使用预期后端。",
+      "仅 CUDA 计算可用不证明 EGL 可用，容器可能缺少图形驱动能力。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-python",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-headless",
+      "mujoco-render"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Cannot initialize a EGL device display",
+        "EGL_NOT_INITIALIZED",
+        "EGL 初始化失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "nvidia-smi\npython -c \"import os; print(os.environ.get('MUJOCO_GL','未设置'))\"",
+          "reason": "先确认 GPU 可见，再确认变量在导入前设置；容器需检查设备映射。",
+          "normal": "驱动可访问，渲染脚本从进程启动时即使用预期后端。",
+          "abnormal": "仅 CUDA 计算可用不证明 EGL 可用，容器可能缺少图形驱动能力。"
+        }
+      ],
+      "fixes": [
+        "若宿主 EGL 可用而容器失败，补齐容器图形运行配置",
+        "若没有适用 GPU，可按系统条件安装软件离屏路径，并记录性能差异。"
+      ],
+      "verification": {
+        "code": "MUJOCO_GL=egl python render_scene.py",
+        "expected": "实际 Renderer 生成有限数值图像；render_scene.py 替换为项目已有渲染脚本。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-inertia",
+    "module": "mujoco",
+    "title": "惯量错误 · 编译或动力学异常",
+    "category": "模型加载",
+    "summary": "遇到“inertia must satisfy”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "惯量必须符合刚体物理一致性；单位转换、零质量或对角元素不合理会破坏动力学。",
+    "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print(m.body_mass); print(m.body_inertia)\"",
+    "language": "bash",
+    "explain": [
+      "编译成功时检查质量与惯量数量级；失败时先按报错定位 body。",
+      "可动物体质量与惯量合理，单位采用米、千克和秒。",
+      "CAD 毫米数据直接当米、极小惯量及违反三角关系的对角值需要修正。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-model",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-inertia",
+      "mujoco-instability"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "inertia must satisfy",
+        "mass and inertia",
+        "惯量不合法"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print(m.body_mass); print(m.body_inertia)\"",
+          "reason": "编译成功时检查质量与惯量数量级；失败时先按报错定位 body。",
+          "normal": "可动物体质量与惯量合理，单位采用米、千克和秒。",
+          "abnormal": "CAD 毫米数据直接当米、极小惯量及违反三角关系的对角值需要修正。"
+        }
+      ],
+      "fixes": [
+        "若单位错误，统一几何尺度后重新计算惯量",
+        "若手填惯量错误，使用可靠 CAD 数据或正确几何公式，不能靠任意小正数过编译。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); mujoco.mj_forward(m,d); print(d.qacc)\"",
+        "expected": "模型通过编译，静态状态加速度有限且符合物理预期。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-nan",
+    "module": "mujoco",
+    "title": "NaN / unstable · 仿真数值发散",
+    "category": "动力学与控制",
+    "summary": "遇到“Nan, Inf or huge value”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "初始穿插、不合理惯性、过强控制和积分步长会共同放大数值误差；警告本身不能唯一定位因素。",
+    "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print(m.opt.timestep,m.opt.integrator); print(m.actuator_ctrlrange)\"",
+    "language": "bash",
+    "explain": [
+      "检查时间步、积分器和输入限制，再在自己的循环中记录首次异常前的 qpos、qvel、ctrl。",
+      "状态及控制量始终有限，没有突变或无依据的大力矩。",
+      "关闭控制后仍发散更偏向模型或接触问题；仅高增益时发散偏向闭环稳定性。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-compute",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-integrator",
+      "mujoco-instability",
+      "mujoco-quickstart"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Nan, Inf or huge value",
+        "simulation is unstable",
+        "仿真发散"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print(m.opt.timestep,m.opt.integrator); print(m.actuator_ctrlrange)\"",
+          "reason": "检查时间步、积分器和输入限制，再在自己的循环中记录首次异常前的 qpos、qvel、ctrl。",
+          "normal": "状态及控制量始终有限，没有突变或无依据的大力矩。",
+          "abnormal": "关闭控制后仍发散更偏向模型或接触问题；仅高增益时发散偏向闭环稳定性。"
+        }
+      ],
+      "fixes": [
+        "若无控制也失败，先修复惯性与初始碰撞",
+        "若闭环导致失败，减小步长和增益逐项对照，同时保持单位与限幅一致。"
+      ],
+      "verification": {
+        "code": "python mujoco_minimal.py",
+        "expected": "先用已附单摆工程验证安装，再对目标模型的同一初态重复试验并记录结果。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-shape",
+    "module": "mujoco",
+    "title": "nq / nv / nu · 数组维度不匹配",
+    "category": "动力学与控制",
+    "summary": "遇到“could not broadcast input array”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "位置、速度和执行器输入是不同空间，浮动关节的位置用四元数，nq 因而可能不等于 nv。",
+    "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print('nq nv nu',m.nq,m.nv,m.nu); print(m.jnt_qposadr,m.jnt_dofadr)\"",
+    "language": "bash",
+    "explain": [
+      "核对模型维数与各关节地址，不按关节数量猜数组长度。",
+      "控制器输出形状与目标数组匹配，索引依据对象映射。",
+      "把 qpos 差当速度，或把 nv 维逆动力学输出直接赋给 nu 维 ctrl，会失败或语义错误。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-api",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-freejoint",
+      "mujoco-ctrl",
+      "mujoco-quaternion"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "could not broadcast input array",
+        "shape mismatch",
+        "维度不匹配"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print('nq nv nu',m.nq,m.nv,m.nu); print(m.jnt_qposadr,m.jnt_dofadr)\"",
+          "reason": "核对模型维数与各关节地址，不按关节数量猜数组长度。",
+          "normal": "控制器输出形状与目标数组匹配，索引依据对象映射。",
+          "abnormal": "把 qpos 差当速度，或把 nv 维逆动力学输出直接赋给 nu 维 ctrl，会失败或语义错误。"
+        }
+      ],
+      "fixes": [
+        "若索引错误，使用关节地址或具名访问",
+        "若控制空间不同，显式处理执行器传动映射，不通过截断数组消除报错。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); print(d.qpos.shape,d.qvel.shape,d.ctrl.shape)\"",
+        "expected": "打印的形状与控制器设计一致，动作含义也一致。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-name",
+    "module": "mujoco",
+    "title": "具名对象不存在 · 编号为 -1",
+    "category": "模型加载",
+    "summary": "遇到“Invalid name”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "名称只在指定对象类型的命名空间解析；joint、body、site 和 actuator 名称不可互换。",
+    "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print([m.joint(i).name for i in range(m.njnt)]); print([m.actuator(i).name for i in range(m.nu)])\"",
+    "language": "bash",
+    "explain": [
+      "枚举实际模型中的关节和执行器名称，检查编译后结果。",
+      "所查名称存在于正确类型集合。",
+      "模型文件版本变化、拼写大小写或对象类型错误可能导致查找失败。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-api",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-ctrl",
+      "mujoco-site"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Invalid name",
+        "object not found",
+        "关节名称不存在"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print([m.joint(i).name for i in range(m.njnt)]); print([m.actuator(i).name for i in range(m.nu)])\"",
+          "reason": "枚举实际模型中的关节和执行器名称，检查编译后结果。",
+          "normal": "所查名称存在于正确类型集合。",
+          "abnormal": "模型文件版本变化、拼写大小写或对象类型错误可能导致查找失败。"
+        }
+      ],
+      "fixes": [
+        "若名称变化，修正控制器的显式映射",
+        "若查询返回 -1，立即报告配置错误，禁止将 -1 当成最后一个元素继续控制。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); print(m.actuator('drive').id)\"",
+        "expected": "将 drive 替换为预期名称，查询得到有效对象。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-frozen",
+    "module": "mujoco",
+    "title": "viewer 不更新 · 物理或显示未推进",
+    "category": "仿真循环",
+    "summary": "遇到“viewer 不更新”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "被动查看器不替用户运行物理循环；step 推进状态，sync 才把变化同步到查看器。",
+    "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); mujoco.mj_step(m,d); print(d.time)\"",
+    "language": "bash",
+    "explain": [
+      "先在没有 GUI 的单步中确认 time 变化，再检查主循环是否同时执行 step 与 sync。",
+      "time 增加且循环持续运行；应运动的模型状态发生变化。",
+      "time 不变是循环未推进；time 变化但画面不变则检查同步、相机或平衡状态。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-python",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-step",
+      "mujoco-passive"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "viewer 不更新",
+        "画面不动",
+        "仿真时间不前进"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); mujoco.mj_step(m,d); print(d.time)\"",
+          "reason": "先在没有 GUI 的单步中确认 time 变化，再检查主循环是否同时执行 step 与 sync。",
+          "normal": "time 增加且循环持续运行；应运动的模型状态发生变化。",
+          "abnormal": "time 不变是循环未推进；time 变化但画面不变则检查同步、相机或平衡状态。"
+        }
+      ],
+      "fixes": [
+        "若缺 step，加入物理推进",
+        "若缺 sync，按被动查看器用法同步，涉及查看器并发状态时按要求加锁。"
+      ],
+      "verification": {
+        "code": "python -m mujoco.viewer --mjcf=robot.xml",
+        "expected": "官方查看器能加载模型；再对照自定义循环检查显示与物理时间。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-contact",
+    "module": "mujoco",
+    "title": "接触力始终为零 · 配对与测量方向",
+    "category": "接触与测量",
+    "summary": "遇到“接触力为零”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "接触记录、有效约束和传感器读数是不同层次；碰撞过滤、距离、索引或坐标解释错误都可造成误判。",
+    "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); mujoco.mj_forward(m,d); print('初态接触数',d.ncon); print(m.geom_contype,m.geom_conaffinity)\"",
+    "language": "bash",
+    "explain": [
+      "检查初态接触与过滤配置；动态接触还需在接触时刻读取。",
+      "物体确实接触时有对应记录，筛选到正确 geom 对。",
+      "只查询初始悬空状态、读取错误接触索引或排除碰撞都会产生零结果。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-api",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-contact",
+      "mujoco-contact-force"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "接触力为零",
+        "ncon is 0",
+        "没有接触"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); mujoco.mj_forward(m,d); print('初态接触数',d.ncon); print(m.geom_contype,m.geom_conaffinity)\"",
+          "reason": "检查初态接触与过滤配置；动态接触还需在接触时刻读取。",
+          "normal": "物体确实接触时有对应记录，筛选到正确 geom 对。",
+          "abnormal": "只查询初始悬空状态、读取错误接触索引或排除碰撞都会产生零结果。"
+        }
+      ],
+      "fixes": [
+        "若过滤错误，按目标配对修正掩码",
+        "若记录存在，使用 mj_contactForce 并统一坐标与符号后汇总足端受力。"
+      ],
+      "verification": {
+        "code": "python -c \"import mujoco; m=mujoco.MjModel.from_xml_path('robot.xml'); d=mujoco.MjData(m); [mujoco.mj_step(m,d) for _ in range(100)]; print(d.ncon)\"",
+        "expected": "在设计的接触实验中出现合理记录；不是所有模型都应产生接触。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "mujoco-error-trajectory",
+    "module": "mujoco",
+    "title": "轨迹每帧都相同 · 数组引用复用",
+    "category": "数据与复现",
+    "summary": "遇到“轨迹全是最后一帧”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "许多 Python 数组是仿真内存视图；把同一视图多次放入列表不会保存过去状态。",
+    "code": "python -c \"import numpy as np; a=np.array([1.]); bad=[a]; good=[a.copy()]; a[0]=2; print(bad,good)\"",
+    "language": "bash",
+    "explain": [
+      "用小数组演示引用与复制，避免在复杂机器人轨迹中误判。",
+      "bad 随原数组变化，good 保持保存时数值。",
+      "历史列表元素共享数据时，推进后所有记录可能指向最新状态。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "mj-python",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "mujoco-state-copy",
+      "mujoco-quickstart"
+    ],
+    "prerequisites": "示例以官方 mujoco 3.3.7 Python 包为基线。Python 片段中 m 是已加载的 MjModel，d 是对应的 MjData；np 表示已导入的 numpy。具名关节、执行器、传感器须先在模型中定义。完整起步代码见「最小仿真实验」。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "轨迹全是最后一帧",
+        "历史数据被覆盖",
+        "数组引用"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "python -c \"import numpy as np; a=np.array([1.]); bad=[a]; good=[a.copy()]; a[0]=2; print(bad,good)\"",
+          "reason": "用小数组演示引用与复制，避免在复杂机器人轨迹中误判。",
+          "normal": "bad 随原数组变化，good 保持保存时数值。",
+          "abnormal": "历史列表元素共享数据时，推进后所有记录可能指向最新状态。"
+        }
+      ],
+      "fixes": [
+        "若记录引擎数组，保存时调用 copy",
+        "若频繁复制造成内存压力，预分配固定长度日志数组并按索引写入。"
+      ],
+      "verification": {
+        "code": "python mujoco_minimal.py",
+        "expected": "单摆 CSV 保留逐步时间和各时刻状态，而非重复最终状态。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-gz-command",
+    "module": "gazebo",
+    "title": "gz sim 不可用 · 版本或安装错误",
+    "category": "安装与版本",
+    "summary": "遇到“gz: command not found”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "现代 Gazebo 的 CLI 与 Classic、早期 Ignition 不同，命令是否存在由安装版本与环境决定。",
+    "code": "command -v gz\ncommand -v gazebo\nprintenv ROS_DISTRO",
+    "language": "bash",
+    "explain": [
+      "先辨别已有程序和 ROS 发行版，不根据教程标题猜代际。",
+      "Harmonic 环境提供 gz sim，与 Jazzy 集成匹配。",
+      "只有 gazebo 常见于 Classic；只有 ign 常见于旧命名版本。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-install",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-install",
+      "gazebo-classic"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "gz: command not found",
+        "Invalid arguments",
+        "gz sim 不可用"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "command -v gz\ncommand -v gazebo\nprintenv ROS_DISTRO",
+          "reason": "先辨别已有程序和 ROS 发行版，不根据教程标题猜代际。",
+          "normal": "Harmonic 环境提供 gz sim，与 Jazzy 集成匹配。",
+          "abnormal": "只有 gazebo 常见于 Classic；只有 ign 常见于旧命名版本。"
+        }
+      ],
+      "fixes": [
+        "若缺现代版本，按兼容组合安装 ros-jazzy-ros-gz",
+        "若复现旧项目，使用独立旧环境或按迁移指南移植插件，不直接改命令前缀。"
+      ],
+      "verification": {
+        "code": "gz sim --help",
+        "expected": "本机帮助显示有效的 sim 子命令和选项。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-resource",
+    "module": "gazebo",
+    "title": "Unable to find uri · 模型资源缺失",
+    "category": "模型与资源",
+    "summary": "遇到“Unable to find uri”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "SDF 的模型 URI 依赖资源搜索路径或在线缓存，文件存在但搜索根目录不对也会失败。",
+    "code": "printf '%s\n' \"${GZ_SIM_RESOURCE_PATH:-未设置}\"\nls -la models/\nrealpath world.sdf",
+    "language": "bash",
+    "explain": [
+      "核对 URI 对应的目录层级，并检查是否依赖未下载的 Fuel 资产。",
+      "世界与模型资源均可解析，搜索路径包含模型目录的父级。",
+      "只复制 world.sdf 或设置错误层级，会使网格、材质或整个模型缺失。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-world",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-mesh",
+      "gazebo-fuel"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Unable to find uri",
+        "Unable to resolve uri",
+        "模型资源找不到"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "printf '%s\n' \"${GZ_SIM_RESOURCE_PATH:-未设置}\"\nls -la models/\nrealpath world.sdf",
+          "reason": "核对 URI 对应的目录层级，并检查是否依赖未下载的 Fuel 资产。",
+          "normal": "世界与模型资源均可解析，搜索路径包含模型目录的父级。",
+          "abnormal": "只复制 world.sdf 或设置错误层级，会使网格、材质或整个模型缺失。"
+        }
+      ],
+      "fixes": [
+        "若本地资产缺失，补齐完整模型目录",
+        "若路径错误，追加正确资源根目录并从同一终端启动，避免覆盖原有搜索路径。"
+      ],
+      "verification": {
+        "code": "gz sim -v 4 world.sdf",
+        "expected": "启动日志不再出现对应 URI 错误，模型可见且碰撞配置完整。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-plugin",
+    "module": "gazebo",
+    "title": "Failed to load system plugin · 插件缺失",
+    "category": "安装与版本",
+    "summary": "遇到“Failed to load system plugin”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "插件加载器需要匹配的共享库与注册类型，Classic 插件不能直接用于 Harmonic。",
+    "code": "gz sim -v 4 world.sdf\nprintenv GZ_SIM_SYSTEM_PLUGIN_PATH",
+    "language": "bash",
+    "explain": [
+      "详细日志给出库名和类型；自定义插件还需检查构建和搜索路径。",
+      "所用插件来自当前 Gazebo 大版本且能被加载。",
+      "库找不到、ABI 不兼容和 name 拼写不符需要分别处理。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-api",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-plugin",
+      "gazebo-classic"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Failed to load system plugin",
+        "Could not find shared library",
+        "系统插件加载失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz sim -v 4 world.sdf\nprintenv GZ_SIM_SYSTEM_PLUGIN_PATH",
+          "reason": "详细日志给出库名和类型；自定义插件还需检查构建和搜索路径。",
+          "normal": "所用插件来自当前 Gazebo 大版本且能被加载。",
+          "abnormal": "库找不到、ABI 不兼容和 name 拼写不符需要分别处理。"
+        }
+      ],
+      "fixes": [
+        "若使用 Classic 插件，改用现代对应 system 或迁移实现",
+        "若自定义库缺依赖，使用匹配 gz-sim8 重新构建并设置其安装路径。"
+      ],
+      "verification": {
+        "code": "gz sim -s -v 4 world.sdf",
+        "expected": "日志显示相关功能正常，无该插件加载错误。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-sdf",
+    "module": "gazebo",
+    "title": "SDF 错误 · 模型未生成",
+    "category": "模型与资源",
+    "summary": "遇到“Error Code”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "SDFormat 有版本化语义及名称作用域；语法正确的 XML 仍可能违反父子、pose 或物理要求。",
+    "code": "gz sdf -k world.sdf\ngz sdf -p world.sdf",
+    "language": "bash",
+    "explain": [
+      "-k 校验 SDF，-p 查看解析后的描述；以本机 gz sdf --help 确认可用选项。",
+      "描述可校验，模型、link 和 joint 引用一致。",
+      "关节父子名称不存在、相对帧不可解析、根版本不兼容都可阻止加载。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "sdf",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-model",
+      "gazebo-frames",
+      "gazebo-urdf"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Error Code",
+        "XML_ERROR",
+        "SDF 解析失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz sdf -k world.sdf\ngz sdf -p world.sdf",
+          "reason": "-k 校验 SDF，-p 查看解析后的描述；以本机 gz sdf --help 确认可用选项。",
+          "normal": "描述可校验，模型、link 和 joint 引用一致。",
+          "abnormal": "关节父子名称不存在、相对帧不可解析、根版本不兼容都可阻止加载。"
+        }
+      ],
+      "fixes": [
+        "若引用错误，按模型作用域修正名称",
+        "若 URDF 转换出错，先单独展开 Xacro，再检查转换后的 SDF。"
+      ],
+      "verification": {
+        "code": "gz sdf -k world.sdf",
+        "expected": "校验通过后再启动仿真，核对实际模型结构。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-render",
+    "module": "gazebo",
+    "title": "Ogre / OpenGL · 黑屏或渲染失败",
+    "category": "渲染与传感器",
+    "summary": "遇到“Unable to create rendering window”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "图形窗口与渲染传感器依赖可用渲染后端，服务器物理可运行不代表图像功能正常。",
+    "code": "printf '%s\n' \"${DISPLAY:-未设置}\"\nnvidia-smi\ngz sim -s -v 4 world.sdf",
+    "language": "bash",
+    "explain": [
+      "先比较仅服务器启动与 GUI 启动日志，区分模型问题与图形问题。",
+      "服务器能运行，图形驱动与桌面环境兼容。",
+      "容器设备映射、远程显示和渲染后端依赖缺失都可能造成黑屏。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-api",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-headless",
+      "gazebo-sensors-system"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Unable to create rendering window",
+        "OGRE EXCEPTION",
+        "Gazebo 黑屏"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "printf '%s\n' \"${DISPLAY:-未设置}\"\nnvidia-smi\ngz sim -s -v 4 world.sdf",
+          "reason": "先比较仅服务器启动与 GUI 启动日志，区分模型问题与图形问题。",
+          "normal": "服务器能运行，图形驱动与桌面环境兼容。",
+          "abnormal": "容器设备映射、远程显示和渲染后端依赖缺失都可能造成黑屏。"
+        }
+      ],
+      "fixes": [
+        "若只做物理实验，使用无 GUI 路径",
+        "若需要相机或 GUI，按平台图形环境配置驱动与渲染上下文，保留详细错误。"
+      ],
+      "verification": {
+        "code": "gz sim -v 4 world.sdf",
+        "expected": "GUI 场景可显示；有传感器时再验证图像话题实际产生数据。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-paused",
+    "module": "gazebo",
+    "title": "世界不动 · 暂停与时间推进",
+    "category": "运行与控制",
+    "summary": "遇到“世界不动”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Gazebo 可以在暂停状态启动；控制指令或传感器配置正确也不会自动让物理时间前进。",
+    "code": "gz topic -l\ngz topic -e -t /clock",
+    "language": "bash",
+    "explain": [
+      "观察真实时钟话题；没有 /clock 时先从 -l 中确认世界时钟名称。",
+      "连续消息中的仿真时间增加。",
+      "时间不增加时先检查暂停，而非立即调整机器人控制器。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-start",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-run",
+      "gazebo-pause"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "世界不动",
+        "仿真暂停",
+        "simulation paused"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz topic -l\ngz topic -e -t /clock",
+          "reason": "观察真实时钟话题；没有 /clock 时先从 -l 中确认世界时钟名称。",
+          "normal": "连续消息中的仿真时间增加。",
+          "abnormal": "时间不增加时先检查暂停，而非立即调整机器人控制器。"
+        }
+      ],
+      "fixes": [
+        "若处于暂停，使用 GUI 运行或启动参数 -r",
+        "若服务器未运行，先修复世界加载错误，再处理控制链。"
+      ],
+      "verification": {
+        "code": "gz sim -r world.sdf",
+        "expected": "新启动实验的时间推进；不要与同名已有世界重复启动后混淆端点。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-drive",
+    "module": "gazebo",
+    "title": "收到 cmd_vel 但机器人不动",
+    "category": "运行与控制",
+    "summary": "遇到“机器人不动”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "速度消息需经过桥接、DiffDrive、正确轮关节和物理接触；static 模型或错误 joint 会阻断运动。",
+    "code": "gz topic -i -t /cmd_vel\ngz topic -e -t /cmd_vel",
+    "language": "bash",
+    "explain": [
+      "先验证 Gazebo 端而非只看 ROS 发布者，再检查 DiffDrive 的关节名和模型 static 配置。",
+      "Gazebo 端收到正确 Twist，世界时间前进，目标模型为动态。",
+      "只有 ROS 侧消息而 Gazebo 无数据偏向桥接；Gazebo 收到但无关节动作偏向插件配置。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-move",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-diff-drive",
+      "gazebo-cmd-vel"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "机器人不动",
+        "cmd_vel 没反应",
+        "轮子不转"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz topic -i -t /cmd_vel\ngz topic -e -t /cmd_vel",
+          "reason": "先验证 Gazebo 端而非只看 ROS 发布者，再检查 DiffDrive 的关节名和模型 static 配置。",
+          "normal": "Gazebo 端收到正确 Twist，世界时间前进，目标模型为动态。",
+          "abnormal": "只有 ROS 侧消息而 Gazebo 无数据偏向桥接；Gazebo 收到但无关节动作偏向插件配置。"
+        }
+      ],
+      "fixes": [
+        "若消息没到，修复桥方向和消息类型",
+        "若插件配置错误，核对轮关节、轮轴、半径、轮距及力限制。"
+      ],
+      "verification": {
+        "code": "gz topic -t /cmd_vel -m gz.msgs.Twist -p 'linear: {x: 0.0}, angular: {z: 0.0}'",
+        "expected": "先验证零速度能到达，再在仿真中用小速度观察轮关节和里程计。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-bridge",
+    "module": "gazebo",
+    "title": "桥接失败 · 消息类型或方向错误",
+    "category": "ROS 桥接",
+    "summary": "遇到“Failed to create a bridge”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "ros_gz_bridge 只支持登记的类型转换，ROS 类型、Gazebo 类型和方向必须精确匹配。",
+    "code": "ros2 topic list -t\ngz topic -l\ngz topic -i -t /cmd_vel",
+    "language": "bash",
+    "explain": [
+      "分别核对两侧真实端点；CLI 文法中的 @、[、] 决定桥方向。",
+      "ROS 使用 geometry_msgs/msg/Twist，Gazebo 使用 gz.msgs.Twist，方向符合命令流向。",
+      "把 Classic 类型、ROS 1 类型或错误 Gazebo 消息名用于现代桥会失败。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-bridge",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-bridge",
+      "gazebo-bridge-yaml"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Failed to create a bridge",
+        "bridge type not supported",
+        "桥接失败"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ros2 topic list -t\ngz topic -l\ngz topic -i -t /cmd_vel",
+          "reason": "分别核对两侧真实端点；CLI 文法中的 @、[、] 决定桥方向。",
+          "normal": "ROS 使用 geometry_msgs/msg/Twist，Gazebo 使用 gz.msgs.Twist，方向符合命令流向。",
+          "abnormal": "把 Classic 类型、ROS 1 类型或错误 Gazebo 消息名用于现代桥会失败。"
+        }
+      ],
+      "fixes": [
+        "若类型名称错误，按支持的转换表修正",
+        "若 YAML 方向错误，控制用 ROS_TO_GZ，传感器和时钟通常用 GZ_TO_ROS。"
+      ],
+      "verification": {
+        "code": "ros2 topic info /cmd_vel --verbose",
+        "expected": "端点存在并确认 Gazebo 端可接收实际测试消息，不仅检查进程存活。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-clock",
+    "module": "gazebo",
+    "title": "ROS 时间为零 · 时钟桥缺失",
+    "category": "ROS 桥接",
+    "summary": "遇到“ROS time is zero”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "ROS 节点启用 use_sim_time 后等待 /clock，缺桥、错误方向或暂停都会让时间不按预期推进。",
+    "code": "gz topic -e -t /clock\nros2 topic echo /clock\nros2 param get /my_node use_sim_time",
+    "language": "bash",
+    "explain": [
+      "命令在不同终端执行或 Ctrl+C 后切换；my_node 替换为实际节点。",
+      "两侧时钟都前进，参与系统使用一致时间源。",
+      "Gazebo 有时钟而 ROS 没有偏向桥接；两侧都停则先检查暂停。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-bridge",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-clock",
+      "ros-sim-time"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "ROS time is zero",
+        "仿真时间为零",
+        "没有 clock"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz topic -e -t /clock\nros2 topic echo /clock\nros2 param get /my_node use_sim_time",
+          "reason": "命令在不同终端执行或 Ctrl+C 后切换；my_node 替换为实际节点。",
+          "normal": "两侧时钟都前进，参与系统使用一致时间源。",
+          "abnormal": "Gazebo 有时钟而 ROS 没有偏向桥接；两侧都停则先检查暂停。"
+        }
+      ],
+      "fixes": [
+        "若桥缺失，加入 Clock 的 GZ_TO_ROS 桥",
+        "若节点使用墙钟，统一相关节点 use_sim_time，并在世界重置后处理时间跳变。"
+      ],
+      "verification": {
+        "code": "ros2 topic hz /clock",
+        "expected": "时钟稳定到达，TF 查询与消息时间戳一致。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-sensor",
+    "module": "gazebo",
+    "title": "传感器无数据 · 系统未加载",
+    "category": "渲染与传感器",
+    "summary": "遇到“传感器没有数据”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "sensor 配置声明测量，具体 system 执行更新；渲染传感器与 IMU 等系统要求不同。",
+    "code": "gz topic -l\ngz sim -v 4 world.sdf",
+    "language": "bash",
+    "explain": [
+      "先确定是否生成话题，再检查 Sensors、Imu 或 Contact 系统加载日志。",
+      "传感器配置所在 link 正确，系统运行且 update_rate 合理。",
+      "未加载系统、场景暂停、渲染失败或错误资源都可导致空数据。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-sensor",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-sensors-system",
+      "gazebo-camera",
+      "gazebo-lidar"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "传感器没有数据",
+        "camera topic empty",
+        "激光无数据"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz topic -l\ngz sim -v 4 world.sdf",
+          "reason": "先确定是否生成话题，再检查 Sensors、Imu 或 Contact 系统加载日志。",
+          "normal": "传感器配置所在 link 正确，系统运行且 update_rate 合理。",
+          "abnormal": "未加载系统、场景暂停、渲染失败或错误资源都可导致空数据。"
+        }
+      ],
+      "fixes": [
+        "若缺系统插件，按传感器类型补齐",
+        "若 Gazebo 已有数据而 ROS 没有，转到桥接和 QoS 检查，不改传感器物理参数。"
+      ],
+      "verification": {
+        "code": "gz topic -e -t /scan",
+        "expected": "/scan 替换为实际话题，出现随场景变化的有效测量。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-explode",
+    "module": "gazebo",
+    "title": "模型抖动或飞走 · 物理参数失配",
+    "category": "物理与性能",
+    "summary": "遇到“模型飞走”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "碰撞穿插、尺度错误、惯量异常和过强控制都可能使约束求解产生大冲量。",
+    "code": "gz sdf -p robot.sdf",
+    "language": "bash",
+    "explain": [
+      "检查展开后的质量、惯性、碰撞形状、初始 pose 和关节限制，并用 GUI 的碰撞显示辅助观察。",
+      "模型尺寸和质量合理，初始几何不严重交叠。",
+      "视觉几何正确但碰撞几何过大，或导出单位差一千倍，是常见根因。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-robot",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-inertia",
+      "gazebo-collision",
+      "gazebo-physics"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "模型飞走",
+        "模型抖动",
+        "机器人穿地"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gz sdf -p robot.sdf",
+          "reason": "检查展开后的质量、惯性、碰撞形状、初始 pose 和关节限制，并用 GUI 的碰撞显示辅助观察。",
+          "normal": "模型尺寸和质量合理，初始几何不严重交叠。",
+          "abnormal": "视觉几何正确但碰撞几何过大，或导出单位差一千倍，是常见根因。"
+        }
+      ],
+      "fixes": [
+        "若初态穿插，先调整 pose 和碰撞",
+        "若惯性或控制导致振荡，按真实参数重算惯量并用较小步长及增益对照。"
+      ],
+      "verification": {
+        "code": "gz sim -r world.sdf",
+        "expected": "先禁用主动驱动，观察被动物理稳定后再逐项恢复控制。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "gazebo-error-slow",
+    "module": "gazebo",
+    "title": "实时倍率低 · 渲染、碰撞或录制瓶颈",
+    "category": "物理与性能",
+    "summary": "遇到“real time factor low”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "运行速度由物理、渲染、消息处理和记录中的瓶颈决定，增加步长会改变动力学误差。",
+    "code": "top\nnvidia-smi\ndf -h .",
+    "language": "bash",
+    "explain": [
+      "分别检查 CPU、GPU 与磁盘；结合 GUI 或世界统计查看实时倍率。",
+      "资源负载与场景复杂度相符，没有持续磁盘或显存耗尽。",
+      "关闭 GUI 后明显改善偏向显示，降低图像频率后改善偏向传感器渲染或传输。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gz-api",
+    "version": "Harmonic · Classic 11 迁移",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "gazebo-performance",
+      "linux-nvidia-smi"
+    ],
+    "prerequisites": "默认使用 Gazebo Harmonic（gz-sim8）与 ROS 2 Jazzy。gz 命令不是 Gazebo Classic 的 gazebo 命令。XML 是应放入相应 SDF 元素的配置片段，示例名称须匹配自己的世界和模型。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "real time factor low",
+        "实时倍率低",
+        "Gazebo 很卡"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "top\nnvidia-smi\ndf -h .",
+          "reason": "分别检查 CPU、GPU 与磁盘；结合 GUI 或世界统计查看实时倍率。",
+          "normal": "资源负载与场景复杂度相符，没有持续磁盘或显存耗尽。",
+          "abnormal": "关闭 GUI 后明显改善偏向显示，降低图像频率后改善偏向传感器渲染或传输。"
+        }
+      ],
+      "fixes": [
+        "若相机开销大，减少不必要分辨率和频率",
+        "若物理开销大，优化碰撞几何和接触对，保持精度条件下比较性能。"
+      ],
+      "verification": {
+        "code": "gz sim -s -r world.sdf",
+        "expected": "同一场景对比无 GUI 性能，并记录传感器开关和物理步长。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-ros1-master",
+    "module": "ros",
+    "title": "ROS 1：无法连接 Master",
+    "category": "ROS 1 通信排障",
+    "summary": "遇到“Unable to communicate with master”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "ROS 1 节点先向 Master 注册，ROS_MASTER_URI 必须指向正在监听且可达的 roscore；后续话题数据由节点直接交换。",
+    "code": "printf '%s\n' \"$ROS_MASTER_URI\"\nrosnode list\nss -ltn | rg 11311",
+    "language": "bash",
+    "explain": [
+      "先确认注册服务器地址，再区分本机未启动与远程网络不可达；ss 只检查本机监听。",
+      "本机启动 roscore 后能列出 /rosout；远程 Master 地址可达。",
+      "Connection refused 常见于进程未启动；超时通常需要检查地址、路由与防火墙。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros1",
+    "version": "ROS 1 Noetic",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-ros1-core",
+      "ros-ros1-network"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Unable to communicate with master",
+        "Cannot contact ROS master"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "printf '%s\n' \"$ROS_MASTER_URI\"\nrosnode list\nss -ltn | rg 11311",
+          "reason": "先确认注册服务器地址，再区分本机未启动与远程网络不可达；ss 只检查本机监听。",
+          "normal": "本机启动 roscore 后能列出 /rosout；远程 Master 地址可达。",
+          "abnormal": "Connection refused 常见于进程未启动；超时通常需要检查地址、路由与防火墙。"
+        }
+      ],
+      "fixes": [
+        "本机开发且无 Master：另开已加载 Noetic 的终端执行 roscore。",
+        "远程 Master：把 ROS_MASTER_URI 改为实际主机地址，确认双向网络，再重启节点。"
+      ],
+      "verification": {
+        "code": "rosnode list\nrostopic list",
+        "expected": "能够列出注册节点和话题；仅能列出话题不代表数据链路正常。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-ros1-package",
+    "module": "ros",
+    "title": "ROS 1：找不到包或节点",
+    "category": "ROS 1 构建排障",
+    "summary": "遇到“Resource not found”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "rospack 根据 ROS_PACKAGE_PATH 定位包；构建结果和可执行文件还依赖当前终端加载的 devel 空间。",
+    "code": "printf '%s\n' \"$ROS_PACKAGE_PATH\"\nrospack find research_demo\nls -l ~/catkin_ws/devel/setup.bash",
+    "language": "bash",
+    "explain": [
+      "research_demo 与工作空间路径是待替换的示例。逐层区分包不可见、未编译和脚本不可执行。",
+      "rospack 返回正确源码目录，devel/setup.bash 存在。",
+      "包不可见提示未加载工作空间；包存在但节点不可执行需要核对文件名和执行位。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros1",
+    "version": "ROS 1 Noetic",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-ros1-catkin",
+      "ros-ros1-run"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Resource not found",
+        "package not found",
+        "Couldn't find executable"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "printf '%s\n' \"$ROS_PACKAGE_PATH\"\nrospack find research_demo\nls -l ~/catkin_ws/devel/setup.bash",
+          "reason": "research_demo 与工作空间路径是待替换的示例。逐层区分包不可见、未编译和脚本不可执行。",
+          "normal": "rospack 返回正确源码目录，devel/setup.bash 存在。",
+          "abnormal": "包不可见提示未加载工作空间；包存在但节点不可执行需要核对文件名和执行位。"
+        }
+      ],
+      "fixes": [
+        "未构建：在工作空间执行 catkin_make 后 source devel/setup.bash。",
+        "Python 脚本存在但无执行位：确认 shebang 后 chmod u+x 对应脚本。"
+      ],
+      "verification": {
+        "code": "rospack find research_demo\nrosrun research_demo talker.py",
+        "expected": "替换为自己的包和节点后正常启动，无 Resource not found。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-ros1-network",
+    "module": "ros",
+    "title": "ROS 1：能看见话题但收不到数据",
+    "category": "ROS 1 通信排障",
+    "summary": "遇到“Unable to contact node”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Master 只返回节点地址；发布者与订阅者之间仍需双向 TCPROS 连接。节点广播了不可路由地址时会出现目录可见但数据不可达。",
+    "code": "env | rg '^ROS_'\nrosnode info /talker\nrostopic info /chatter\nrostopic echo /chatter",
+    "language": "bash",
+    "explain": [
+      "核对各机器广播的地址与节点 XMLRPC URI，echo 等待数据，用 Ctrl+C 结束。",
+      "节点 URI 可从对端访问，echo 持续输出。",
+      "节点 URI 为仅本机解析的主机名、回环地址或错误网卡地址。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros1",
+    "version": "ROS 1 Noetic",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-ros1-network",
+      "ros-ros1-topic"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Unable to contact node",
+        "ROS_HOSTNAME",
+        "ROS_IP"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "env | rg '^ROS_'\nrosnode info /talker\nrostopic info /chatter\nrostopic echo /chatter",
+          "reason": "核对各机器广播的地址与节点 XMLRPC URI，echo 等待数据，用 Ctrl+C 结束。",
+          "normal": "节点 URI 可从对端访问，echo 持续输出。",
+          "abnormal": "节点 URI 为仅本机解析的主机名、回环地址或错误网卡地址。"
+        }
+      ],
+      "fixes": [
+        "存在 ROS_HOSTNAME 与 ROS_IP 混用：只配置可被所有机器解析的主机名或可达 IP，重启节点。",
+        "双向网络被阻断：按实际网段配置访问规则，不要直接关闭所有安全策略。"
+      ],
+      "verification": {
+        "code": "rostopic hz /chatter",
+        "expected": "订阅端连续获得合理频率；用 Ctrl+C 结束。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-ros1-tf",
+    "module": "ros",
+    "title": "ROS 1：TF 外推失败",
+    "category": "ROS 1 坐标排障",
+    "summary": "遇到“Lookup would require extrapolation”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "TF 缓存只保存有限时间范围内的变换。查询时间超出缓存、使用仿真时钟不一致或发布滞后都会触发外推错误。",
+    "code": "rosparam get /use_sim_time\nrostopic echo -n 1 /clock\nrosrun tf tf_echo map base_link",
+    "language": "bash",
+    "explain": [
+      "核对全局时间源与 map 到 base_link 链路；实际帧名按项目替换。",
+      "仿真项目的 /clock 前进，变换时间与当前 ROS 时间同源。",
+      "/clock 停滞、节点使用系统时间或帧链未建立。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros1",
+    "version": "ROS 1 Noetic",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-ros1-tf",
+      "ros-ros1-bag"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Lookup would require extrapolation",
+        "ExtrapolationException"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "rosparam get /use_sim_time\nrostopic echo -n 1 /clock\nrosrun tf tf_echo map base_link",
+          "reason": "核对全局时间源与 map 到 base_link 链路；实际帧名按项目替换。",
+          "normal": "仿真项目的 /clock 前进，变换时间与当前 ROS 时间同源。",
+          "abnormal": "/clock 停滞、节点使用系统时间或帧链未建立。"
+        }
+      ],
+      "fixes": [
+        "时间源混用：统一 /use_sim_time 并确保仿真播放。",
+        "发布滞后：修复 TF 发布频率与时间戳，不要单纯把容差无限放大。"
+      ],
+      "verification": {
+        "code": "rosrun tf tf_echo map base_link",
+        "expected": "在所需时间范围内连续获得变换，无重复外推错误。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-package",
+    "module": "ros",
+    "title": "ROS 2：Package not found",
+    "category": "ROS 2 构建排障",
+    "summary": "遇到“Package not found”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "ROS 2 从 ament 资源索引发现已安装的包；源码存在不等于 install 空间中存在可执行入口。",
+    "code": "printf '%s\n' \"$AMENT_PREFIX_PATH\"\ncolcon list\nros2 pkg executables research_pubsub",
+    "language": "bash",
+    "explain": [
+      "在工作空间根目录执行；research_pubsub 是本手册项目包名。检查源码发现与安装入口两个阶段。",
+      "colcon 能发现包，ros2 pkg executables 列出 talker、listener。",
+      "只有 colcon 可见：可能未构建或未 source install/setup.bash。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros2",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-colcon",
+      "ros-package",
+      "ros-quickstart"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Package not found",
+        "No executable found"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "printf '%s\n' \"$AMENT_PREFIX_PATH\"\ncolcon list\nros2 pkg executables research_pubsub",
+          "reason": "在工作空间根目录执行；research_pubsub 是本手册项目包名。检查源码发现与安装入口两个阶段。",
+          "normal": "colcon 能发现包，ros2 pkg executables 列出 talker、listener。",
+          "abnormal": "只有 colcon 可见：可能未构建或未 source install/setup.bash。"
+        }
+      ],
+      "fixes": [
+        "未加载环境：先 source /opt/ros/jazzy/setup.bash，再构建并 source install/setup.bash。",
+        "包可见但无入口：核对 setup.py 的 console_scripts、setup.cfg 与模块函数。"
+      ],
+      "verification": {
+        "code": "ros2 run research_pubsub talker",
+        "expected": "节点启动，另一个已加载相同工作空间的终端能监听 /chatter。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-dependency",
+    "module": "ros",
+    "title": "ROS 2：构建缺少依赖",
+    "category": "ROS 2 构建排障",
+    "summary": "遇到“Could not find a package configuration file”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "CMake 搜索前缀与 rosdep 的系统包映射解决不同问题；缺少 package.xml 声明、发行版不支持或 overlay 未加载都可能失败。",
+    "code": "rosdep check --from-paths src --ignore-src\ncolcon list\nprintf '%s\n' \"$CMAKE_PREFIX_PATH\"",
+    "language": "bash",
+    "explain": [
+      "先检查已声明依赖，再检查环境；在工作空间根目录执行。",
+      "依赖均满足，所需 ROS 安装前缀可见。",
+      "rosdep key 未解析，或所需包没有对应发行版的二进制包。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros2",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-rosdep",
+      "ros-colcon"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Could not find a package configuration file",
+        "Cannot locate rosdep definition"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "rosdep check --from-paths src --ignore-src\ncolcon list\nprintf '%s\n' \"$CMAKE_PREFIX_PATH\"",
+          "reason": "先检查已声明依赖，再检查环境；在工作空间根目录执行。",
+          "normal": "依赖均满足，所需 ROS 安装前缀可见。",
+          "abnormal": "rosdep key 未解析，或所需包没有对应发行版的二进制包。"
+        }
+      ],
+      "fixes": [
+        "依赖已声明且发行版支持：rosdep install --from-paths src --ignore-src -r -y。",
+        "key 错误或不支持：修正 manifest 或使用对应源码版本，不能用随意复制的库覆盖 ABI。"
+      ],
+      "verification": {
+        "code": "colcon build --symlink-install\ncolcon test-result --all",
+        "expected": "构建成功；测试结果只证明已执行测试，未执行测试的包需补做验证。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-qos",
+    "module": "ros",
+    "title": "ROS 2：话题存在但 QoS 不兼容",
+    "category": "ROS 2 通信排障",
+    "summary": "遇到“incompatible QoS”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "订阅者请求的可靠性与持久性必须由发布者提供。Reliable 订阅者不能连接仅提供 Best Effort 的发布者。",
+    "code": "ros2 topic info /scan --verbose\nros2 topic echo /scan --qos-reliability best_effort --once",
+    "language": "bash",
+    "explain": [
+      "先查看每个端点 QoS，再用兼容的临时订阅区分数据链路与应用问题。",
+      "端点类型一致，兼容 QoS 的 echo 可以收到扫描数据。",
+      "发布者 Best Effort，原应用订阅者 Reliable；或持久性要求不匹配。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros2-concept",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-qos",
+      "ros-durability",
+      "gazebo-error-sensor"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "incompatible QoS",
+        "RELIABILITY_QOS_POLICY",
+        "DURABILITY_QOS_POLICY"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ros2 topic info /scan --verbose\nros2 topic echo /scan --qos-reliability best_effort --once",
+          "reason": "先查看每个端点 QoS，再用兼容的临时订阅区分数据链路与应用问题。",
+          "normal": "端点类型一致，兼容 QoS 的 echo 可以收到扫描数据。",
+          "abnormal": "发布者 Best Effort，原应用订阅者 Reliable；或持久性要求不匹配。"
+        }
+      ],
+      "fixes": [
+        "传感器高频流：按数据语义把订阅者配置为兼容的 SensorDataQoS。",
+        "需要历史状态：发布与订阅双方一起设计 Transient Local，不能只改一端。"
+      ],
+      "verification": {
+        "code": "ros2 topic info /scan --verbose\nros2 topic hz /scan",
+        "expected": "应用与发布者 QoS 兼容并收到数据；hz 输出受订阅开销影响。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-domain",
+    "module": "ros",
+    "title": "ROS 2：跨机器无法发现节点",
+    "category": "ROS 2 通信排障",
+    "summary": "遇到“ROS_DOMAIN_ID”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "DDS 发现依赖相同通信域、可达网络和发现配置；CLI daemon 也可能持有旧环境。",
+    "code": "env | rg 'ROS_DOMAIN_ID|ROS_LOCALHOST_ONLY|ROS_AUTOMATIC_DISCOVERY_RANGE|RMW_IMPLEMENTATION'\nros2 doctor --report\nros2 node list",
+    "language": "bash",
+    "explain": [
+      "两台机器分别执行并比较；环境变量为空不等于相同配置文件。",
+      "域 ID 一致、允许所需网络范围，双方发现对方节点。",
+      "域不同、仅本机发现或容器网络限制组播。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros2-how",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-domain",
+      "ros-multimachine",
+      "ros-rmw"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "ROS_DOMAIN_ID",
+        "ROS_LOCALHOST_ONLY",
+        "discovery failed"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "env | rg 'ROS_DOMAIN_ID|ROS_LOCALHOST_ONLY|ROS_AUTOMATIC_DISCOVERY_RANGE|RMW_IMPLEMENTATION'\nros2 doctor --report\nros2 node list",
+          "reason": "两台机器分别执行并比较；环境变量为空不等于相同配置文件。",
+          "normal": "域 ID 一致、允许所需网络范围，双方发现对方节点。",
+          "abnormal": "域不同、仅本机发现或容器网络限制组播。"
+        }
+      ],
+      "fixes": [
+        "环境不一致：按所用发行版统一域和发现配置，重启节点及 ros2 daemon。",
+        "网络限制组播：使用中间件官方的静态发现配置并核对所需端口。"
+      ],
+      "verification": {
+        "code": "ros2 node list\nros2 topic echo /chatter --once",
+        "expected": "双方看见节点且接收到一次实际消息。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-clock",
+    "module": "ros",
+    "title": "ROS 2：仿真节点等待时钟",
+    "category": "ROS 2 时间排障",
+    "summary": "遇到“Waiting for clock”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "use_sim_time 为真时 ROS 时间来自 /clock；桥接缺失、仿真暂停或某节点未启用仿真时间会使定时器和 TF 不一致。",
+    "code": "ros2 topic info /clock --verbose\nros2 topic echo /clock --once\nros2 param get /research_talker use_sim_time",
+    "language": "bash",
+    "explain": [
+      "节点名按实际替换；检查时钟发布与每个节点参数，而不是只检查启动文件。",
+      "/clock 非零且持续前进，相关节点统一 use_sim_time。",
+      "/clock 无发布者或仿真暂停；节点参数存在真假混用。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros2-concept",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-sim-time",
+      "gazebo-clock",
+      "gazebo-error-clock"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Waiting for clock",
+        "Time is not initialized",
+        "use_sim_time"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ros2 topic info /clock --verbose\nros2 topic echo /clock --once\nros2 param get /research_talker use_sim_time",
+          "reason": "节点名按实际替换；检查时钟发布与每个节点参数，而不是只检查启动文件。",
+          "normal": "/clock 非零且持续前进，相关节点统一 use_sim_time。",
+          "abnormal": "/clock 无发布者或仿真暂停；节点参数存在真假混用。"
+        }
+      ],
+      "fixes": [
+        "缺少桥接：按 Gazebo 时钟教程增加 GZ_TO_ROS 桥接。",
+        "暂停或时间源不一致：播放仿真，并在启动参数中为所有相关节点设置 use_sim_time。"
+      ],
+      "verification": {
+        "code": "ros2 topic hz /clock",
+        "expected": "时钟持续更新，节点定时器和 TF 消费恢复。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-tf",
+    "module": "ros",
+    "title": "ROS 2：TF 坐标树断开或时间外推",
+    "category": "ROS 2 坐标排障",
+    "summary": "遇到“Invalid frame ID”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "TF 需要从目标帧到源帧的一条连通树，以及覆盖查询时刻的变换缓存。名称、父子关系与时间均需正确。",
+    "code": "ros2 run tf2_ros tf2_echo odom base_link\nros2 run tf2_tools view_frames\nros2 topic info /tf --verbose",
+    "language": "bash",
+    "explain": [
+      "用实际帧名；view_frames 生成当前坐标图文件，检查多父节点和缺失边。",
+      "odom→base_link 连通，时间戳与系统的时间源一致。",
+      "缺失固定传感器变换、同一 child 多来源，或动态变换时间滞后。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros2",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-tf2",
+      "ros-tf-static",
+      "ros-tf-tree"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Invalid frame ID",
+        "Could not find a connection",
+        "extrapolation into the future"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ros2 run tf2_ros tf2_echo odom base_link\nros2 run tf2_tools view_frames\nros2 topic info /tf --verbose",
+          "reason": "用实际帧名；view_frames 生成当前坐标图文件，检查多父节点和缺失边。",
+          "normal": "odom→base_link 连通，时间戳与系统的时间源一致。",
+          "abnormal": "缺失固定传感器变换、同一 child 多来源，或动态变换时间滞后。"
+        }
+      ],
+      "fixes": [
+        "固定外参缺失：依据真实标定添加 static_transform_publisher。",
+        "动态边错误：修复发布者与时间源；不要用静态单位变换掩盖缺失的里程计。"
+      ],
+      "verification": {
+        "code": "ros2 run tf2_ros tf2_echo odom base_link",
+        "expected": "持续获得变换，导航实际查询时不再报错。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-controller",
+    "module": "ros",
+    "title": "ROS 2：控制器加载后未激活",
+    "category": "ROS 2 控制排障",
+    "summary": "遇到“interface does not exist”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "ros2_control 的资源管理器将硬件导出的状态/命令接口分配给控制器；关节名、接口名、占用冲突和生命周期都会影响激活。",
+    "code": "ros2 control list_controllers\nros2 control list_hardware_interfaces\nros2 control list_hardware_components",
+    "language": "bash",
+    "explain": [
+      "先查看硬件组件状态与接口，再检查控制器是否已占用同一命令接口。",
+      "硬件 active，所需接口 available，目标控制器 active。",
+      "接口不存在、硬件 inactive 或接口已被另一个控制器 claim。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "ros-control",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-control",
+      "ros-trajectory"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "interface does not exist",
+        "Not acceptable command interfaces combination",
+        "Failed to activate controller"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ros2 control list_controllers\nros2 control list_hardware_interfaces\nros2 control list_hardware_components",
+          "reason": "先查看硬件组件状态与接口，再检查控制器是否已占用同一命令接口。",
+          "normal": "硬件 active，所需接口 available，目标控制器 active。",
+          "abnormal": "接口不存在、硬件 inactive 或接口已被另一个控制器 claim。"
+        }
+      ],
+      "fixes": [
+        "配置不一致：对照 URDF 与 YAML 修正关节/接口名，再重新启动控制管理器。",
+        "资源冲突：停用冲突控制器后按项目的控制切换流程激活目标控制器。"
+      ],
+      "verification": {
+        "code": "ros2 control list_controllers\nros2 control list_hardware_interfaces",
+        "expected": "目标 active 且独占正确命令接口；在安全幅度下验证反馈随目标变化。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "ros-error-nav",
+    "module": "ros",
+    "title": "ROS 2：Nav2 无法规划或代价地图超时",
+    "category": "ROS 2 导航排障",
+    "summary": "遇到“Timed out waiting for transform”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "导航同时依赖定位链 map→odom→base_link、有效地图、正确传感器帧和已激活生命周期节点。规划失败不一定是规划器算法问题。",
+    "code": "ros2 lifecycle get /planner_server\nros2 run tf2_ros tf2_echo map base_link\nros2 topic echo /map --once --field info\nros2 topic info /scan --verbose",
+    "language": "bash",
+    "explain": [
+      "依次确认生命周期、定位、地图范围和传感器输入；echo 等待不到时用 Ctrl+C 并检查上游。",
+      "节点 active，机器人位于地图内，激光可转换到代价地图坐标。",
+      "未设初始位姿、地图路径错误、TF 缺失或激光 QoS 不匹配。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "nav2",
+    "version": "ROS 2 Humble / Jazzy",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "ros-nav2",
+      "ros-slam",
+      "ros-error-tf"
+    ],
+    "prerequisites": "以 ROS 2 Jazzy / Ubuntu 24.04 为默认；标有 ROS 1 的词条使用 Noetic / Ubuntu 20.04。Humble 对应 Ubuntu 22.04。先加载相应工作空间；不要在同一终端混合 source ROS 1 与 ROS 2。节点名、包名、话题名须按实际系统替换。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Timed out waiting for transform",
+        "Failed to create a plan",
+        "Robot is out of bounds of the costmap"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ros2 lifecycle get /planner_server\nros2 run tf2_ros tf2_echo map base_link\nros2 topic echo /map --once --field info\nros2 topic info /scan --verbose",
+          "reason": "依次确认生命周期、定位、地图范围和传感器输入；echo 等待不到时用 Ctrl+C 并检查上游。",
+          "normal": "节点 active，机器人位于地图内，激光可转换到代价地图坐标。",
+          "abnormal": "未设初始位姿、地图路径错误、TF 缺失或激光 QoS 不匹配。"
+        }
+      ],
+      "fixes": [
+        "定位未建立：在 RViz 根据地图设置正确的 2D Pose Estimate。",
+        "地图/传感器异常：先修复输入并清除故障，再发送可达且非障碍区域的目标。"
+      ],
+      "verification": {
+        "code": "ros2 action info /navigate_to_pose\nros2 lifecycle get /controller_server",
+        "expected": "导航服务器存在，控制器 active；一次近距离目标任务成功完成。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-import",
+    "module": "isaac",
+    "title": "Isaac Lab：导入模块失败",
+    "category": "安装与启动排障",
+    "summary": "遇到“No module named 'isaaclab'”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Isaac Lab 扩展和 Isaac Sim 运行时依赖配套 Python 环境；omni 等应用模块还需要在 AppLauncher 初始化之后导入。",
+    "code": "./isaaclab.sh -p -c \"import sys; print(sys.executable)\"\ngit describe --tags --always\n./isaaclab.sh -p scripts/tutorials/00_sim/create_empty.py --headless",
+    "language": "bash",
+    "explain": [
+      "在 IsaacLab 仓库根目录执行，先核对解释器和版本，再用官方空场景隔离自定义代码。",
+      "使用安装指南指定的解释器，空场景进入仿真循环。",
+      "系统 Python 与运行时环境不同，或自定义脚本过早导入 omni。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-install",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-install",
+      "isaac-launcher"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "No module named 'isaaclab'",
+        "No module named 'omni'",
+        "No module named 'isaacsim'"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "./isaaclab.sh -p -c \"import sys; print(sys.executable)\"\ngit describe --tags --always\n./isaaclab.sh -p scripts/tutorials/00_sim/create_empty.py --headless",
+          "reason": "在 IsaacLab 仓库根目录执行，先核对解释器和版本，再用官方空场景隔离自定义代码。",
+          "normal": "使用安装指南指定的解释器，空场景进入仿真循环。",
+          "abnormal": "系统 Python 与运行时环境不同，或自定义脚本过早导入 omni。"
+        }
+      ],
+      "fixes": [
+        "环境错误：按 v2.3.0 官方安装方式安装并使用 ./isaaclab.sh -p。",
+        "空场景成功而自定义失败：将运行时导入放到 AppLauncher 创建之后。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/tutorials/00_sim/create_empty.py --headless",
+        "expected": "无模块错误，确认后用 Ctrl+C 关闭仿真。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-driver",
+    "module": "isaac",
+    "title": "Isaac Lab：GPU 或驱动不兼容",
+    "category": "安装与启动排障",
+    "summary": "遇到“Failed to create GPU device”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "渲染与物理运行时依赖兼容 GPU、驱动以及进程可见的设备。系统 CUDA Toolkit 版本不能单独证明驱动与 Isaac Sim 兼容。",
+    "code": "nvidia-smi\nprintf '%s\n' \"$CUDA_VISIBLE_DEVICES\"\n./isaaclab.sh -p -c \"import torch; print(torch.cuda.is_available()); print(torch.version.cuda)\"",
+    "language": "bash",
+    "explain": [
+      "比较系统 GPU 状态与应用解释器中的设备可见性，再对照 v2.3.0 兼容矩阵。",
+      "系统和 PyTorch 均可见计划使用的 GPU，硬件满足对应 Isaac Sim 要求。",
+      "容器未映射 GPU、设备被环境变量屏蔽，或驱动不满足要求。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-install",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-compatibility",
+      "linux-nvidia-smi"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Failed to create GPU device",
+        "CUDA driver version is insufficient",
+        "No CUDA GPUs are available"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "nvidia-smi\nprintf '%s\n' \"$CUDA_VISIBLE_DEVICES\"\n./isaaclab.sh -p -c \"import torch; print(torch.cuda.is_available()); print(torch.version.cuda)\"",
+          "reason": "比较系统 GPU 状态与应用解释器中的设备可见性，再对照 v2.3.0 兼容矩阵。",
+          "normal": "系统和 PyTorch 均可见计划使用的 GPU，硬件满足对应 Isaac Sim 要求。",
+          "abnormal": "容器未映射 GPU、设备被环境变量屏蔽，或驱动不满足要求。"
+        }
+      ],
+      "fixes": [
+        "设备不可见：修复容器 GPU 运行参数或 CUDA_VISIBLE_DEVICES。",
+        "版本不兼容：按该版安装文档选择受支持驱动和 Isaac Sim，不混用不同版本依赖。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/tutorials/00_sim/create_empty.py --headless",
+        "expected": "官方最小场景启动，无设备创建失败。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-asset",
+    "module": "isaac",
+    "title": "Isaac Lab：USD 资产无法加载",
+    "category": "资产与场景排障",
+    "summary": "遇到“Could not open asset”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "USD 引用可能指向本地相对路径、Nucleus 或远程资产端点；根文件存在并不代表引用链中的纹理与子层都可达。",
+    "code": "./isaaclab.sh -p -c \"from pathlib import Path; print(Path('robot.usd').resolve()); print(Path('robot.usd').exists())\"\nrg 'usd_path|ISAAC_NUCLEUS_DIR' source/isaaclab_assets",
+    "language": "bash",
+    "explain": [
+      "robot.usd 替换为自己的资产；核对配置字符串和基于工作目录的相对解析。",
+      "本地路径存在或远程资产服务可达，启动日志无缺失引用。",
+      "相对目录错误、远程访问失败或只复制了 USD 主文件。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-how",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-usd",
+      "isaac-asset-cfg"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Could not open asset",
+        "Failed to resolve reference",
+        "Unable to open stage"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "./isaaclab.sh -p -c \"from pathlib import Path; print(Path('robot.usd').resolve()); print(Path('robot.usd').exists())\"\nrg 'usd_path|ISAAC_NUCLEUS_DIR' source/isaaclab_assets",
+          "reason": "robot.usd 替换为自己的资产；核对配置字符串和基于工作目录的相对解析。",
+          "normal": "本地路径存在或远程资产服务可达，启动日志无缺失引用。",
+          "abnormal": "相对目录错误、远程访问失败或只复制了 USD 主文件。"
+        }
+      ],
+      "fixes": [
+        "路径错误：使用明确的绝对路径或项目根目录解析路径。",
+        "引用链缺失：按资产许可下载完整依赖并修正引用；不要用空模型继续训练。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/tutorials/00_sim/create_empty.py --headless",
+        "expected": "先确认运行时正常，再启动自己的资产加载脚本；所有目标 prim 和关节均能找到。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-task",
+    "module": "isaac",
+    "title": "Isaac Lab：找不到任务 ID",
+    "category": "任务注册排障",
+    "summary": "遇到“NameNotFound”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Gymnasium 注册把任务名称映射到环境入口与配置；自定义包未导入或 ID 拼写/版本不同会导致注册表中不存在任务。",
+    "code": "./isaaclab.sh -p scripts/environments/list_envs.py\nrg 'gym.register|id=' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole",
+    "language": "bash",
+    "explain": [
+      "确认所用标签有哪些正式注册名称；自定义任务还应检查启动脚本是否执行注册。",
+      "目标 ID 与注册表完全一致，包括大小写和版本后缀。",
+      "拿其他版本的任务 ID 直接运行，或自定义注册从未执行。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-train",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-register",
+      "isaac-list-envs"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "NameNotFound",
+        "Environment doesn't exist",
+        "NamespaceNotFound"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "./isaaclab.sh -p scripts/environments/list_envs.py\nrg 'gym.register|id=' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole",
+          "reason": "确认所用标签有哪些正式注册名称；自定义任务还应检查启动脚本是否执行注册。",
+          "normal": "目标 ID 与注册表完全一致，包括大小写和版本后缀。",
+          "abnormal": "拿其他版本的任务 ID 直接运行，或自定义注册从未执行。"
+        }
+      ],
+      "fixes": [
+        "ID 不匹配：使用当前标签列出的 ID。",
+        "自定义注册缺失：在训练解析任务配置前完成注册，确保配置入口可导入。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 16 --headless",
+        "expected": "标准任务成功创建；自定义任务需通过本项目 run.sh 进入注册包装器。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-memory",
+    "module": "isaac",
+    "title": "Isaac Lab：CUDA 显存不足",
+    "category": "性能与设备排障",
+    "summary": "遇到“CUDA out of memory”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "并行环境、物理接触缓冲、相机图像、策略激活和优化器状态共同占用显存；只减少网络大小可能无效。",
+    "code": "nvidia-smi\n./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 16 --headless",
+    "language": "bash",
+    "explain": [
+      "记录运行前后显存，先用少量无相机环境验证容量下限。",
+      "小规模环境运行稳定且显存有余量。",
+      "其他进程占满显存，或仅启用相机/训练后暴增。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-how",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-memory",
+      "isaac-camera",
+      "isaac-video"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "CUDA out of memory",
+        "Failed to allocate memory",
+        "OutOfMemoryError"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "nvidia-smi\n./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 16 --headless",
+          "reason": "记录运行前后显存，先用少量无相机环境验证容量下限。",
+          "normal": "小规模环境运行稳定且显存有余量。",
+          "abnormal": "其他进程占满显存，或仅启用相机/训练后暴增。"
+        }
+      ],
+      "fixes": [
+        "环境规模过大：先降低 --num_envs，再逐项增加并记录峰值。",
+        "视觉任务占用高：降低图像分辨率与采样率，核对录像和缓存生命周期。"
+      ],
+      "verification": {
+        "code": "nvidia-smi",
+        "expected": "目标配置经过持续运行后显存峰值低于可用容量，没有反复 OOM。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-device",
+    "module": "isaac",
+    "title": "Isaac Lab：张量设备或形状不一致",
+    "category": "张量与接口排障",
+    "summary": "遇到“Expected all tensors to be on the same device”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "并行环境将 batch 维放在前面；动作维、观测维、环境索引和张量设备必须符合任务契约。",
+    "code": "rg 'num_envs|action_space|observation_space|device' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole\nnvidia-smi",
+    "language": "bash",
+    "explain": [
+      "用官方任务对照字段；在自己的报错行附近打印 tensor.shape、tensor.device 和 env.num_envs。",
+      "动作形状为环境数×动作数，参与同一运算的张量在同一设备。",
+      "单环境向量被当作整个 batch，或新建 torch.tensor 默认落在 CPU。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-api",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-tensor",
+      "isaac-observations",
+      "isaac-joint-target"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Expected all tensors to be on the same device",
+        "size mismatch",
+        "shape mismatch"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "rg 'num_envs|action_space|observation_space|device' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole\nnvidia-smi",
+          "reason": "用官方任务对照字段；在自己的报错行附近打印 tensor.shape、tensor.device 和 env.num_envs。",
+          "normal": "动作形状为环境数×动作数，参与同一运算的张量在同一设备。",
+          "abnormal": "单环境向量被当作整个 batch，或新建 torch.tensor 默认落在 CPU。"
+        }
+      ],
+      "fixes": [
+        "设备错误：用现有张量的 device/dtype 创建辅助张量。",
+        "形状错误：按任务 action_manager 与 observation_manager 的实际维度修正，不能靠随意 reshape 掩盖语义。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 4 --headless",
+        "expected": "标准任务可运行；自定义任务在 num_envs=1 和 4 都通过一个完整重置与步进周期。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-nan",
+    "module": "isaac",
+    "title": "Isaac Lab：训练出现 NaN 或策略分布非法",
+    "category": "训练稳定性排障",
+    "summary": "遇到“NaN”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "非有限观测、奖励除零、过大动作与不稳定物理状态会传播到策略分布和梯度。应从首个非有限值追溯，而不是只清理最终损失。",
+    "code": "rg 'reward|weight|clip|scale|normaliz' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole\nnvidia-smi",
+    "language": "bash",
+    "explain": [
+      "记录首个异常迭代；在自定义观测、动作、奖励出口加入 torch.isfinite 检查并保留对应环境索引。",
+      "重置和步进后的状态、观测与奖励均有限。",
+      "异常首先出现在某奖励除法、归一化或物理状态。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-env",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-rewards",
+      "isaac-zero-agent",
+      "isaac-decimation"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "NaN",
+        "nan",
+        "Normal scale",
+        "invalid values"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "rg 'reward|weight|clip|scale|normaliz' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole\nnvidia-smi",
+          "reason": "记录首个异常迭代；在自定义观测、动作、奖励出口加入 torch.isfinite 检查并保留对应环境索引。",
+          "normal": "重置和步进后的状态、观测与奖励均有限。",
+          "abnormal": "异常首先出现在某奖励除法、归一化或物理状态。"
+        }
+      ],
+      "fixes": [
+        "奖励公式异常：给分母定义有效下界并测试极端状态。",
+        "物理先发散：检查质量惯量、初始穿透、动作缩放与时间步，先运行零动作。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 16 --headless",
+        "expected": "修复后的自定义任务通过零动作和随机动作有限值检查，再恢复训练并观察多个迭代。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-joint",
+    "module": "isaac",
+    "title": "Isaac Lab：正则表达式未匹配到关节",
+    "category": "资产与接口排障",
+    "summary": "遇到“Not all regular expressions are matched”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "执行器与动作配置按关节名称或正则选择对象；USD 名称、导入结果和配置中的名称不一致时匹配为空。",
+    "code": "rg 'joint_names|joint_names_expr|actuators' source/isaaclab_assets source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole",
+    "language": "bash",
+    "explain": [
+      "对照异常列出的 Available strings；在资产初始化后检查 robot.joint_names。",
+      "每个模式匹配预期关节，动作顺序与控制器约定一致。",
+      "拼写/大小写不同、选择到了固定关节或表达式过宽。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-api",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-actuators",
+      "isaac-articulation"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Not all regular expressions are matched",
+        "Available strings",
+        "joint names"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "rg 'joint_names|joint_names_expr|actuators' source/isaaclab_assets source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole",
+          "reason": "对照异常列出的 Available strings；在资产初始化后检查 robot.joint_names。",
+          "normal": "每个模式匹配预期关节，动作顺序与控制器约定一致。",
+          "abnormal": "拼写/大小写不同、选择到了固定关节或表达式过宽。"
+        }
+      ],
+      "fixes": [
+        "未匹配：依据实际 joint_names 改配置。",
+        "匹配过多：使用锚定模式并显式检查动作顺序，避免同一关节被意外重复控制。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 4 --headless",
+        "expected": "自定义资产初始化无未匹配项，动作维与受控关节数一致。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-camera",
+    "module": "isaac",
+    "title": "Isaac Lab：相机未启用或图像为空",
+    "category": "传感器排障",
+    "summary": "遇到“Cameras are not enabled”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "无窗口模式不自动代表已启用相机渲染；相机需要启动时加载相关扩展、有效渲染产品和足够的更新步骤。",
+    "code": "./isaaclab.sh -p scripts/tutorials/04_sensors/run_camera.py --help\nnvidia-smi",
+    "language": "bash",
+    "explain": [
+      "先查看该版本教程参数与设备状态，再比较自己的 AppLauncher 参数。",
+      "相机教程可用，启动时包含 --enable_cameras，传感器更新后图像尺寸正确。",
+      "脚本在未开启相机时访问图像，或在首帧渲染前读取数据。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-sensor",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-camera",
+      "isaac-video"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Cameras are not enabled",
+        "enable_cameras",
+        "render product"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "./isaaclab.sh -p scripts/tutorials/04_sensors/run_camera.py --help\nnvidia-smi",
+          "reason": "先查看该版本教程参数与设备状态，再比较自己的 AppLauncher 参数。",
+          "normal": "相机教程可用，启动时包含 --enable_cameras，传感器更新后图像尺寸正确。",
+          "abnormal": "脚本在未开启相机时访问图像，或在首帧渲染前读取数据。"
+        }
+      ],
+      "fixes": [
+        "相机未启用：使用 --enable_cameras 并按教程创建传感器。",
+        "首帧空数据：等待传感器更新，核对 clipping_range、位姿及场景光照。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/tutorials/04_sensors/run_camera.py --headless --enable_cameras",
+        "expected": "图像张量存在且不是持续全零；教程参数以 --help 为准。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-checkpoint",
+    "module": "isaac",
+    "title": "Isaac Lab：回放检查点维度不匹配",
+    "category": "模型回放排障",
+    "summary": "遇到“Missing key(s) in state_dict”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "检查点对应特定观测顺序、动作接口和网络结构；不同任务配置或训练库版本可能仍能找到文件但无法正确加载。",
+    "code": "find logs -type f -name 'model_*.pt'\n./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py --help",
+    "language": "bash",
+    "explain": [
+      "在 IsaacLab 根目录查询已有检查点，并核对同一运行目录保存的 env 与 agent 配置。",
+      "任务、网络及输入输出维度与训练记录一致。",
+      "检查点来自另一任务，或修改观测顺序后仍使用旧策略。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-train",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-play",
+      "isaac-resume",
+      "isaac-export"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Missing key(s) in state_dict",
+        "Unexpected key(s) in state_dict",
+        "size mismatch for"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "find logs -type f -name 'model_*.pt'\n./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py --help",
+          "reason": "在 IsaacLab 根目录查询已有检查点，并核对同一运行目录保存的 env 与 agent 配置。",
+          "normal": "任务、网络及输入输出维度与训练记录一致。",
+          "abnormal": "检查点来自另一任务，或修改观测顺序后仍使用旧策略。"
+        }
+      ],
+      "fixes": [
+        "选错文件：显式传 --checkpoint 的真实路径。",
+        "接口已变：恢复训练时配置，或重新训练并作为新实验，不能静默跳过关键权重。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py --task Isaac-Cartpole-v0 --num_envs 16 --checkpoint /absolute/path/model_100.pt --headless",
+        "expected": "替换为真实路径后成功加载，动作有限且回放任务与训练记录相同。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-hydra",
+    "module": "isaac",
+    "title": "Isaac Lab：Hydra 配置字段不存在",
+    "category": "配置排障",
+    "summary": "遇到“Key is not in struct”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Hydra 的结构化配置限制可覆盖字段；命令行应用参数与 env/agent 配置路径属于不同层。",
+    "code": "./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py --help\nrg 'class CartpoleEnvCfg|class RewardsCfg|weight=' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole/cartpole_env_cfg.py",
+    "language": "bash",
+    "explain": [
+      "先确认字段存在于 v2.3.0 配置，再使用完整的 env 或 agent 路径。",
+      "覆盖路径与配置一致，启动记录保存了新的值。",
+      "误拼字段、把 Python 类名当配置键，或使用其他版本文档。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-hydra",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-hydra",
+      "isaac-manager"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Key is not in struct",
+        "Could not override",
+        "Error parsing override"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py --help\nrg 'class CartpoleEnvCfg|class RewardsCfg|weight=' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole/cartpole_env_cfg.py",
+          "reason": "先确认字段存在于 v2.3.0 配置，再使用完整的 env 或 agent 路径。",
+          "normal": "覆盖路径与配置一致，启动记录保存了新的值。",
+          "abnormal": "误拼字段、把 Python 类名当配置键，或使用其他版本文档。"
+        }
+      ],
+      "fixes": [
+        "路径错误：依据实际 configclass 的属性名称修正。",
+        "复杂任务修改：使用项目自定义配置类并注册任务，避免用新增键掩盖拼写错误。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py --task Isaac-Cartpole-v0 --num_envs 16 --max_iterations 1 --headless",
+        "expected": "基础配置先完成一次迭代，再逐项增加合法覆盖并核对保存的配置。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "isaac-error-reward",
+    "module": "isaac",
+    "title": "Isaac Lab：奖励不增长或重置异常",
+    "category": "任务逻辑排障",
+    "summary": "遇到“episode length”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "奖励尺度、终止阈值和重置分布共同决定学习信号。每步立即终止、状态未写回或随机化范围过大都可能让策略无法学习。",
+    "code": "rg 'weight=|episode_length_s|reset_|termination' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole/cartpole_env_cfg.py",
+    "language": "bash",
+    "explain": [
+      "记录各奖励分项、terminated/truncated 比例和平均 episode length；只看总奖励不足以定位。",
+      "环境存活时间与设计一致，重置后状态在有效范围，奖励分项尺度可解释。",
+      "回合长度接近一步、重置后仍越界，或某项奖励支配总和。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "il-env",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "isaac-reset",
+      "isaac-rewards",
+      "isaac-events",
+      "isaac-repro"
+    ],
+    "prerequisites": "以 Isaac Lab v2.3.0 源码布局为基线；在 IsaacLab 仓库根目录执行 ./isaaclab.sh。先按该版本官方安装指南配置兼容的 Isaac Sim、Python 与 NVIDIA 驱动。配置片段需要放入已有的任务、场景或训练脚本，不是独立程序。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "episode length",
+        "reward collapse",
+        "reset loop"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "rg 'weight=|episode_length_s|reset_|termination' source/isaaclab_tasks/isaaclab_tasks/manager_based/classic/cartpole/cartpole_env_cfg.py",
+          "reason": "记录各奖励分项、terminated/truncated 比例和平均 episode length；只看总奖励不足以定位。",
+          "normal": "环境存活时间与设计一致，重置后状态在有效范围，奖励分项尺度可解释。",
+          "abnormal": "回合长度接近一步、重置后仍越界，或某项奖励支配总和。"
+        }
+      ],
+      "fixes": [
+        "重置错误：检查 env_ids 索引和 scene.env_origins，写入状态后更新缓冲。",
+        "奖励/随机化过强：先关闭新增项建立基线，再按固定种子做单因素比较。"
+      ],
+      "verification": {
+        "code": "./isaaclab.sh -p scripts/environments/zero_agent.py --task Isaac-Cartpole-v0 --num_envs 16 --headless",
+        "expected": "自定义任务能重复重置与运行；用相同种子和预算比较多次训练，而非要求单次奖励必然增长。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-ssh",
+    "module": "github",
+    "title": "GitHub：SSH 公钥认证失败",
+    "category": "认证排障",
+    "summary": "遇到“Permission denied (publickey)”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "SSH 认证确认当前公钥对应的账号；仓库访问权限是认证之后的另一层检查。",
+    "code": "ssh -T git@github.com\nssh-add -l\ngit remote -v",
+    "language": "bash",
+    "explain": [
+      "核对 SSH 身份、代理加载密钥和实际远程地址。GitHub 成功认证的 ssh -T 也可能返回非零退出码。",
+      "输出 Hi 用户名，且用户名拥有目标仓库权限。",
+      "没有可用密钥，认证到了错误账号，或远程 OWNER/REPO 有误。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-auth",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-ssh",
+      "github-remote"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Permission denied (publickey)",
+        "Could not read from remote repository"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "ssh -T git@github.com\nssh-add -l\ngit remote -v",
+          "reason": "核对 SSH 身份、代理加载密钥和实际远程地址。GitHub 成功认证的 ssh -T 也可能返回非零退出码。",
+          "normal": "输出 Hi 用户名，且用户名拥有目标仓库权限。",
+          "abnormal": "没有可用密钥，认证到了错误账号，或远程 OWNER/REPO 有误。"
+        }
+      ],
+      "fixes": [
+        "没有密钥：按官方指南生成并把公钥添加到正确 GitHub 账号。",
+        "身份不对：通过 SSH Host 别名选择正确密钥，并修正 origin。"
+      ],
+      "verification": {
+        "code": "git ls-remote origin HEAD",
+        "expected": "可读取有权限仓库的 HEAD；私有仓库需核对账号授权。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-token",
+    "module": "github",
+    "title": "GitHub：HTTPS 403 或令牌失效",
+    "category": "认证排障",
+    "summary": "遇到“HTTP 403”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "HTTPS 凭据可能过期或权限不足；细粒度令牌还受仓库选择、组织审批和 SSO 限制。",
+    "code": "gh auth status\ngit remote -v\ngh repo view --json nameWithOwner,viewerPermission",
+    "language": "bash",
+    "explain": [
+      "查看身份和仓库权限，不要把令牌内容写入命令、日志或截图。",
+      "当前账号与目标仓库匹配，拥有所需读取或写入权限。",
+      "账号错误、令牌未覆盖该仓库或组织尚未审批。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-auth",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-auth",
+      "github-token",
+      "github-permission-error"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "HTTP 403",
+        "Authentication failed",
+        "Bad credentials"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gh auth status\ngit remote -v\ngh repo view --json nameWithOwner,viewerPermission",
+          "reason": "查看身份和仓库权限，不要把令牌内容写入命令、日志或截图。",
+          "normal": "当前账号与目标仓库匹配，拥有所需读取或写入权限。",
+          "abnormal": "账号错误、令牌未覆盖该仓库或组织尚未审批。"
+        }
+      ],
+      "fixes": [
+        "身份过期：通过 gh auth login 重新登录所需账号。",
+        "权限不足：申请目标仓库的最小必要权限并完成组织要求的授权。"
+      ],
+      "verification": {
+        "code": "git ls-remote origin HEAD",
+        "expected": "读取成功；写操作仍应按 viewerPermission 和分支规则判断。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-repository",
+    "module": "github",
+    "title": "GitHub：Repository not found",
+    "category": "仓库访问排障",
+    "summary": "遇到“Repository not found”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "GitHub 对不存在或当前身份无权查看的私有仓库都可能返回找不到；不能仅凭文本判断仓库已删除。",
+    "code": "git remote -v\ngh auth status\ngh repo view OWNER/REPO",
+    "language": "bash",
+    "explain": [
+      "替换 OWNER/REPO；比较远程拼写、仓库是否转移和当前登录身份。",
+      "目标仓库地址与有权限的账号一致。",
+      "仓库名拼写错误、仓库转移或使用了另一账号的凭据。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-repo",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-clone",
+      "github-remote"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Repository not found",
+        "repository does not exist"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git remote -v\ngh auth status\ngh repo view OWNER/REPO",
+          "reason": "替换 OWNER/REPO；比较远程拼写、仓库是否转移和当前登录身份。",
+          "normal": "目标仓库地址与有权限的账号一致。",
+          "abnormal": "仓库名拼写错误、仓库转移或使用了另一账号的凭据。"
+        }
+      ],
+      "fixes": [
+        "地址错误：确认真实地址后 git remote set-url origin 新地址。",
+        "私有权限问题：先验证当前身份并向仓库管理员申请访问。"
+      ],
+      "verification": {
+        "code": "git ls-remote origin HEAD",
+        "expected": "能够读取远程引用，不再返回 Repository not found。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-nonfast",
+    "module": "github",
+    "title": "GitHub：推送被拒绝，远程有新提交",
+    "category": "分支与历史排障",
+    "summary": "遇到“non-fast-forward”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Git 拒绝让普通 push 丢弃远程已有提交；远程分支不在本地历史祖先链上时需要先整合。",
+    "code": "git status\ngit fetch origin\ngit log --oneline --graph --decorate --all -20",
+    "language": "bash",
+    "explain": [
+      "先保存未提交修改；fetch 只更新远程跟踪引用，日志帮助判断分叉位置。",
+      "能够明确看到本地与远程的新增提交。",
+      "双方都新增了提交，或跟踪分支设错。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "git",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-fetch",
+      "github-pull",
+      "github-push"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "non-fast-forward",
+        "fetch first",
+        "Updates were rejected"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git status\ngit fetch origin\ngit log --oneline --graph --decorate --all -20",
+          "reason": "先保存未提交修改；fetch 只更新远程跟踪引用，日志帮助判断分叉位置。",
+          "normal": "能够明确看到本地与远程的新增提交。",
+          "abnormal": "双方都新增了提交，或跟踪分支设错。"
+        }
+      ],
+      "fixes": [
+        "共享分支：按团队约定 merge 远程分支并解决冲突。",
+        "个人未共享提交：确认影响范围后 rebase 到远程分支；不要直接 force 覆盖未知提交。"
+      ],
+      "verification": {
+        "code": "git status\ngit log --oneline --graph --all -12",
+        "expected": "工作区干净，已整合远程历史后普通 push 可以通过权限与规则检查。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-conflict",
+    "module": "github",
+    "title": "GitHub：合并或变基冲突",
+    "category": "分支与历史排障",
+    "summary": "遇到“CONFLICT (content)”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "两侧修改同一上下文时 Git 无法决定最终语义；冲突标记展示候选文本，但必须由开发者确定正确组合。",
+    "code": "git status\ngit diff --name-only --diff-filter=U\ngit diff --check",
+    "language": "bash",
+    "explain": [
+      "确认正在 merge 还是 rebase，并列出未解决文件；diff --check 可定位残留标记和空白问题。",
+      "明确所有冲突文件与操作状态。",
+      "不理解某侧改动或测试尚未覆盖冲突路径。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "git",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-conflict",
+      "github-merge"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "CONFLICT (content)",
+        "Automatic merge failed",
+        "could not apply"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git status\ngit diff --name-only --diff-filter=U\ngit diff --check",
+          "reason": "确认正在 merge 还是 rebase，并列出未解决文件；diff --check 可定位残留标记和空白问题。",
+          "normal": "明确所有冲突文件与操作状态。",
+          "abnormal": "不理解某侧改动或测试尚未覆盖冲突路径。"
+        }
+      ],
+      "fixes": [
+        "继续整合：编辑确认正确语义，运行测试，git add 已解决文件，再执行对应 --continue。",
+        "无法确认语义：用 git merge --abort 或 git rebase --abort 返回操作前状态，先与改动作者澄清。"
+      ],
+      "verification": {
+        "code": "git diff --check\ngit status",
+        "expected": "无未合并路径，测试通过，历史结果包含所需改动。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-large",
+    "module": "github",
+    "title": "GitHub：文件超过大小限制",
+    "category": "文件与存储排障",
+    "summary": "遇到“GH001”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "推送检查涉及待上传的 Git 历史对象。仅删除工作区的大文件不会从早先提交中移除它。",
+    "code": "git status\ngit log --all --oneline -- path/to/large.bin\ngit lfs ls-files",
+    "language": "bash",
+    "explain": [
+      "替换真实路径；定位大文件首次进入的提交并区分普通 Git 对象与 LFS 指针。",
+      "确定大文件是否已在共享历史中，以及是否应由 LFS 或外部数据存储管理。",
+      "大文件早已被提交，后来添加 .gitignore 仍无法修复历史。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-limits",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-lfs",
+      "github-large-file-error",
+      "github-ignore"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "GH001",
+        "exceeds GitHub's file size limit",
+        "large files detected"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git status\ngit log --all --oneline -- path/to/large.bin\ngit lfs ls-files",
+          "reason": "替换真实路径；定位大文件首次进入的提交并区分普通 Git 对象与 LFS 指针。",
+          "normal": "确定大文件是否已在共享历史中，以及是否应由 LFS 或外部数据存储管理。",
+          "abnormal": "大文件早已被提交，后来添加 .gitignore 仍无法修复历史。"
+        }
+      ],
+      "fixes": [
+        "未共享的最近提交：把数据移出 Git 并重写该本地提交，保留原文件备份。",
+        "已共享历史：先协调迁移与备份，再使用官方推荐工具；迁移 LFS 会改变提交哈希。"
+      ],
+      "verification": {
+        "code": "git lfs ls-files\ngit status",
+        "expected": "Git 中保留合适的小文件或 LFS 指针；推送前复查全部待上传提交。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-protected",
+    "module": "github",
+    "title": "GitHub：受保护分支拒绝推送",
+    "category": "规则与审查排障",
+    "summary": "遇到“GH006”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "分支保护与 rulesets 可要求 PR、审查、签名或状态检查。具备仓库写权限并不意味着能直接修改受保护分支。",
+    "code": "git branch --show-current\ngh pr status\ngh repo view --json nameWithOwner,viewerPermission",
+    "language": "bash",
+    "explain": [
+      "确认推送目标与现有 PR，阅读服务端错误列出的具体规则。",
+      "知道需要满足哪项规则以及对应 PR。",
+      "直接向受保护主分支推送，或缺少必需检查。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-repo",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-rules",
+      "github-pr-create",
+      "github-pr-review"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "GH006",
+        "GH013",
+        "protected branch hook declined"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git branch --show-current\ngh pr status\ngh repo view --json nameWithOwner,viewerPermission",
+          "reason": "确认推送目标与现有 PR，阅读服务端错误列出的具体规则。",
+          "normal": "知道需要满足哪项规则以及对应 PR。",
+          "abnormal": "直接向受保护主分支推送，或缺少必需检查。"
+        }
+      ],
+      "fixes": [
+        "要求 PR：创建工作分支，推送后提交 PR。",
+        "检查/审查不足：修复失败检查并完成必要审查，不通过关闭规则规避流程。"
+      ],
+      "verification": {
+        "code": "gh pr checks\ngh pr view --json mergeStateStatus,reviewDecision",
+        "expected": "所有必需检查与审查条件满足，按仓库规则合并。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-detached",
+    "module": "github",
+    "title": "GitHub：处于 detached HEAD",
+    "category": "分支与历史排障",
+    "summary": "遇到“detached HEAD”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "checkout 某个提交或标签时 HEAD 直接指向提交；新提交若没有分支引用，后续切换后难以发现，但通常仍可通过 reflog 找回。",
+    "code": "git status\ngit log -1 --oneline\ngit reflog -8",
+    "language": "bash",
+    "explain": [
+      "先确认当前提交以及是否已有需要保留的新提交。",
+      "可以明确要保留的提交哈希。",
+      "在标签上直接修改并提交，随后切换后找不到新提交。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "git",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-branch",
+      "github-reproduce"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "detached HEAD",
+        "not currently on a branch"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git status\ngit log -1 --oneline\ngit reflog -8",
+          "reason": "先确认当前提交以及是否已有需要保留的新提交。",
+          "normal": "可以明确要保留的提交哈希。",
+          "abnormal": "在标签上直接修改并提交，随后切换后找不到新提交。"
+        }
+      ],
+      "fixes": [
+        "当前仍在目标提交：git switch -c experiment/recovered 创建分支引用。",
+        "已经切走：从 reflog 找到正确提交，再 git branch recovered 提交哈希，核对后切换。"
+      ],
+      "verification": {
+        "code": "git branch --show-current\ngit log -1 --oneline",
+        "expected": "当前分支指向需保留的提交，工作区状态符合预期。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-actions",
+    "module": "github",
+    "title": "GitHub Actions：工作流语法或路径错误",
+    "category": "自动化排障",
+    "summary": "遇到“Invalid workflow file”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Actions 先解析 YAML 与表达式，再按事件运行 job；缩进、on 键、上下文可用位置和工作流路径都会影响触发。",
+    "code": "git ls-files .github/workflows\ngh workflow list\ngh run list --limit 5",
+    "language": "bash",
+    "explain": [
+      "确认工作流已提交到正确分支和路径；UI 的解析错误定位到具体行。",
+      "工作流可被识别，触发事件与分支规则相符。",
+      "YAML 错误、仅本地未推送，或 paths/branches 过滤排除本次提交。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-actions",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-actions",
+      "github-python-ci",
+      "github-run-inspect"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Invalid workflow file",
+        "No event triggers defined",
+        "Unrecognized named-value"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git ls-files .github/workflows\ngh workflow list\ngh run list --limit 5",
+          "reason": "确认工作流已提交到正确分支和路径；UI 的解析错误定位到具体行。",
+          "normal": "工作流可被识别，触发事件与分支规则相符。",
+          "abnormal": "YAML 错误、仅本地未推送，或 paths/branches 过滤排除本次提交。"
+        }
+      ],
+      "fixes": [
+        "解析失败：依据报错修复缩进与表达式上下文，在本地进行语法检查。",
+        "没有触发：核对事件、默认分支和过滤条件，使用 workflow_dispatch 做显式验证。"
+      ],
+      "verification": {
+        "code": "gh run list --limit 5\ngh run view --log-failed",
+        "expected": "触发后出现对应运行记录，配置阶段没有解析错误。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-ci",
+    "module": "github",
+    "title": "GitHub Actions：本机通过，CI 失败",
+    "category": "自动化排障",
+    "summary": "遇到“Process completed with exit code 1”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "Runner 是干净环境，未跟踪文件、未声明依赖、大小写与路径差异会在 CI 暴露；退出码 1 仅说明失败，不给出根因。",
+    "code": "git status --short\ngh run view --log-failed\ngit ls-files",
+    "language": "bash",
+    "explain": [
+      "定位首个实际异常而不是最后一行退出码；检查本机依赖和数据是否已在仓库中声明。",
+      "测试、依赖与必要小型夹具均可从新克隆恢复。",
+      "依赖只装在本机、测试发现目录错误或大小写不一致。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-actions",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-python-ci",
+      "github-matrix",
+      "github-run-inspect"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Process completed with exit code 1",
+        "ModuleNotFoundError",
+        "No tests were found"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git status --short\ngh run view --log-failed\ngit ls-files",
+          "reason": "定位首个实际异常而不是最后一行退出码；检查本机依赖和数据是否已在仓库中声明。",
+          "normal": "测试、依赖与必要小型夹具均可从新克隆恢复。",
+          "abnormal": "依赖只装在本机、测试发现目录错误或大小写不一致。"
+        }
+      ],
+      "fixes": [
+        "缺依赖：补齐 requirements/项目依赖声明，并用新环境安装测试。",
+        "测试发现错误：固定工作目录和测试命令，对关键测试数量作验收。"
+      ],
+      "verification": {
+        "code": "python3 -m unittest discover -s tests -v",
+        "expected": "本项目离线测试全部通过；远端新一次 CI 运行也通过才算完成云端验证。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-actions-permission",
+    "module": "github",
+    "title": "GitHub Actions：令牌权限不足",
+    "category": "自动化权限排障",
+    "summary": "遇到“Resource not accessible by integration”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "GITHUB_TOKEN 按工作流权限、事件来源和仓库策略授予能力；Fork PR 默认权限和 secret 可用性与仓库内 push 不同。",
+    "code": "gh run view --log-failed\nrg 'permissions:|pull_request|workflow_run|contents:' .github/workflows",
+    "language": "bash",
+    "explain": [
+      "检查失败步骤需要什么权限及实际触发事件；不要打印 token 或 secrets。",
+      "权限声明足够且事件允许执行目标操作。",
+      "发布步骤在只读 PR 事件执行，或 contents 写权限未授予。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-actions",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-actions",
+      "github-secrets",
+      "github-release"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "Resource not accessible by integration",
+        "Write access to repository not granted"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "gh run view --log-failed\nrg 'permissions:|pull_request|workflow_run|contents:' .github/workflows",
+          "reason": "检查失败步骤需要什么权限及实际触发事件；不要打印 token 或 secrets。",
+          "normal": "权限声明足够且事件允许执行目标操作。",
+          "abnormal": "发布步骤在只读 PR 事件执行，或 contents 写权限未授予。"
+        }
+      ],
+      "fixes": [
+        "正常发布：把写入发布步骤限制到可信标签事件并最小化 permissions。",
+        "来自 Fork 的不可信代码：保留只读验证流程，不通过 pull_request_target 执行任意 PR 代码获取 secrets。"
+      ],
+      "verification": {
+        "code": "gh run view\ngh release list",
+        "expected": "可信标签事件完成发布；PR 验证继续保持只读权限。"
+      },
+      "checked": "2026-09-21"
+    }
+  },
+  {
+    "id": "github-error-lfs",
+    "module": "github",
+    "title": "GitHub：克隆后只有 LFS 指针或子模块为空",
+    "category": "复现排障",
+    "summary": "遇到“version https://git-lfs.github.com/spec/v1”或同类症状时，按环境、输入和运行状态逐步确认原因。",
+    "principle": "LFS 指针和 submodule gitlink 都只保存外部对象引用；普通源码文件齐全不代表实验依赖数据和子仓库已恢复。",
+    "code": "git lfs env\ngit lfs ls-files\ngit submodule status\ncat .gitmodules",
+    "language": "bash",
+    "explain": [
+      "区分 LFS 下载失败、配额/权限问题与子模块未初始化；没有 .gitmodules 的仓库可跳过该项。",
+      "LFS 实际对象存在，子模块位于主仓库记录的提交。",
+      "只剩几行 LFS 指针，或子模块状态前带减号。"
+    ],
+    "pitfall": "下列原因是排查候选，不代表仅凭错误文本即可确定根因。先保存配置与必要日志，再按检查结果选择修复。",
+    "source": "gh-limits",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "kind": "报错",
+    "related": [
+      "github-lfs",
+      "github-submodule",
+      "github-reproduce"
+    ],
+    "prerequisites": "Git 是本机版本管理工具，GitHub 是远程协作平台，gh 是可选的 GitHub CLI。示例中的 OWNER、REPO、用户名、分支和编号都需要替换。向远程 push、创建 PR 或修改设置会影响真实仓库，执行前核对当前仓库与权限。 排障中的文件路径、节点名和进程编号须替换为自己的对象。rg 来自 ripgrep；若本机缺少它，可先安装 ripgrep，或将简单文本过滤改为 grep -E。检查命令若持续监听，用 Ctrl+C 结束后再继续下一步。",
+    "troubleshooting": {
+      "patterns": [
+        "version https://git-lfs.github.com/spec/v1",
+        "smudge filter lfs failed",
+        "No url found for submodule"
+      ],
+      "diagnosis": [
+        {
+          "title": "执行诊断检查",
+          "code": "git lfs env\ngit lfs ls-files\ngit submodule status\ncat .gitmodules",
+          "reason": "区分 LFS 下载失败、配额/权限问题与子模块未初始化；没有 .gitmodules 的仓库可跳过该项。",
+          "normal": "LFS 实际对象存在，子模块位于主仓库记录的提交。",
+          "abnormal": "只剩几行 LFS 指针，或子模块状态前带减号。"
+        }
+      ],
+      "fixes": [
+        "LFS 对象缺失：确认权限与存储可用后 git lfs pull。",
+        "子模块未初始化：核对来源后 git submodule update --init --recursive。"
+      ],
+      "verification": {
+        "code": "git lfs fsck\ngit submodule status",
+        "expected": "LFS 对象检查通过，子模块提交匹配；再运行项目的真实数据加载验证。"
+      },
+      "checked": "2026-09-21"
+    }
+  }
+]

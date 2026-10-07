@@ -1,0 +1,31 @@
+{
+  "url": "https://docs.github.com/en/code-security",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Getting started",
+      "url": "https://docs.github.com/en/code-security/getting-started/github-security-features"
+    },
+    {
+      "title": "Concepts",
+      "url": "https://docs.github.com/en/code-security/concepts/secret-security/secret-leakage-risks"
+    },
+    {
+      "title": "How-tos",
+      "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/manage-your-coverage/enabling-public-monitoring-for-your-enterprise"
+    },
+    {
+      "title": "Reference",
+      "url": "https://docs.github.com/en/code-security/reference/security-at-scale/overview-dashboard-metrics"
+    },
+    {
+      "title": "Tutorials",
+      "url": "https://docs.github.com/en/code-security/tutorials/secret-protection-adoption-path"
+    },
+    {
+      "title": "Responsible use",
+      "url": "https://docs.github.com/en/code-security/responsible-use/security-and-quality-ai-features"
+    }
+  ]
+}

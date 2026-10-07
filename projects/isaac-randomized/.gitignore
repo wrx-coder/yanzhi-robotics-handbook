@@ -1,0 +1,9 @@
+__pycache__/
+.venv/
+runs/
+build/
+install/
+log/
+*.csv
+*.tar.gz
+sweep-results/

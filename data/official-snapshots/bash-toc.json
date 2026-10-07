@@ -1,0 +1,358 @@
+{
+  "url": "https://www.gnu.org/software/bash/manual/html_node/index.html",
+  "status": 200,
+  "date": "2026-09-21",
+  "method": "官方网页目录人工核对，非网络探测全部子页",
+  "rows": [
+    {
+      "title": "Introduction",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Introduction.html",
+      "depth": 1
+    },
+    {
+      "title": "What is Bash",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/What-is-Bash_003f.html",
+      "depth": 2
+    },
+    {
+      "title": "What is a shell",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/What-is-a-shell_003f.html",
+      "depth": 2
+    },
+    {
+      "title": "Definitions",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Definitions.html",
+      "depth": 1
+    },
+    {
+      "title": "Basic Shell Features",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html",
+      "depth": 1
+    },
+    {
+      "title": "Shell Syntax",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Syntax.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Commands",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Commands.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Functions",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Parameters",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameters.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Expansions",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Expansions.html",
+      "depth": 2
+    },
+    {
+      "title": "Redirections",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Redirections.html",
+      "depth": 2
+    },
+    {
+      "title": "Executing Commands",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Executing-Commands.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Scripts",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Builtin Commands",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html",
+      "depth": 1
+    },
+    {
+      "title": "Bourne Shell Builtins",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Builtins.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash Builtins",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-Builtins.html",
+      "depth": 2
+    },
+    {
+      "title": "Modifying Shell Behavior",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Modifying-Shell-Behavior.html",
+      "depth": 2
+    },
+    {
+      "title": "Special Builtins",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Special-Builtins.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Variables",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Variables.html",
+      "depth": 1
+    },
+    {
+      "title": "Bourne Shell Variables",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bourne-Shell-Variables.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash Variables",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash Features",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-Features.html",
+      "depth": 1
+    },
+    {
+      "title": "Invoking Bash",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Invoking-Bash.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash Startup Files",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html",
+      "depth": 2
+    },
+    {
+      "title": "Interactive Shells",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Interactive-Shells.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash Conditional Expressions",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-Conditional-Expressions.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Arithmetic",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Arithmetic.html",
+      "depth": 2
+    },
+    {
+      "title": "Aliases",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Aliases.html",
+      "depth": 2
+    },
+    {
+      "title": "Arrays",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Arrays.html",
+      "depth": 2
+    },
+    {
+      "title": "The Directory Stack",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/The-Directory-Stack.html",
+      "depth": 2
+    },
+    {
+      "title": "Controlling the Prompt",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Controlling-the-Prompt.html",
+      "depth": 2
+    },
+    {
+      "title": "The Restricted Shell",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/The-Restricted-Shell.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash POSIX Mode",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-POSIX-Mode.html",
+      "depth": 2
+    },
+    {
+      "title": "Shell Compatibility Mode",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Shell-Compatibility-Mode.html",
+      "depth": 2
+    },
+    {
+      "title": "Job Control",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Job-Control.html",
+      "depth": 1
+    },
+    {
+      "title": "Job Control Basics",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Job-Control-Basics.html",
+      "depth": 2
+    },
+    {
+      "title": "Job Control Builtins",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Job-Control-Builtins.html",
+      "depth": 2
+    },
+    {
+      "title": "Job Control Variables",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Job-Control-Variables.html",
+      "depth": 2
+    },
+    {
+      "title": "Command Line Editing",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Command-Line-Editing.html",
+      "depth": 1
+    },
+    {
+      "title": "Introduction and Notation",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Introduction-and-Notation.html",
+      "depth": 2
+    },
+    {
+      "title": "Readline Interaction",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Readline-Interaction.html",
+      "depth": 2
+    },
+    {
+      "title": "Readline Init File",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html",
+      "depth": 2
+    },
+    {
+      "title": "Bindable Readline Commands",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bindable-Readline-Commands.html",
+      "depth": 2
+    },
+    {
+      "title": "Readline vi Mode",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Readline-vi-Mode.html",
+      "depth": 2
+    },
+    {
+      "title": "Programmable Completion",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion.html",
+      "depth": 2
+    },
+    {
+      "title": "Programmable Completion Builtins",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Programmable-Completion-Builtins.html",
+      "depth": 2
+    },
+    {
+      "title": "A Programmable Completion Example",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/A-Programmable-Completion-Example.html",
+      "depth": 2
+    },
+    {
+      "title": "Using History Interactively",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Using-History-Interactively.html",
+      "depth": 1
+    },
+    {
+      "title": "Bash History Facilities",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-History-Facilities.html",
+      "depth": 2
+    },
+    {
+      "title": "Bash History Builtins",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Bash-History-Builtins.html",
+      "depth": 2
+    },
+    {
+      "title": "History Interaction",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/History-Interaction.html",
+      "depth": 2
+    },
+    {
+      "title": "Installing Bash",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Installing-Bash.html",
+      "depth": 1
+    },
+    {
+      "title": "Basic Installation",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Basic-Installation.html",
+      "depth": 2
+    },
+    {
+      "title": "Compilers and Options",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Compilers-and-Options.html",
+      "depth": 2
+    },
+    {
+      "title": "Compiling For Multiple Architectures",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Compiling-For-Multiple-Architectures.html",
+      "depth": 2
+    },
+    {
+      "title": "Installation Names",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Installation-Names.html",
+      "depth": 2
+    },
+    {
+      "title": "Specifying the System Type",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Specifying-the-System-Type.html",
+      "depth": 2
+    },
+    {
+      "title": "Sharing Defaults",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Sharing-Defaults.html",
+      "depth": 2
+    },
+    {
+      "title": "Operation Controls",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Operation-Controls.html",
+      "depth": 2
+    },
+    {
+      "title": "Optional Features",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Optional-Features.html",
+      "depth": 2
+    },
+    {
+      "title": "Reporting Bugs",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Reporting-Bugs.html",
+      "depth": 1
+    },
+    {
+      "title": "Major Differences From The Bourne Shell",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Major-Differences-From-The-Bourne-Shell.html",
+      "depth": 1
+    },
+    {
+      "title": "Implementation Differences From The SVR4_002e2 Shell",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Major-Differences-From-The-Bourne-Shell.html",
+      "depth": 2
+    },
+    {
+      "title": "GNU Free Documentation License",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/GNU-Free-Documentation-License.html",
+      "depth": 1
+    },
+    {
+      "title": "Indexes",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Indexes.html",
+      "depth": 1
+    },
+    {
+      "title": "Builtin Index",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Builtin-Index.html",
+      "depth": 2
+    },
+    {
+      "title": "Reserved Word Index",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Reserved-Word-Index.html",
+      "depth": 2
+    },
+    {
+      "title": "Variable Index",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Variable-Index.html",
+      "depth": 2
+    },
+    {
+      "title": "Function Index",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Function-Index.html",
+      "depth": 2
+    },
+    {
+      "title": "Concept Index",
+      "url": "https://www.gnu.org/software/bash/manual/html_node/Concept-Index.html",
+      "depth": 2
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "url": "https://mujoco.readthedocs.io/en/3.3.7/overview.html",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Overview",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/overview.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Computation",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/computation/index.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Fluid forces",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/computation/fluid.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/computation/index.html"
+    },
+    {
+      "title": "Modeling",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/modeling.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "XML Reference",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/XMLreference.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Programming",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Simulation",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/simulation.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html"
+    },
+    {
+      "title": "Visualization",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/visualization.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html"
+    },
+    {
+      "title": "User Interface",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/ui.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html"
+    },
+    {
+      "title": "Model Editing",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/modeledit.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html"
+    },
+    {
+      "title": "Code samples",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/samples.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html"
+    },
+    {
+      "title": "Extensions",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/programming/extension.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/programming/index.html"
+    },
+    {
+      "title": "API Reference",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/index.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Types",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/APItypes.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/index.html"
+    },
+    {
+      "title": "Functions",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/APIfunctions.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/index.html"
+    },
+    {
+      "title": "Globals",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/APIglobals.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/APIreference/index.html"
+    },
+    {
+      "title": "Python",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/python.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "MuJoCo XLA",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/mjx.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "MuJoCo Warp",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/mjwarp/index.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "API",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/mjwarp/api.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/mjwarp/index.html"
+    },
+    {
+      "title": "Unity Plug-in",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/unity.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "OpenUSD",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/index.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Building",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/building.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/index.html"
+    },
+    {
+      "title": "mjcPhysics",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/mjcPhysics.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/index.html"
+    },
+    {
+      "title": "File Format Plugin",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/mjcf_file_format_plugin.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/index.html"
+    },
+    {
+      "title": "Importing",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/importing.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/index.html"
+    },
+    {
+      "title": "Exporting",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/exporting.html",
+      "depth": 2,
+      "parent": "https://mujoco.readthedocs.io/en/3.3.7/OpenUSD/index.html"
+    },
+    {
+      "title": "Model Gallery",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/models.html",
+      "depth": 1,
+      "parent": null
+    },
+    {
+      "title": "Changelog",
+      "url": "https://mujoco.readthedocs.io/en/3.3.7/changelog.html",
+      "depth": 1,
+      "parent": null
+    }
+  ]
+}

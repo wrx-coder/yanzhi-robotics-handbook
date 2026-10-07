@@ -1,0 +1,22 @@
+name: 标签发布
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -v
+      - name: 打包当前提交
+        run: git archive --format=zip --output=research-code.zip HEAD
+      - name: 创建 Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: gh release create "$RELEASE_TAG" research-code.zip --verify-tag --title "$RELEASE_TAG" --notes-file RELEASE.md

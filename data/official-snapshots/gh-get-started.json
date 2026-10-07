@@ -1,0 +1,59 @@
+{
+  "url": "https://docs.github.com/en/get-started",
+  "status": 200,
+  "date": "2026-09-21",
+  "rows": [
+    {
+      "title": "Start your journey",
+      "url": "https://docs.github.com/en/get-started/start-your-journey/what-is-github"
+    },
+    {
+      "title": "Onboarding",
+      "url": "https://docs.github.com/en/get-started/onboarding/getting-started-with-your-github-account"
+    },
+    {
+      "title": "Using GitHub",
+      "url": "https://docs.github.com/en/get-started/using-github/hello-world"
+    },
+    {
+      "title": "Learning about GitHub",
+      "url": "https://docs.github.com/en/get-started/learning-about-github/githubs-plans"
+    },
+    {
+      "title": "Learn to code",
+      "url": "https://docs.github.com/en/get-started/learning-to-code/setting-up-copilot-for-learning-to-code"
+    },
+    {
+      "title": "Accessibility",
+      "url": "https://docs.github.com/en/get-started/accessibility/managing-your-theme-settings"
+    },
+    {
+      "title": "Writing on GitHub",
+      "url": "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github"
+    },
+    {
+      "title": "Explore projects",
+      "url": "https://docs.github.com/en/get-started/exploring-projects-on-github/discovering-projects-on-github"
+    },
+    {
+      "title": "Git basics",
+      "url": "https://docs.github.com/en/get-started/git-basics/set-up-git"
+    },
+    {
+      "title": "Using Git",
+      "url": "https://docs.github.com/en/get-started/using-git/about-git"
+    },
+    {
+      "title": "Archive account and public repos",
+      "url": "https://docs.github.com/en/get-started/archiving-your-github-personal-account-and-public-repositories/requesting-an-archive-of-your-personal-accounts-data"
+    },
+    {
+      "title": "Using GitHub Docs",
+      "url": "https://docs.github.com/en/get-started/using-github-docs/about-versions-of-github-docs"
+    },
+    {
+      "title": "GitHub Certifications",
+      "url": "https://docs.github.com/en/get-started/showcase-your-expertise-with-github-certifications/about-github-certifications"
+    }
+  ]
+}

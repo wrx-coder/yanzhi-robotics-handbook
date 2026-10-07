@@ -1,0 +1,261 @@
+{
+  "url": "https://git.savannah.gnu.org/cgit/bash.git/plain/doc/bashref.texi?h=bash-5.3",
+  "status": 200,
+  "rows": [
+    {
+      "title": "Introduction",
+      "node": "Introduction",
+      "depth": 1
+    },
+    {
+      "title": "What is Bash?",
+      "node": "What is Bash?",
+      "depth": 2
+    },
+    {
+      "title": "What is a shell?",
+      "node": "What is a shell?",
+      "depth": 2
+    },
+    {
+      "title": "Definitions",
+      "node": "Definitions",
+      "depth": 1
+    },
+    {
+      "title": "Basic Shell Features",
+      "node": "Basic Shell Features",
+      "depth": 1
+    },
+    {
+      "title": "Shell Syntax",
+      "node": "Shell Syntax",
+      "depth": 2
+    },
+    {
+      "title": "Shell Commands",
+      "node": "Shell Commands",
+      "depth": 2
+    },
+    {
+      "title": "Shell Functions",
+      "node": "Shell Functions",
+      "depth": 2
+    },
+    {
+      "title": "Shell Parameters",
+      "node": "Shell Parameters",
+      "depth": 2
+    },
+    {
+      "title": "Shell Expansions",
+      "node": "Shell Expansions",
+      "depth": 2
+    },
+    {
+      "title": "Redirections",
+      "node": "Redirections",
+      "depth": 2
+    },
+    {
+      "title": "Executing Commands",
+      "node": "Executing Commands",
+      "depth": 2
+    },
+    {
+      "title": "Shell Scripts",
+      "node": "Shell Scripts",
+      "depth": 2
+    },
+    {
+      "title": "Shell Builtin Commands",
+      "node": "Shell Builtin Commands",
+      "depth": 1
+    },
+    {
+      "title": "Bourne Shell Builtins",
+      "node": "Bourne Shell Builtins",
+      "depth": 2
+    },
+    {
+      "title": "Bash Builtin Commands",
+      "node": "Bash Builtins",
+      "depth": 2
+    },
+    {
+      "title": "Modifying Shell Behavior",
+      "node": "Modifying Shell Behavior",
+      "depth": 2
+    },
+    {
+      "title": "Special Builtins",
+      "node": "Special Builtins",
+      "depth": 2
+    },
+    {
+      "title": "Shell Variables",
+      "node": "Shell Variables",
+      "depth": 1
+    },
+    {
+      "title": "Bourne Shell Variables",
+      "node": "Bourne Shell Variables",
+      "depth": 2
+    },
+    {
+      "title": "Bash Variables",
+      "node": "Bash Variables",
+      "depth": 2
+    },
+    {
+      "title": "Bash Features",
+      "node": "Bash Features",
+      "depth": 1
+    },
+    {
+      "title": "Invoking Bash",
+      "node": "Invoking Bash",
+      "depth": 2
+    },
+    {
+      "title": "Bash Startup Files",
+      "node": "Bash Startup Files",
+      "depth": 2
+    },
+    {
+      "title": "Interactive Shells",
+      "node": "Interactive Shells",
+      "depth": 2
+    },
+    {
+      "title": "Bash Conditional Expressions",
+      "node": "Bash Conditional Expressions",
+      "depth": 2
+    },
+    {
+      "title": "Shell Arithmetic",
+      "node": "Shell Arithmetic",
+      "depth": 2
+    },
+    {
+      "title": "Aliases",
+      "node": "Aliases",
+      "depth": 2
+    },
+    {
+      "title": "Arrays",
+      "node": "Arrays",
+      "depth": 2
+    },
+    {
+      "title": "The Directory Stack",
+      "node": "The Directory Stack",
+      "depth": 2
+    },
+    {
+      "title": "Controlling the Prompt",
+      "node": "Controlling the Prompt",
+      "depth": 2
+    },
+    {
+      "title": "The Restricted Shell",
+      "node": "The Restricted Shell",
+      "depth": 2
+    },
+    {
+      "title": "Bash and POSIX",
+      "node": "Bash POSIX Mode",
+      "depth": 2
+    },
+    {
+      "title": "Shell Compatibility Mode",
+      "node": "Shell Compatibility Mode",
+      "depth": 2
+    },
+    {
+      "title": "Job Control",
+      "node": "Job Control",
+      "depth": 1
+    },
+    {
+      "title": "Job Control Basics",
+      "node": "Job Control Basics",
+      "depth": 2
+    },
+    {
+      "title": "Job Control Builtins",
+      "node": "Job Control Builtins",
+      "depth": 2
+    },
+    {
+      "title": "Job Control Variables",
+      "node": "Job Control Variables",
+      "depth": 2
+    },
+    {
+      "title": "Installing Bash",
+      "node": "Installing Bash",
+      "depth": 1
+    },
+    {
+      "title": "Basic Installation",
+      "node": "Basic Installation",
+      "depth": 2
+    },
+    {
+      "title": "Compilers and Options",
+      "node": "Compilers and Options",
+      "depth": 2
+    },
+    {
+      "title": "Compiling For Multiple Architectures",
+      "node": "Compiling For Multiple Architectures",
+      "depth": 2
+    },
+    {
+      "title": "Installation Names",
+      "node": "Installation Names",
+      "depth": 2
+    },
+    {
+      "title": "Specifying the System Type",
+      "node": "Specifying the System Type",
+      "depth": 2
+    },
+    {
+      "title": "Sharing Defaults",
+      "node": "Sharing Defaults",
+      "depth": 2
+    },
+    {
+      "title": "Operation Controls",
+      "node": "Operation Controls",
+      "depth": 2
+    },
+    {
+      "title": "Optional Features",
+      "node": "Optional Features",
+      "depth": 2
+    },
+    {
+      "title": "Reporting Bugs",
+      "node": "Reporting Bugs",
+      "depth": 1
+    },
+    {
+      "title": "Major Differences From The Bourne Shell",
+      "node": "Major Differences From The Bourne Shell",
+      "depth": 1
+    },
+    {
+      "title": "GNU Free Documentation License",
+      "node": "GNU Free Documentation License",
+      "depth": 1
+    },
+    {
+      "title": "Indexes",
+      "node": "Indexes",
+      "depth": 1
+    }
+  ]
+}

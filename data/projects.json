@@ -1,0 +1,703 @@
+[
+  {
+    "id": "linux-experiment",
+    "module": "linux",
+    "title": "远程实验流程 · 独立环境、日志与归档",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "基础",
+    "summary": "运行随附的线性回归程序，隔离 Python 环境，用 tmux 管理会话并归档真实结果。",
+    "principle": "梯度下降在合成数据上拟合 y=2x+1。固定种子控制采样；虚拟环境隔离依赖；Bash pipefail 将训练失败传递到流水线；tee 同时写入日志并显示输出；tar 将配置与结果打包。",
+    "prerequisites": "Ubuntu 22.04 / 24.04，Python 3.10+、python3-venv、tmux、tar。训练本身只用 Python 标准库，无 GPU 要求。",
+    "source": "python",
+    "code": "sudo apt install python3-venv tmux\npython3 -m venv .venv\nsource .venv/bin/activate\npython3 --version",
+    "language": "bash",
+    "explain": [
+      "apt 安装虚拟环境支持与会话工具；venv 创建本目录环境；source 让当前 shell 的 python3 指向该环境。",
+      "tmux new 创建 research 会话；在新会话中 run.sh 调用真实 train.py，按时间与进程号建立输出目录，并在成功后归档。Ctrl+B 后按 D 可离开会话；完成后输入 exit 关闭空闲会话。",
+      "attach 连接仍在运行的会话；训练很快，若会话已退出则无需重连。find 列出结果；检查 JSON 中 loss 与两个拟合参数，并保留 tar.gz。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "启动并保留会话",
+        "body": "tmux new 创建 research 会话；在新会话中 run.sh 调用真实 train.py，按时间与进程号建立输出目录，并在成功后归档。Ctrl+B 后按 D 可离开会话；完成后输入 exit 关闭空闲会话。",
+        "code": "tmux new -s research\nsource .venv/bin/activate\nbash run.sh"
+      },
+      {
+        "title": "重新连接与检查",
+        "body": "attach 连接仍在运行的会话；训练很快，若会话已退出则无需重连。find 列出结果；检查 JSON 中 loss 与两个拟合参数，并保留 tar.gz。",
+        "code": "tmux attach -t research\nfind runs -maxdepth 2 -type f\ncat runs/*/result.json"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "每次运行生成 metrics.csv（200 行数据）、result.json、日志及 tar.gz。默认种子下 loss 应低于 0.01，weight 接近 2、bias 接近 1。归档解压后应含同一结果目录和日志。"
+      }
+    ],
+    "related": [
+      "linux-error-command",
+      "linux-error-permission",
+      "linux-error-module"
+    ],
+    "project": {
+      "directory": "linux-experiment",
+      "verification": {
+        "status": "目标环境运行通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "Bash 流水线与真实训练运行成功，loss=0.003008，CSV/JSON/日志/tar.gz 均生成。未运行 tmux 交互会话；其命令已静态核对。"
+      },
+      "acceptance": "每次运行生成 metrics.csv（200 行数据）、result.json、日志及 tar.gz。默认种子下 loss 应低于 0.01，weight 接近 2、bias 接近 1。归档解压后应含同一结果目录和日志。"
+    }
+  },
+  {
+    "id": "linux-sweep",
+    "module": "linux",
+    "title": "多种子实验 · 参数扫描、失败记录与指标汇总",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "GNU/Linux · Ubuntu 22.04 / 24.04",
+    "level": "进阶",
+    "summary": "对两档学习率和三个种子执行六次真实实验，保留失败退出码、日志及统计摘要。",
+    "principle": "每组参数由独立子进程执行，避免随机状态串扰。汇总表保留成功与失败两类记录；均值和样本标准差仅使用成功数据，同时报告失败数量，避免把失败实验悄悄丢弃。",
+    "prerequisites": "Python 3.10+，仅标准库。目录中已包含 train.py；在可写的新输出目录运行。",
+    "source": "bash",
+    "code": "python3 sweep.py --output sweep-results\ncat sweep-results/summary.csv\ncat sweep-results/aggregate.json",
+    "language": "bash",
+    "explain": [
+      "sweep.py 按固定参数表顺序启动六个子进程。--output 必须是不存在的目录，防止覆盖旧实验。",
+      "--fail-seed 1 为两个 seed=1 实验注入非法学习率。其余实验继续完成，进程最后返回 1，代表该扫描存在失败。紧接着 echo $? 读取退出码；不要在其间执行其他命令。",
+      "tar 归档全部分组日志与配置结果。查看失败日志应能追溯明确异常，而不是只看到汇总里的 failed。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "验证失败记录",
+        "body": "--fail-seed 1 为两个 seed=1 实验注入非法学习率。其余实验继续完成，进程最后返回 1，代表该扫描存在失败。紧接着 echo $? 读取退出码；不要在其间执行其他命令。",
+        "code": "python3 sweep.py --output sweep-with-failure --fail-seed 1\necho $?\ncat sweep-with-failure/summary.csv"
+      },
+      {
+        "title": "保存可复现结果",
+        "body": "tar 归档全部分组日志与配置结果。查看失败日志应能追溯明确异常，而不是只看到汇总里的 failed。",
+        "code": "cat sweep-with-failure/lr0.03-seed1.log\ntar -czf sweep-results.tar.gz sweep-results"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "正常扫描：summary.csv 有 6 条 ok，aggregate.json 有 2 组统计。注入失败：4 条 ok、2 条 failed，两个失败日志明确指出学习率非法，程序退出码为 1。统计可复现意味着保留种子、配置、失败比例与环境，而不是只复制一个均值。"
+      }
+    ],
+    "related": [
+      "linux-error-space",
+      "linux-error-oom",
+      "linux-error-permission"
+    ],
+    "project": {
+      "directory": "linux-sweep",
+      "verification": {
+        "status": "目标环境运行通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "六组扫描全部成功；注入故障后四组成功、两组失败，程序退出码 1；CSV 与分组统计保留失败记录。"
+      },
+      "acceptance": "正常扫描：summary.csv 有 6 条 ok，aggregate.json 有 2 组统计。注入失败：4 条 ok、2 条 failed，两个失败日志明确指出学习率非法，程序退出码为 1。统计可复现意味着保留种子、配置、失败比例与环境，而不是只复制一个均值。"
+    }
+  },
+  {
+    "id": "mujoco-quickstart",
+    "module": "mujoco",
+    "title": "最小仿真实验 · 从模型到控制与日志",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "基础",
+    "summary": "无需图形窗口，建立有质量、惯量和执行器的单摆，完成 2 秒物理仿真并记录 CSV。",
+    "principle": "MJCF 编译为只读结构 MjModel，状态存入 MjData。每步先写入有限幅值力矩，再 mj_step 积分，最后记录仿真时间与更新后的状态。阻尼项消耗能量，正弦项持续激励系统。",
+    "prerequisites": "Python 3.10+、mujoco==3.3.7、NumPy。CPU 即可，示例不打开 viewer 或离屏渲染。",
+    "source": "mj-python",
+    "code": "python3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install -r requirements.txt",
+    "language": "bash",
+    "explain": [
+      "venv 隔离 Python 包；requirements.txt 固定 MuJoCo 引擎基线。安装阶段需要网络或预先准备的 wheel。",
+      "mujoco_minimal.py 内嵌完整模型并运行 1000 个步长，每步 0.002 秒；没有隐藏的 robot.xml 或控制器。",
+      "DictReader 按列名读取记录；断言验证样本数、结束时间和非有限状态。末行时间可能有浮点误差，因此用容差。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "执行完整实验",
+        "body": "mujoco_minimal.py 内嵌完整模型并运行 1000 个步长，每步 0.002 秒；没有隐藏的 robot.xml 或控制器。",
+        "code": "python mujoco_minimal.py"
+      },
+      {
+        "title": "逐行验证日志",
+        "body": "DictReader 按列名读取记录；断言验证样本数、结束时间和非有限状态。末行时间可能有浮点误差，因此用容差。",
+        "code": "python - <<'PY'\nimport csv, math\nrows=list(csv.DictReader(open('pendulum.csv')))\nassert len(rows)==1000\nassert abs(float(rows[-1]['time_s'])-2)<1e-8\nassert all(math.isfinite(float(v)) for r in rows for v in r.values())\nprint('1000 条有限状态，2 秒仿真验收通过')\nPY"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "输出 pendulum.csv，1000 条数据加一行表头。角度、速度、力矩均有限；力矩限制在 ±2 N·m。日志可作为控制器修改前的基线，不把“可运行”当作控制效果最优。"
+      }
+    ],
+    "related": [
+      "mujoco-error-import",
+      "mujoco-error-nan",
+      "mujoco-error-trajectory"
+    ],
+    "project": {
+      "directory": "mujoco-pendulum",
+      "verification": {
+        "status": "目标环境运行通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python / MuJoCo / NumPy：3.11.15 3.3.7 2.4.6",
+        "evidence": "CPU 无图形运行通过；1000 条有限数值日志，最终仿真时间 2 秒。"
+      },
+      "acceptance": "输出 pendulum.csv，1000 条数据加一行表头。角度、速度、力矩均有限；力矩限制在 ±2 N·m。日志可作为控制器修改前的基线，不把“可运行”当作控制效果最优。"
+    }
+  },
+  {
+    "id": "mujoco-arm-project",
+    "module": "mujoco",
+    "title": "二维机械臂 · Jacobian 逆解与闭环轨迹跟踪",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "MuJoCo 3.3.7 · Python API",
+    "level": "进阶",
+    "summary": "包含两自由度 MJCF、阻尼最小二乘逆解、关节 PD 控制、轨迹 CSV 和误差验收。",
+    "principle": "末端速度近似为 J·dq，阻尼最小二乘 Jᵀ(JJᵀ+λI)⁻¹ 限制奇异附近的逆解增益。逆解使用独立 MjData，避免把目标解直接写入真实动力学状态；PD 力矩驱动真实关节跟随。",
+    "prerequisites": "Python 3.10+、MuJoCo 3.3.7 与 NumPy。零重力二维教学模型，无碰撞和关节限位，仅测试平面内可达轨迹。",
+    "source": "mj-api",
+    "code": "python3 -m venv .venv\nsource .venv/bin/activate\npython -m pip install -r requirements.txt\npython track.py",
+    "language": "bash",
+    "explain": [
+      "requirements 固定引擎；track.py 从脚本旁加载 arm.xml，因此模型路径不依赖运行目录。CSV 输出到当前目录。",
+      "metrics.json 保存去掉首秒瞬态后的 RMSE；CSV 同时保留目标、实际位置与逐步误差，可用任意绘图工具复查。",
+      "复制完整目录到新实验位置，再分别改变 PD 增益或阻尼项；每次只改变一个因素，避免直接覆盖上次轨迹。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "检查轨迹误差",
+        "body": "metrics.json 保存去掉首秒瞬态后的 RMSE；CSV 同时保留目标、实际位置与逐步误差，可用任意绘图工具复查。",
+        "code": "cat metrics.json\nhead -n 6 trajectory.csv"
+      },
+      {
+        "title": "建立对照实验",
+        "body": "复制完整目录到新实验位置，再分别改变 PD 增益或阻尼项；每次只改变一个因素，避免直接覆盖上次轨迹。",
+        "code": "python -c \"import mujoco; print(mujoco.__version__)\"\ncp metrics.json metrics-baseline.json\ncp trajectory.csv trajectory-baseline.csv"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "应产生 3000 条轨迹记录，metrics.json 的 acceptance=true，首秒之后 RMSE < 0.03 m。程序超阈值会非零退出。此阈值是示例验收条件，不是所有机械臂系统的性能保证。"
+      }
+    ],
+    "related": [
+      "mujoco-error-name",
+      "mujoco-error-shape",
+      "mujoco-error-nan"
+    ],
+    "project": {
+      "directory": "mujoco-arm",
+      "verification": {
+        "status": "目标环境运行通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python / MuJoCo / NumPy：3.11.15 3.3.7 2.4.6",
+        "evidence": "CPU 无图形运行通过；3000 条轨迹，去掉首秒后的末端 RMSE=0.009382 m，小于 0.03 m 阈值。"
+      },
+      "acceptance": "应产生 3000 条轨迹记录，metrics.json 的 acceptance=true，首秒之后 RMSE < 0.03 m。程序超阈值会非零退出。此阈值是示例验收条件，不是所有机械臂系统的性能保证。"
+    }
+  },
+  {
+    "id": "gazebo-quickstart",
+    "module": "gazebo",
+    "title": "最小世界实验 · 重力、碰撞与 ROS 时钟",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "Ubuntu 24.04 · ROS 2 Jazzy · Gazebo Harmonic",
+    "level": "基础",
+    "summary": "自包含 SDF 世界让球体落到地面，同时检查 Gazebo 传输和 ROS 仿真时间。",
+    "principle": "Physics 系统在固定步长推进刚体，碰撞几何产生接触约束，SceneBroadcaster 为界面同步实体。/clock 是仿真时间，不等同于机器墙钟；ROS 桥接只转换消息，不推动物理。",
+    "prerequisites": "Ubuntu 24.04 + 已安装 ROS 2 Jazzy。安装 ros-jazzy-ros-gz 将使用配套 Gazebo Harmonic。GUI 需要可用图形驱动，纯服务端可加 -s。",
+    "source": "gz-world",
+    "code": "sudo apt install ros-jazzy-ros-gz\nsource /opt/ros/jazzy/setup.bash\ngz sim -r world.sdf",
+    "language": "bash",
+    "explain": [
+      "apt 安装 ROS 对应桥接和 Gazebo；source 加载 ROS 工具。gz sim -r 加载随附世界并立即运行。",
+      "gz topic -l 枚举话题；-e 订阅时钟。此命令持续输出，检查后 Ctrl+C。若运行了多个世界，请选择列表中对应世界的 clock 话题。",
+      "引号中的 [ 表示 Gazebo 到 ROS 单向桥接，防止两个时钟互相回传。该桥接应持续运行。",
+      "echo --once 检查消息结构，hz 连续计算接收频率；检查后 Ctrl+C。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "观察传输 · 终端 2",
+        "body": "gz topic -l 枚举话题；-e 订阅时钟。此命令持续输出，检查后 Ctrl+C。若运行了多个世界，请选择列表中对应世界的 clock 话题。",
+        "code": "gz topic -l\ngz topic -e -t /clock"
+      },
+      {
+        "title": "桥接时钟 · 终端 3",
+        "body": "引号中的 [ 表示 Gazebo 到 ROS 单向桥接，防止两个时钟互相回传。该桥接应持续运行。",
+        "code": "source /opt/ros/jazzy/setup.bash\nros2 run ros_gz_bridge parameter_bridge \"/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock\""
+      },
+      {
+        "title": "验证 ROS · 终端 4",
+        "body": "echo --once 检查消息结构，hz 连续计算接收频率；检查后 Ctrl+C。",
+        "code": "source /opt/ros/jazzy/setup.bash\nros2 topic echo /clock --once\nros2 topic hz /clock"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "球体由 z=1 下落并停在地面上方约自身半径处；仿真运行时时钟前进，暂停时停止。ROS /clock 存在且内容与仿真一致。结束时分别关闭桥接和 Gazebo 进程。"
+      }
+    ],
+    "related": [
+      "gazebo-error-gz-command",
+      "gazebo-error-paused",
+      "gazebo-error-clock"
+    ],
+    "project": {
+      "directory": "gazebo-falling",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "已检查 1 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+      },
+      "acceptance": "球体由 z=1 下落并停在地面上方约自身半径处；仿真运行时时钟前进，暂停时停止。ROS /clock 存在且内容与仿真一致。结束时分别关闭桥接和 Gazebo 进程。"
+    }
+  },
+  {
+    "id": "gazebo-diffdrive-project",
+    "module": "gazebo",
+    "title": "差速机器人 · 激光雷达、里程计与 ROS 桥接",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "Ubuntu 24.04 · ROS 2 Jazzy · Gazebo Harmonic",
+    "level": "进阶",
+    "summary": "完整离线房间、轮式机器人、GPU 激光雷达、双向指令与单向传感器桥接，可直接用于下一套建图实战。",
+    "principle": "差速插件将线速度和角速度转换为左右轮角速度；轮径与轮距决定运动学比例。激光雷达通过渲染射线测距。Gazebo 发布 odom→base_link，静态 TF 补齐 base_link→laser_frame，bridge 转换时间、扫描、里程计和速度类型。",
+    "prerequisites": "Ubuntu 24.04、ROS 2 Jazzy、Gazebo Harmonic，支持 Ogre2 的图形环境。只在该仿真中运行速度示例。所有模型由本地几何组成。",
+    "source": "gz-bridge",
+    "code": "sudo apt install ros-jazzy-ros-gz ros-jazzy-tf2-ros\nsource /opt/ros/jazzy/setup.bash\nprintf \"%s\\n\" \"$ROS_DISTRO\"",
+    "language": "bash",
+    "explain": [
+      "ros-gz 提供桥接和配套 Gazebo；tf2-ros 提供静态坐标发布器。检查 source 后当前 ROS_DISTRO 应为 jazzy。",
+      "sim.sh 启动世界、桥接和静态 TF；任何子进程退出都会清理其他子进程。无 GUI 的支持环境可传 -s --headless-rendering，但 GPU 雷达仍需渲染能力。",
+      "检查 scan 的 frame_id 为 laser_frame，TF 连通且时钟在前进。tf2_echo 持续输出，用 Ctrl+C 结束后执行下一条。",
+      "drive.py 发布有限时长速度并在结束时发送零速度。原地旋转便于观察扫描变化；短距离前进用于检查里程计符号。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "启动系统 · 终端 1",
+        "body": "sim.sh 启动世界、桥接和静态 TF；任何子进程退出都会清理其他子进程。无 GUI 的支持环境可传 -s --headless-rendering，但 GPU 雷达仍需渲染能力。",
+        "code": "bash sim.sh"
+      },
+      {
+        "title": "传感器检查 · 终端 2",
+        "body": "检查 scan 的 frame_id 为 laser_frame，TF 连通且时钟在前进。tf2_echo 持续输出，用 Ctrl+C 结束后执行下一条。",
+        "code": "source /opt/ros/jazzy/setup.bash\nros2 topic echo /scan --once --field header\nros2 run tf2_ros tf2_echo odom laser_frame\nros2 topic echo /odom --once"
+      },
+      {
+        "title": "小范围运动 · 终端 2",
+        "body": "drive.py 发布有限时长速度并在结束时发送零速度。原地旋转便于观察扫描变化；短距离前进用于检查里程计符号。",
+        "code": "python3 drive.py --angular 0.3 --seconds 5\npython3 drive.py --linear 0.15 --angular 0 --seconds 3"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "scan 约 10 Hz，odom 约 30 Hz；odom→base_link→laser_frame 连通。前进测试后 odom 位置变化约 0.45 m（受加减速影响）；雷达边界与房间一致。Ctrl+C sim.sh 后三类进程均被清理。"
+      }
+    ],
+    "related": [
+      "gazebo-error-drive",
+      "gazebo-error-sensor",
+      "gazebo-error-bridge",
+      "ros-error-tf"
+    ],
+    "project": {
+      "directory": "gazebo-diffdrive",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "已检查 4 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+      },
+      "acceptance": "scan 约 10 Hz，odom 约 30 Hz；odom→base_link→laser_frame 连通。前进测试后 odom 位置变化约 0.45 m（受加减速影响）；雷达边界与房间一致。Ctrl+C sim.sh 后三类进程均被清理。"
+    }
+  },
+  {
+    "id": "ros-quickstart",
+    "module": "ros",
+    "title": "双终端实验 · 完整 ROS 2 发布订阅功能包",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "Ubuntu 24.04 · ROS 2 Jazzy",
+    "level": "基础",
+    "summary": "从真实 ament_python 包构建 talker/listener，验证节点发现、消息类型和 2 Hz 通信。",
+    "principle": "ament 资源索引决定包可见性，console_scripts 将 Python 函数安装为 ros2 run 可执行入口。rclpy executor 调度定时器与订阅回调，DDS 按消息类型和 QoS 建立通信。",
+    "prerequisites": "Ubuntu 24.04 + ROS 2 Jazzy；包含 src/research_pubsub 的完整工作空间。每个新终端都需加载发行版及该工作空间。",
+    "source": "ros2",
+    "code": "sudo apt install python3-colcon-common-extensions ros-jazzy-rclpy ros-jazzy-std-msgs\nsource /opt/ros/jazzy/setup.bash\ncolcon build --symlink-install\nsource install/setup.bash\nros2 pkg executables research_pubsub",
+    "language": "bash",
+    "explain": [
+      "apt 安装 colcon 与消息依赖；colcon 从 src 发现包，--symlink-install 便于开发。source install/setup.bash 将安装索引加入当前环境。",
+      "talker 每 0.5 秒发布递增编号字符串。进程保持运行，Ctrl+C 结束。",
+      "在项目根目录开启新终端并加载环境，listener 回调打印收到的同一编号。",
+      "node list 检查两个节点；topic info 确认类型与端点；hz 检查持续频率后 Ctrl+C。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "发布 · 终端 1",
+        "body": "talker 每 0.5 秒发布递增编号字符串。进程保持运行，Ctrl+C 结束。",
+        "code": "ros2 run research_pubsub talker"
+      },
+      {
+        "title": "订阅 · 终端 2",
+        "body": "在项目根目录开启新终端并加载环境，listener 回调打印收到的同一编号。",
+        "code": "source /opt/ros/jazzy/setup.bash\nsource install/setup.bash\nros2 run research_pubsub listener"
+      },
+      {
+        "title": "验收 · 终端 3",
+        "body": "node list 检查两个节点；topic info 确认类型与端点；hz 检查持续频率后 Ctrl+C。",
+        "code": "source /opt/ros/jazzy/setup.bash\nsource install/setup.bash\nros2 node list\nros2 topic info /chatter --verbose\nros2 topic hz /chatter"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "可执行入口包含 talker/listener；两个节点可见，listener 接收“实验样本 N”，频率约 2 Hz。新增数据字段时应定义消息类型并更新依赖，不把任意对象塞进不匹配的消息。"
+      }
+    ],
+    "related": [
+      "ros-error-package",
+      "ros-error-dependency",
+      "ros-error-qos",
+      "ros-error-domain"
+    ],
+    "project": {
+      "directory": "ros-pubsub",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "已检查 4 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+      },
+      "acceptance": "可执行入口包含 talker/listener；两个节点可见，listener 接收“实验样本 N”，频率约 2 Hz。新增数据字段时应定义消息类型并更新依赖，不把任意对象塞进不匹配的消息。"
+    }
+  },
+  {
+    "id": "ros-navigation-project",
+    "module": "ros",
+    "title": "移动机器人闭环 · SLAM 建图、保存地图与 Nav2 导航",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "Ubuntu 24.04 · ROS 2 Jazzy · Gazebo Harmonic",
+    "level": "进阶",
+    "summary": "随附与差速实战相同的完整仿真文件，完成扫描建图、地图落盘、AMCL 定位和导航目标验收。",
+    "principle": "SLAM 估计地图与 map→odom；导航阶段由 AMCL 维护该变换，不能让 SLAM 和 AMCL 同时争用。Nav2 根据全局地图规划、局部扫描避障并生成速度。prepare_config.py 从已安装的 Jazzy 完整配置派生本机器人参数，记录来源哈希以便复现。",
+    "prerequisites": "Ubuntu 24.04、ROS 2 Jazzy、Harmonic；支持 GPU 雷达渲染。项目自包含机器人文件，无需先下载另一套 ZIP。每个终端先 source /opt/ros/jazzy/setup.bash 并进入本目录。",
+    "source": "nav2",
+    "code": "sudo apt install ros-jazzy-ros-gz ros-jazzy-navigation2 ros-jazzy-nav2-bringup ros-jazzy-slam-toolbox ros-jazzy-tf2-tools python3-yaml\nsource /opt/ros/jazzy/setup.bash\nmkdir -p maps\ndpkg-query -W ros-jazzy-navigation2 ros-jazzy-slam-toolbox",
+    "language": "bash",
+    "explain": [
+      "安装完整 Nav2、SLAM、桥接、TF 工具及 YAML 解析。依赖应来自同一 Jazzy 软件源，保存 apt 版本可复现实验。",
+      "本目录 sim.sh 提供时钟、扫描、里程计与固定传感器外参；保持运行。",
+      "加载本项目 slam.yaml，配置扫描话题与坐标帧。SLAM 持续接收扫描并发布地图。",
+      "先旋转扫描四周，再小幅移动增加视角；每段结束自动发零速度。等地图形成后 map_saver_cli 保存灰度地图与 YAML。",
+      "用 Ctrl+C 停止 SLAM，保持 Gazebo 运行，再执行 navigate.sh。脚本检查地图，生成完整 Nav2 YAML 并启动 map_server、AMCL 与导航节点。不要同时运行两个 map→odom 发布者。",
+      "RViz 默认配置展示地图与导航控件。Fixed Frame 设为 map，用 2D Pose Estimate 在地图上设置仿真机器人的实际位置与朝向；激光和墙壁对齐后用 Nav2 Goal 发送房间内、非障碍区域的近距离目标。",
+      "检查生命周期为 active，action 存在；RViz 应显示路径且机器人到达目标。保留生成配置和 config-origin.json 与地图。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "仿真 · 终端 1",
+        "body": "本目录 sim.sh 提供时钟、扫描、里程计与固定传感器外参；保持运行。",
+        "code": "bash sim.sh"
+      },
+      {
+        "title": "建图 · 终端 2",
+        "body": "加载本项目 slam.yaml，配置扫描话题与坐标帧。SLAM 持续接收扫描并发布地图。",
+        "code": "ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true \"slam_params_file:=$PWD/slam.yaml\""
+      },
+      {
+        "title": "探索并保存 · 终端 3",
+        "body": "先旋转扫描四周，再小幅移动增加视角；每段结束自动发零速度。等地图形成后 map_saver_cli 保存灰度地图与 YAML。",
+        "code": "python3 drive.py --angular 0.3 --seconds 22\npython3 drive.py --linear 0.15 --angular 0 --seconds 4\nros2 run nav2_map_server map_saver_cli -f \"$PWD/maps/room\" --ros-args -p use_sim_time:=true\nls -l maps/room.*"
+      },
+      {
+        "title": "切换定位导航 · 终端 2",
+        "body": "用 Ctrl+C 停止 SLAM，保持 Gazebo 运行，再执行 navigate.sh。脚本检查地图，生成完整 Nav2 YAML 并启动 map_server、AMCL 与导航节点。不要同时运行两个 map→odom 发布者。",
+        "code": "bash navigate.sh"
+      },
+      {
+        "title": "设定位姿并导航 · 终端 4",
+        "body": "RViz 默认配置展示地图与导航控件。Fixed Frame 设为 map，用 2D Pose Estimate 在地图上设置仿真机器人的实际位置与朝向；激光和墙壁对齐后用 Nav2 Goal 发送房间内、非障碍区域的近距离目标。",
+        "code": "ros2 launch nav2_bringup rviz_launch.py use_sim_time:=true"
+      },
+      {
+        "title": "验收 · 终端 3",
+        "body": "检查生命周期为 active，action 存在；RViz 应显示路径且机器人到达目标。保留生成配置和 config-origin.json 与地图。",
+        "code": "ros2 lifecycle get /planner_server\nros2 lifecycle get /controller_server\nros2 action info /navigate_to_pose\ncat config-origin.json"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "maps/room.yaml 与图像存在；停止 SLAM 后 AMCL 建立唯一 map→odom；Nav2 关键节点 active，一次可达目标返回成功，机器人静止后速度回零。导航性能需在目标环境实测；本示例没有预填成功轨迹或地图。"
+      }
+    ],
+    "related": [
+      "ros-error-nav",
+      "ros-error-tf",
+      "ros-error-clock",
+      "gazebo-error-sensor"
+    ],
+    "project": {
+      "directory": "ros-navigation",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "已检查 7 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+      },
+      "acceptance": "maps/room.yaml 与图像存在；停止 SLAM 后 AMCL 建立唯一 map→odom；Nav2 关键节点 active，一次可达目标返回成功，机器人静止后速度回零。导航性能需在目标环境实测；本示例没有预填成功轨迹或地图。"
+    }
+  },
+  {
+    "id": "isaac-quickstart",
+    "module": "isaac",
+    "title": "Cartpole 训练闭环 · 环境验证、训练与检查点回放",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "Isaac Lab v2.3.0",
+    "level": "基础",
+    "summary": "用统一脚本执行官方任务的零动作验证、PPO 训练与显式检查点回放。",
+    "principle": "先验证仿真与任务重置，再引入强化学习训练，可将环境故障与算法问题分开定位。PPO 收集并行环境轨迹并迭代更新策略；检查点回放复用同一任务和网络接口。",
+    "prerequisites": "已按官方说明完整安装 Isaac Lab v2.3.0、兼容 Isaac Sim/NVIDIA GPU/驱动及 RSL-RL。ISAACLAB_PATH 必须指向真实仓库绝对路径。此 ZIP 不包含大型运行时和资产。",
+    "source": "il-train",
+    "code": "export ISAACLAB_PATH=/absolute/path/IsaacLab\ngit -C \"$ISAACLAB_PATH\" describe --tags --always\n\"$ISAACLAB_PATH/isaaclab.sh\" -i rsl_rl",
+    "language": "bash",
+    "explain": [
+      "把示例路径替换为本机真实仓库；describe 应对应 v2.3.0。安装 -i rsl_rl 安装该训练后端，可能需要联网。",
+      "check 使用 16 个环境运行零动作，验证模型加载、步进与重置；观察成功后 Ctrl+C。",
+      "train 固定种子 42、64 个环境、150 次迭代，运行结果写入 IsaacLab/logs/rsl_rl/cartpole。先确认小规模运行，再增加预算。",
+      "CHECKPOINT 必须替换为上一步实际生成的文件。默认 headless 用于运行验证；如需图形展示，可按官方 play 脚本移除 --headless 后运行。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "环境验证",
+        "body": "check 使用 16 个环境运行零动作，验证模型加载、步进与重置；观察成功后 Ctrl+C。",
+        "code": "bash run.sh check"
+      },
+      {
+        "title": "训练与记录",
+        "body": "train 固定种子 42、64 个环境、150 次迭代，运行结果写入 IsaacLab/logs/rsl_rl/cartpole。先确认小规模运行，再增加预算。",
+        "code": "bash run.sh train\nfind \"$ISAACLAB_PATH/logs/rsl_rl/cartpole\" -name \"model_*.pt\""
+      },
+      {
+        "title": "显式回放",
+        "body": "CHECKPOINT 必须替换为上一步实际生成的文件。默认 headless 用于运行验证；如需图形展示，可按官方 play 脚本移除 --headless 后运行。",
+        "code": "export CHECKPOINT=/absolute/path/to/model_149.pt\nbash run.sh play --checkpoint \"$CHECKPOINT\""
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "零动作阶段无资产/设备异常；训练产生真实 TensorBoard 事件与 model_*.pt；同一任务回放可加载检查点且动作有限。150 次迭代不是性能保证，记录实际回合长度和奖励；绝不把未运行的示例标为训练成功。"
+      }
+    ],
+    "related": [
+      "isaac-error-driver",
+      "isaac-error-asset",
+      "isaac-error-memory",
+      "isaac-error-checkpoint"
+    ],
+    "project": {
+      "directory": "isaac-cartpole",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "已检查 1 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+      },
+      "acceptance": "零动作阶段无资产/设备异常；训练产生真实 TensorBoard 事件与 model_*.pt；同一任务回放可加载检查点且动作有限。150 次迭代不是性能保证，记录实际回合长度和奖励；绝不把未运行的示例标为训练成功。"
+    }
+  },
+  {
+    "id": "isaac-randomized-project",
+    "module": "isaac",
+    "title": "自定义管理器任务 · 奖励、重置随机化与对照实验",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "Isaac Lab v2.3.0",
+    "level": "进阶",
+    "summary": "提供可导入的配置类、Gymnasium 注册入口、训练包装器与 TensorBoard 对比脚本。",
+    "principle": "自定义配置继承官方 CartpoleEnvCfg，分别调整杆角度惩罚、滑车速度惩罚及初始状态分布。字符串入口先注册，实际类在 AppLauncher 后加载，避免过早导入仿真扩展。改变奖励后总回报不可直接跨任务比较，应在相同评估条件下衡量回合长度和失败率。",
+    "prerequisites": "Isaac Lab v2.3.0 + RSL-RL，环境要求同 Cartpole 实战。compare.py 需要训练环境中的 TensorBoard。ISAACLAB_PATH 为绝对路径。",
+    "source": "il-env",
+    "code": "export ISAACLAB_PATH=/absolute/path/IsaacLab\nbash run.sh check",
+    "language": "bash",
+    "explain": [
+      "run.sh 调用 entry.py 注册 Research-Cartpole-Randomized-v0，然后运行官方 zero_agent。Ctrl+C 结束验证。",
+      "在独立运行名保存官方任务；--seed 42 与自定义任务相同，预算和环境数也保持一致。命令在官方仓库工作目录启动，日志写入该仓库。",
+      "重新进入解压的 isaac-randomized 目录后执行。使用 run_name 区分实验，注册任务的环境配置仍会保存到训练日志。",
+      "把两个目录替换为刚刚生成的运行目录。compare.py 只读取真实事件文件；标签不存在时列出可用标签。尾部奖励只能描述各自训练进度，不能直接证明新奖励更好。",
+      "使用自定义注册入口回放对应检查点。随后用多个种子重复相同预算；要做单因素消融，应在 research_task.py 中一次仅修改一组配置并另存实验。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "训练基线",
+        "body": "在独立运行名保存官方任务；--seed 42 与自定义任务相同，预算和环境数也保持一致。命令在官方仓库工作目录启动，日志写入该仓库。",
+        "code": "cd \"$ISAACLAB_PATH\"\n./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py --task Isaac-Cartpole-v0 --num_envs 64 --max_iterations 150 --seed 42 --run_name baseline --headless"
+      },
+      {
+        "title": "训练自定义任务",
+        "body": "重新进入解压的 isaac-randomized 目录后执行。使用 run_name 区分实验，注册任务的环境配置仍会保存到训练日志。",
+        "code": "bash run.sh train --max_iterations 150 --seed 42 --run_name randomized"
+      },
+      {
+        "title": "对比真实曲线",
+        "body": "把两个目录替换为刚刚生成的运行目录。compare.py 只读取真实事件文件；标签不存在时列出可用标签。尾部奖励只能描述各自训练进度，不能直接证明新奖励更好。",
+        "code": "\"$ISAACLAB_PATH/isaaclab.sh\" -p compare.py /absolute/path/baseline_run /absolute/path/randomized_run --tag Train/mean_reward"
+      },
+      {
+        "title": "回放与复验",
+        "body": "使用自定义注册入口回放对应检查点。随后用多个种子重复相同预算；要做单因素消融，应在 research_task.py 中一次仅修改一组配置并另存实验。",
+        "code": "bash run.sh play --checkpoint /absolute/path/randomized_run/model_149.pt"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "任务注册与零动作步进通过，env 配置能看到新奖励权重和重置范围；基线/自定义日志独立，比较脚本使用真实标量。当前同时修改奖励与重置分布属于流程演示，不能作为单因素因果结论。需补做固定评估分布、多种子与置信区间后报告科研结论。"
+      }
+    ],
+    "related": [
+      "isaac-error-task",
+      "isaac-error-hydra",
+      "isaac-error-reward",
+      "isaac-error-nan"
+    ],
+    "project": {
+      "directory": "isaac-randomized",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "已检查 4 个 Python / Bash / XML / YAML 文件的语法；未启动目标软件或云端服务。"
+      },
+      "acceptance": "任务注册与零动作步进通过，env 配置能看到新奖励权重和重置范围；基线/自定义日志独立，比较脚本使用真实标量。当前同时修改奖励与重置分布属于流程演示，不能作为单因素因果结论。需补做固定评估分布、多种子与置信区间后报告科研结论。"
+    }
+  },
+  {
+    "id": "github-research-release",
+    "module": "github",
+    "title": "科研发布流程 · 从实验分支到论文版本",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "基础",
+    "summary": "使用真实可运行 train.py 演练本地提交、实验分支、PR 说明与带标签的发布。",
+    "principle": "提交固定源码快照，分支指向一条实验历史，PR 记录变更和验证，标签将论文引用绑定到明确提交。数据产物与代码版本分别归档，避免把不断变动的默认分支当成论文版本。",
+    "prerequisites": "Git、Python 3.10+；远程步骤另需 GitHub 账号、已安装并登录 gh、有权限的仓库。先修改示例维护者信息。脚本不会自动创建仓库或推送。",
+    "source": "gh-flow",
+    "code": "python3 train.py --output runs/baseline\ngit init -b main\ngit add train.py README.md PR.md RELEASE.md .gitignore\ngit commit -m \"建立可复现实验基线\"",
+    "language": "bash",
+    "explain": [
+      "执行完整训练生成结果；git init 创建本地仓库，git add 只暂存指定源码与说明，避免误提交实验产物。首次 commit 前需已配置自己的 Git 身份。",
+      "switch 创建独立分支；执行不同种子并记录结果到 PR.md。修改说明后提交，使后续 PR 有明确可审查内容。",
+      "OWNER/REPO 替换为自己的空仓库。添加 origin 后分别推送 main 和当前分支；gh pr create 会真的向 GitHub 创建 PR，因此先核对仓库和 PR.md。",
+      "PR 按仓库规则完成审查合并后，切回 main 并只接受快进更新。检查提交，再建立注解标签；push 标签和 gh release create 都作用于真实远程。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "实验分支",
+        "body": "switch 创建独立分支；执行不同种子并记录结果到 PR.md。修改说明后提交，使后续 PR 有明确可审查内容。",
+        "code": "git switch -c experiment/seed-check\npython3 train.py --seed 7 --output runs/seed7\ncat runs/seed7/result.json\n# 编辑 PR.md，填写真实对比结果\ngit add PR.md\ngit commit -m \"记录种子对照实验\""
+      },
+      {
+        "title": "远程 PR · 由你在目标仓库执行",
+        "body": "OWNER/REPO 替换为自己的空仓库。添加 origin 后分别推送 main 和当前分支；gh pr create 会真的向 GitHub 创建 PR，因此先核对仓库和 PR.md。",
+        "code": "git remote add origin https://github.com/OWNER/REPO.git\ngit push -u origin main\ngit push -u origin experiment/seed-check\ngh pr create --base main --title \"记录种子对照实验\" --body-file PR.md"
+      },
+      {
+        "title": "合并后发布",
+        "body": "PR 按仓库规则完成审查合并后，切回 main 并只接受快进更新。检查提交，再建立注解标签；push 标签和 gh release create 都作用于真实远程。",
+        "code": "git switch main\ngit pull --ff-only\ngit log -1 --oneline\ngit tag -a v0.1.0 -m \"科研实验基线 v0.1.0\"\ngit push origin v0.1.0\ngh release create v0.1.0 --verify-tag --notes-file RELEASE.md"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "本地 train.py 生成有限结果且 loss < 0.01；分支提交可追溯。远程验收需真实 PR 已合并、标签对应预期提交、Release 说明记录环境与结果。本网站构建过程没有创建远程 PR 或 Release。"
+      }
+    ],
+    "related": [
+      "github-error-ssh",
+      "github-error-nonfast",
+      "github-error-protected"
+    ],
+    "project": {
+      "directory": "github-release",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "Python 实验和临时仓库的初始化、提交、分支操作运行通过。未连接 GitHub；PR、推送、标签与 Release 的远端流程未运行。"
+      },
+      "acceptance": "本地 train.py 生成有限结果且 loss < 0.01；分支提交可追溯。远程验收需真实 PR 已合并、标签对应预期提交、Release 说明记录环境与结果。本网站构建过程没有创建远程 PR 或 Release。"
+    }
+  },
+  {
+    "id": "github-ci-project",
+    "module": "github",
+    "title": "科研代码自动化 · Python 测试矩阵与标签发布",
+    "category": "完整实战",
+    "kind": "实战",
+    "version": "GitHub · Git · GitHub CLI",
+    "level": "进阶",
+    "summary": "完整指标代码、三个单元测试、双 Python 版本 CI 和仅标签触发的 Release 工作流。",
+    "principle": "CI 在干净 Runner 上重建环境并测试数学结果与异常边界；矩阵检验 Python 兼容性。发布 job 先运行测试，再归档 HEAD，并用受限于标签事件的写权限创建 Release。PR 验证仅有只读权限。",
+    "prerequisites": "本地 Python 3.10+、Git；远端需你有权限的 GitHub 仓库且 Actions 已启用。工作流 actions/checkout@v4、setup-python@v5 是固定主版本入口，严格供应链复现时可自行审计并锁定提交 SHA。",
+    "source": "gh-actions",
+    "code": "python3 -m unittest discover -s tests -v",
+    "language": "bash",
+    "explain": [
+      "unittest discover 从 tests 发现测试，覆盖已知数值、相同输入和非法输入；不需要下载第三方 Python 包。",
+      "把本项目文件放到目标仓库根目录；确认 .github 隐藏目录也被复制。git add 只暂存相关文件，远程 push 会触发 main 或 PR 检查。",
+      "gh run list 显示运行，view --log-failed 定位失败步骤。只有远端两个 Python job 均通过才能声称云端矩阵验证通过。",
+      "确认在已通过审查和测试的提交上；创建此前未使用的版本标签，推送触发 release.yml。工作流使用 RELEASE.md 并附上当前提交的 ZIP。"
+    ],
+    "pitfall": "按顺序逐步验证；持续运行的服务要在独立终端启动。命令默认在解压后的项目根目录执行，终端编号标在步骤标题中。下载包含完整项目文件，运行依赖需另行安装。",
+    "sections": [
+      {
+        "title": "加入已有仓库",
+        "body": "把本项目文件放到目标仓库根目录；确认 .github 隐藏目录也被复制。git add 只暂存相关文件，远程 push 会触发 main 或 PR 检查。",
+        "code": "git add research_math.py tests .github README.md RELEASE.md .gitignore\ngit commit -m \"添加科研指标测试和发布流程\"\ngit push"
+      },
+      {
+        "title": "检查矩阵执行",
+        "body": "gh run list 显示运行，view --log-failed 定位失败步骤。只有远端两个 Python job 均通过才能声称云端矩阵验证通过。",
+        "code": "gh run list --limit 5\ngh run view --log-failed"
+      },
+      {
+        "title": "标签触发发布",
+        "body": "确认在已通过审查和测试的提交上；创建此前未使用的版本标签，推送触发 release.yml。工作流使用 RELEASE.md 并附上当前提交的 ZIP。",
+        "code": "git tag -a v0.1.0 -m \"指标与测试首版\"\ngit push origin v0.1.0\ngh release view v0.1.0"
+      },
+      {
+        "title": "验收与结果解释",
+        "body": "本地输出 Ran 3 tests / OK。云端矩阵覆盖 Python 3.10 与 3.12；标签发布应出现 research-code.zip。远端工作流未由网站构建代为执行，首次使用需在自己的仓库核实权限与分支策略。"
+      }
+    ],
+    "related": [
+      "github-error-actions",
+      "github-error-ci",
+      "github-error-actions-permission"
+    ],
+    "project": {
+      "directory": "github-ci",
+      "verification": {
+        "status": "静态检查通过",
+        "date": "2026-09-21",
+        "environment": "Linux x86_64 · Python 3.10.12",
+        "evidence": "本机三个单元测试通过，两个 Actions YAML 已解析。未在 GitHub Runner 运行 Python 矩阵或发布工作流。"
+      },
+      "acceptance": "本地输出 Ran 3 tests / OK。云端矩阵覆盖 Python 3.10 与 3.12；标签发布应出现 research-code.zip。远端工作流未由网站构建代为执行，首次使用需在自己的仓库核实权限与分支策略。"
+    }
+  }
+]

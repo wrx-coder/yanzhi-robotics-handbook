@@ -1,0 +1,6 @@
+{
+  "url": "https://raw.githubusercontent.com/ros2/ros2_documentation/jazzy/source/Concepts/Basic.rst",
+  "status": 200,
+  "date": "2026-09-21",
+  "links": ".. toctree::\n   :maxdepth: 1\n\n   Basic/Interfaces-Topics-Services-Actions\n   Basic/About-Nodes\n   Basic/About-Discovery\n   Basic/About-Parameters\n   Basic/About-Command-Line-Tools\n   Basic/About-Launch\n   Basic/About-Client-Libraries"
+}

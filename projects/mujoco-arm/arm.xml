@@ -1,0 +1,21 @@
+<mujoco model="planar_arm">
+  <compiler angle="radian"/>
+  <option timestep="0.002" gravity="0 0 0" integrator="implicitfast"/>
+  <default>
+    <joint type="hinge" axis="0 0 1" damping="0.3" armature="0.05"/>
+    <geom type="capsule" size="0.025" density="1000" contype="0" conaffinity="0"/>
+    <motor ctrllimited="true" ctrlrange="-20 20"/>
+  </default>
+  <worldbody>
+    <body name="link1">
+      <joint name="shoulder"/>
+      <geom fromto="0 0 0 0.6 0 0"/>
+      <body name="link2" pos="0.6 0 0">
+        <joint name="elbow"/>
+        <geom fromto="0 0 0 0.4 0 0"/>
+        <site name="tip" pos="0.4 0 0" size="0.035"/>
+      </body>
+    </body>
+  </worldbody>
+  <actuator><motor joint="shoulder"/><motor joint="elbow"/></actuator>
+</mujoco>
