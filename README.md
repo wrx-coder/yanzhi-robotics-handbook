@@ -137,7 +137,8 @@ python3 scripts/build.py
 
 | 层 | 实现 |
 |---|---|
-| 页面 | 手写 HTML + CSS + 原生 JavaScript（`dist/app.js`），无 React/Vue、无 CDN、无在线字体 |
+| 页面 | 手写 HTML + CSS + 原生 JavaScript（`dist/app.js`），无 React/Vue、无 CDN、无在线字体；支持系统深色模式 |
+| 字体 | IBM Plex Sans / Mono 拉丁子集随站点放在 `dist/fonts/`（SIL OFL 1.1，见 `dist/fonts/OFL.txt`），中文使用系统黑体 |
 | 数据 | `data/` 下 `¦` 分隔的纯文本源稿 → 编译为 `dist/knowledge.json` 与 `knowledge.js` |
 | 构建 | `scripts/*.py`，全部为标准库（顺带校验数量、必填字段、引用完整性） |
 | 测试 | `scripts/verify*.py` / `verify*.cjs`，含无头 Chrome 的离线与响应式回归 |
